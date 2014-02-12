@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Wine Cellar - Personal Inventory</title>
+        
+        <link rel="stylesheet" href="css/normalize.css" />
+        <link rel="stylesheet" href="css/foundation.css" />
+        <link rel="stylesheet" href="css/custom.css" />
+        
+        <script src="js/vendor/custom.modernizr.js"></script>
+        
+    </head>
+    <body class="">
+        
+        <!-- Main Menu Bar -->
+        <div class="contain-to-grid sticky">
+            <nav class="top-bar">
+                <ul class="title-area">
+                    
+                    <!-- Title Area -->
+                    <li class="name">
+                        <h1><a href="#">Wine Cellar</a></h1>
+                    </li>
+                    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+                </ul>
+                
+                <section class="top-bar-section">
+                    <!-- Left Nav Section -->
+                    <ul class="left">
+                        <li class="divider"></li>
+                        <li class=""><a href="#">Profile</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="active"><a href="#">Inventory</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class=""><a href="#">Sommelier</a>
+                        </li>
+                        
+                        <li class="divider"></li>
+                    </ul>
+                    <!-- End Left Nav -->
+                    
+                    <!-- Right Nav Section -->
+                    <ul class="right">
+                        <li class="divider"></li>
+                        <li class=""><a href="#">@</a>
+                        <li class="divider"></li>
+                    </ul>
+                    <!-- End Right Nav -->
+                    
+                </section>
+            </nav>
+        </div><!--/Sticky Toolbar -->
+        <!-- End Main Menu Bar -->
+        
+        
+        
+        
+
+        <!-- Some kind of spacing? -->
+        
+        
+        
+        <!-- 100% width container -->
+        <div class="">
+            <div class="row">
+            
+                
+                <!-- Tag/Filter/Sort Menu -->
+                <div class="large-4 columns left_side">
+                    
+                    <div class="large-12 large-centered columns">
+                        
+                        <!-- Filter Sort Options go here -->
+                        <div class="row collapse">
+                            <div id="filter_nav" class="large-12 columns">
+                                <ul>
+                                    <li filter=".filter-2, .filter-3, .filter-4, .filter-tag" sortby="random"><img src="img/filter_nav_hash.png" /></li>
+                                    <li filter="*" sortby="index"><img src="img/filter_nav_carrot.png" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Filter items (Location, Filter, Tag) go here -->
+                        <div class="row collapse">
+                            <div id="filter_container" class="large-12 columns">
+                                <div order="-1" class="filter-obj filter-1 filter-label">Locations</div>
+                                <div order="7" class="filter-obj filter-2"></div>
+                                <div order="19" class="filter-obj filter-2"></div>
+                                <div order="2" class="filter-obj filter-2"></div>
+                                <div order="54" class="filter-obj filter-2"></div>
+                                <div order="-1" class="filter-obj filter-1 filter-label">Filters</div>
+                                <div order="13" class="filter-obj filter-3"></div>
+                                <div order="1" class="filter-obj filter-3"></div>
+                                <div order="9" class="filter-obj filter-3"></div>
+                                <div order="8" class="filter-obj filter-3"></div>
+                                <div order="11" class="filter-obj filter-3"></div>
+                                <div order="32" class="filter-obj filter-3"></div>
+                                <div order="21" class="filter-obj filter-4"></div>
+                                <div order="90" class="filter-obj filter-4"></div>
+                                <div order="4" class="filter-obj filter-4"></div>
+                                <div order="50" class="filter-obj filter-4"></div>
+                                <div order="-1" class="filter-obj filter-1 filter-label">Tags</div>
+                                <div order="10" class="filter-obj filter-tag">This</div>
+                                <div order="0" class="filter-obj filter-tag">is</div>
+                                <div order="5" class="filter-obj filter-tag">a</div>
+                                <div order="43" class="filter-obj filter-tag">test</div>
+                                <div order="41" class="filter-obj filter-tag">of</div>
+                                <div order="23" class="filter-obj filter-tag">the</div>
+                                <div order="12" class="filter-obj filter-tag">tagging</div>
+                                <div order="14" class="filter-obj filter-tag">system</div>
+                                <div order="20" class="filter-obj filter-tag">which</div>
+                                <div order="34" class="filter-obj filter-tag">can</div>
+                                <div order="15" class="filter-obj filter-tag">handle</div>
+                                <div order="42" class="filter-obj filter-tag">words</div>
+                                <div order="33" class="filter-obj filter-tag">of</div>
+                                <div order="60" class="filter-obj filter-tag">various</div>
+                                <div order="70" class="filter-obj filter-tag">lengths</div>
+                                <div order="80" class="filter-obj filter-tag">:D</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                
+                
+                <!-- Inventory -->
+                <div class="large-8 columns right_side">
+                
+                    <!-- Inventory Page Control -->
+                    <div id="page">
+                        
+                        <!-- Display Mode -->
+                        <div id="page_display">
+                            <ul>
+                                <li id="grid_display">Grid</li>
+                                <li id="list_display">List</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Page Navigation -->
+                        <div id="page_nav">
+                            <ul>
+                                <li>Off</li>
+                                <li class="">1</li>
+                                <li class="intermediate">... 7 ...</li>
+                                <li class="adj_page">14</li>
+                                <li class="curr_page">15</li>
+                                <li class="adj_page">16</li>
+                                <li class="intermediate">... 23 ...</li>
+                                <li class="">30</li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Inventory Container -->
+                    <div id="inventory_container" class="percent100">
+                        <div class="inventory-obj inventory-4" data-reveal-id="wineInfoModal">
+                            <div class="inventory-obj-image"></div>
+                            <div class="inventory-obj-label"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+                    
+            </div>
+            
+            
+        </div>
+        
+        <!-- Modals -->
+        <div id="wineInfoModal" class="reveal-modal">
+            
+            <div class="row">
+                <div class="large-4 columns">
+                    <h2>{Wine Name}</h2>
+                    <h4>{Winery Name}</h4>
+                    <img src="#"/> {Image Here}
+                </div>
+                
+                <div class="large-8 columns">
+                    <h3>Information:</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    
+                    <h3>Tags:<h3>
+                        <ul class="tags">
+                            <li><a href="#" class="tag">Red Wine</a></li>
+                            <li><a href="#" class="tag">White Wine</a></li>
+                            <li><a href="#" class="tag">Cheesy</a></li>
+                        </ul>
+                        
+                        <h3>More Info.</h3>
+                        
+                        <a class="close-reveal-modal">&#215;</a>
+                </div>
+            </div>
+        </div>
+        <!-- End Modals -->
+        
+        <!-- Javascript Imports -->
+        
+        <script>
+            document.write('<script src=' +
+                           ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+                           '.js><\/script>')
+        </script>
+        
+        <script src="js/vendor/jquery.js"></script>
+        <script src="js/foundation.min.js"></script>
+        <script src="isotopesjs/jquery.isotope.js"></script>
+        
+        <script>
+            $(document).foundation();
+        </script>
+        
+        
+        <!-- Auxillary Functions -->
+        <script type="test/javascript">
+            
+            function arrRmvAll(array, item) {
+                for(var i = array.length; i >= 0; i--) {
+                    if(array[i] === item) {
+                        array.splice(i, 1);
+                    }
+                }
+            }
+            
+        </script>
+        
+        
+        <!-- Isotopes Custom JS -->
+        <script type="text/javascript">
+            
+            var imgCnt = 14;
+            
+            var adjs = new Array();
+            adjs[0] = 'Terrible';
+            adjs[1] = 'Radical';
+            adjs[2] = 'Wicked';
+            adjs[3] = 'TripleKill';
+            adjs[4] = 'Gnarly';
+            adjs[5] = 'Rockin';
+            adjs[6] = 'Swaggin';
+            
+            //Inject Inventory Items =D -->
+            var maxInvCnt = 99;//There is already one sitting in the div for "Add Wine"
+            for(var i = 0; i < maxInvCnt;i++)
+            {
+                $('#inventory_container').append('<div class="inventory-obj inventory-4" data-reveal-id="wineInfoModal">' +
+                                                    /*'<div class="inventory-obj-stars"></div>' +
+                                                    '<div class="inventory-obj-count"></div>' +*/
+                                                    '<div class="inventory-obj-image"><img src="img/wine' + Math.floor(Math.random() * imgCnt) + '.jpeg" /></div>' +
+                                                    //'<div class="inventory-obj-label">The ' + adjs[Math.floor(Math.random() * adjs.length)] + ' Wine</div>' +
+                                                 '</div>');
+            }
+            
+            
+            
+            //Darkens or Lightens a hex color by the given percent
+            function shadeColor(color, percent) {
+                var num = parseInt(color.slice(1),16), amt = Math.round(2.55 * percent), R = (num >> 16) + amt, B = (num >> 8 & 0x00FF) + amt, G = (num & 0x0000FF) + amt;
+                return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (B<255?B<1?0:B:255)*0x100 + (G<255?G<1?0:G:255)).toString(16).slice(1);
+            }
+            
+            //Forces JQuery to return hex values for BG color instead of RGB
+            $.cssHooks.backgroundColor = {
+                get: function(elem) {
+                    if (elem.currentStyle)
+                    var bg = elem.currentStyle["backgroundColor"];
+                    else if (window.getComputedStyle)
+                    var bg = document.defaultView.getComputedStyle(elem,
+                                                                   null).getPropertyValue("background-color");
+                    if (bg.search("rgb") == -1)
+                    return bg;
+                    else {
+                        bg = bg.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+                        function hex(x) {
+                            return ("0" + parseInt(x).toString(16)).slice(-2);
+                        }
+                        return "#" + hex(bg[1]) + hex(bg[2]) + hex(bg[3]);
+                    }
+                }
+            }
+            
+            //Set up the random colors for Filtering objects
+            var colors = new Array();
+            colors[0] = '#7E2548';
+            colors[1] = '#6E1953';
+            colors[2] = '#64184C';
+            colors[3] = '#571542';
+            colors[4] = '#48163E';
+            
+            
+            /*Randomize bg color for filter objects*/
+            $( ".filter-obj:not(.filter-label)" ).each(function() {
+                $(this).css("background-color", colors[Math.floor(Math.random() * colors.length)]);
+            });
+            
+            
+            /*Randomize bg color for inventory objects*/
+            /*
+            $( ".inventory-obj:not(.inventory-obj:first-of-type)" ).each(function() {
+                $(this).css("background-color", colors[Math.floor(Math.random() * colors.length)]);
+            });
+             */
+            
+            //$('#theDiv').prepend('<img id="theImg" src="theImg.png" />')
+            
+            //Preps the Inventory layout
+            var $inventory = $('#inventory_container');
+            $inventory.isotope({ layoutMode : 'fitRows' });
+            $inventory.isotope({ filter: '*' });
+            
+            //Preps the Filter/s layout
+            var $filter = $('#filter_container');
+            $filter.isotope({ layoutMode : 'fitRows' });
+            $filter.isotope({ sortBy: 'random' });
+            $filter.isotope({ filter: '.filter-2, .filter-3, .filter-4, .filter-tag' });
+            
+            
+            //Configures the possible sorting methods
+            $('#filter_container').isotope({
+                getSortData : {
+                    index : function ( $elem ) {
+                        return $elem.index();
+                    },
+                    order : function ( $elem ) {
+                        return parseInt( $elem.attr('order') );
+                    }
+                }
+            });
+            
+            // filter down to items of a single border color
+            $('#filter_nav ul li').click(function(){
+                var f = $(this).attr('filter');
+                var s = $(this).attr('sortby');
+                $filter.isotope({ sortBy: s });
+                $filter.isotope({ filter: f });
+                return false;
+            });
+            
+            //Auto-arranges the filters on mouseenter, and explodes on mouseleave
+            $('#filter_container').mouseenter(function() {
+                $filter.isotope({ sortBy: 'index' });
+                $filter.isotope({ filter: '*' });
+            }).mouseleave(function() {
+                $filter.isotope({ sortBy: 'random' });
+                $filter.isotope({ filter: '.filter-2, .filter-3, .filter-4, .filter-tag' });
+            });
+            
+            //Dynamically highlights the filter objects (if it is not activated)
+            $('.filter-obj:not(.filter-label)').mouseenter(function() {
+                if(!$(this).hasClass('activated')) {
+                    $(this).css("background-color", shadeColor($(this).css("background-color"), 10));
+                }
+            }).mouseleave(function() {
+                if(!$(this).hasClass('activated')) {
+                    $(this).css("background-color", shadeColor($(this).css("background-color"), -10.1));
+                }
+            });
+            
+            /*
+            //Dynamically highlights the inventory objects
+            $('.inventory-obj:not(.inventory-obj:first-of-type)').mouseenter(function() {
+                if(!$(this).hasClass('activated')) {
+                    $(this).css("background-color", shadeColor($(this).css("background-color"), 10));
+                }
+            }).mouseleave(function() {
+                if(!$(this).hasClass('activated')) {
+                    $(this).css("background-color", shadeColor($(this).css("background-color"), -10.1));
+                }
+            });
+             */
+            
+            //Lays out the inventory in grid mode
+            $('#grid_display').click(function(){
+                $( ".inventory-obj" ).each(function() {
+                    if($(this).hasClass('inventory-1')) {
+                        $(this).removeClass('inventory-1');
+                    }
+                    if(!$(this).hasClass('inventory-4')) {
+                        $(this).addClass('inventory-4');
+                    }
+                });
+                $inventory.isotope('reLayout', null);
+            });
+            
+            //Lays out the inventory in grid mode
+            $('#list_display').click(function(){
+                $( ".inventory-obj" ).each(function() {
+                    if($(this).hasClass('inventory-4')) {
+                        $(this).removeClass('inventory-4');
+                    }
+                    if(!$(this).hasClass('inventory-1')) {
+                        $(this).addClass('inventory-1');
+                    }
+                });
+                $inventory.isotope('reLayout', null);
+            });
+            
+            $('.filter-obj:not(.filter-label)').click(function(){
+                if($(this).hasClass('activated')) {
+                    $(this).removeClass('activated');
+                }else{
+                    $(this).addClass('activated');
+                }
+            });
+            
+            /*
+            //If an object is near the right side it forces a wrap-arround that loses mouseenter focus
+            $('.inventory-obj').mouseenter(function() {
+                $('#inventory_container').isotope('reLayout', function(){})
+            }).mouseleave(function() {
+                $('#inventory_container').isotope('reLayout', function(){})
+            });
+             */
+            
+            
+            var filterList = new Array();
+            var activeItems = new Array();
+            var pagination = new Array();
+            var currentPage = 1;
+            var perPageCount = 20;
+            
+            
+            
+            
+            function calculateActiveItems()
+            {
+                //
+            }
+            
+            function paginateActive()
+            {
+                //Adds a special class to each active item based on pagination rules
+            }
+            
+            function depaginateActive()
+            {
+                //Removes pagination classes from active items
+            }
+            
+            function calculatePaginationArray()
+            {
+                //includes -1 as off switch, make sure to show on page bar
+            }
+            
+            function performFilter()
+            {
+                //Performs filtering with the given data set
+            }
+            
+            function rebuildFilters()
+            {
+                //Clears pagination, active
+                //performs filtering
+                //calcaltes active
+                //calcualtes pagination
+            }
+            
+            function changeToPage(pageNum)
+            {
+                
+            }
+            
+            function addToFilter(str)
+            {
+                //Adds to the filter list
+                //rebuild
+            }
+            
+            function removeFromFilter(str)
+            {
+                
+            }
+            
+            // filter to previous page
+            $('#prev_btn').click(function()
+            {
+                 if(pagenum > 1) {
+                     $container.isotope({ filter: '.page' + (--pagenum) });
+                 }
+                 return false;
+            });
+            
+            // filter to next page
+            $('#next_btn').click(function()
+                                 {
+                                 if(pagenum < pagemax) {
+                                 $container.isotope({ filter: '.page' + (++pagenum) });
+                                 }
+                                 return false;
+                                 });
+            
+            // filter down to items of a single border color
+            $('#filters div').click(function()
+                                    {
+                                    var selector = $(this).attr('filter');
+                                    $container.isotope({ filter: selector });
+                                    return false;
+                                    });
+            
+            </script>
+
+    </body>
+</html>

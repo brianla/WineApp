@@ -1,0 +1,22 @@
+BUGS:
+
+	~Sometimes clicking Add Wine opens the Edit Wine dialog
+	~Scriptsrun slow on some computers
+	~Load scripts are loading in wrong order
+	~Location Dropdown has only numbers, needs names
+
+MUST DO:
+
+	~Filtering by tags does not work!
+	~List mode does not display wine data
+	~Edit Locations
+	~Increment/Decrement Buttons on View Wine Modal
+	~3D Rendering
+	~Inventory Styling
+	
+
+NICE TO DO:
+
+	~Dynamic Pagination based on Filters Active
+	~Dynamic Filter Reduction based on Valid Non-Zero Intersections
+	~

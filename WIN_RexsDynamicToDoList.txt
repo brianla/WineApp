@@ -1,0 +1,50 @@
+BUGS:
+
+	~
+
+MUST DO:
+
+	~Increment/Decrement Buttons on View Wine Modal
+	
+
+NICE TO DO:
+
+	~(5)Dynamic Pagination based on Filters Active
+	~(3)Dynamic Filter Reduction based on Valid Non-Zero Intersections
+	~
+
+SHINY STUFF:
+
+	~(1.5)FP: Rotating Random Wine next to Login Box (twitter logng page style), on click shows Wine Modal
+
+DESIGN:
+
+	~Dynamic Messaging??
+																		LOOK HERE
+																	     PROFILE MODAL
+
+
+
+HIGH PRIORITY:
+
+Remove internal panel from 3D renderer, add in something else?
+@View Wine Modal needs to have its design completed. (ADD Tags, Rating,Quantity)
+DATA VERIFICATION (Javascript)
+@Implement Dynamic Tag Filtering
+@Add Copyright bar to Inv/Rec
+Set location drop down to current wine's location
+Set wishlist check box to current value
+See why wishlist setting is not saved on Wine Edit
+
+practice presentation
+Finish setting up demo account 
+Run through demo and presentation
+
+Brown background and seed image bhind seed wines on reommender
+Add Divider things?
+
+
+MONDAY:
+
+BRING CAMERA
+BRING MIC

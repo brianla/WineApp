@@ -1,0 +1,536 @@
+{% set navigation_bar = [
+    ('/', 'index', 'Index'),
+    ('/Inventory', 'inventory', 'Inventory'),
+    ('/Recommend', 'recommend', 'Recommendation'),
+] -%}
+{% set active_page = active_page|default('index') -%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <!-- Set the viewport width to device width for mobile -->
+        <meta name="viewport" content="width=device-width" />
+        
+        <link rel="icon" href="{{ url_for('static', filename='images/favicons/favicon.ico') }}" type="image/x-icon" />
+        
+        <meta name="keywords" content="WineCellarrraoraornaroaor    " />
+        <meta name="description" content="" />
+        <meta name="author" content="ZURB, inc. ZURB network also includes zurb.com" />
+        <meta name="copyright" content="ZURB, inc. Copyright (c) 2012" />
+        {% block head %}
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/normalize.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/foundation.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/custom.css') }}">
+        
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC' rel='stylesheet' type='text/css'>
+        
+        {% block css %}{% endblock %}
+        
+        <script src="{{ url_for('static', filename='javascripts/modernizr.foundation.js') }}"></script>
+        
+        <title>{% block title %}{% endblock %} WineCellar</title>
+        {% endblock %}
+    </head>
+    <body>
+        
+        <header>
+            <div class="nav-bar">
+                <div class="nav-inside">
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">             
+                    <div class="logo" onclick="location.href='{{ url_for('inventory') }}';" style="cursor: pointer;">
+                        <h1>WineCellar</h1>
+                        <p>Your Personal Wine Sommelier</p>
+                    </div>
+                    <nav class="main">
+                        <ul>
+                            <li><a href="" data-reveal-id="profileModal">Profile</a></li>
+                            <li><a href="/Inventory">Inventory</a></li>
+                            <li><a href="/Recommend">Recommender</a></li>
+                            {% if user and user is defined %}
+                            <li><a href="/User/logout">Logout</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <img src="{{ url_for('static', filename='images/1short.jpg') }}" class="bgimg"/>
+        </header>
+        {% block content %}{% endblock %}
+        <!-- Included JS Files (Compressed) 
+            <script src="{{ url_for('static', filename='javascripts/jquery.js') }}"></script>
+            <script src="{{ url_for('static', filename='javascripts/foundation.min.js') }}"></script>-->
+            
+
+        <!-- Profile Stuffs -->
+        <div id="profileModal" class="reveal-modal medium-large">
+
+            <div class="row">
+                <div class="large-4 columns">
+                    <div class="row" id="user_image">
+                        {% if user.imagePath %}
+                            <img  src="{{ url_for('static', filename=('images/user/' + user.imagePath) ) }}" />
+                        {% else %}
+                            <img  src="{{ url_for('static', filename=('images/user/default_user.jpg') ) }}" />
+                        {% endif %}
+                    </div>
+                    {% if user.location %}
+                    <div class="row">
+                        <div class="large-12 columns" id="">
+                            <div class="user-info"><b>Location:</b> {{user.location}}</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if user.dateOfBirth %}
+                    <div class="row">
+                        <div class="large-12 columns" id="">
+                            <div class="user-info"><b>Birthday:</b> {{user.dateOfBirth}}</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div id="editUserAccountButton" class="button full_width" data-reveal-id="editAccountModal">Edit Account</div>
+                    </div>
+                    <div class="row">
+                        <div id="deleteUserAccountButton" class="button full_width" data-reveal-id="deleteAccountModal">Delete Account</div>
+                    </div>
+                </div>
+                <div class="large-8 columns">
+                    <div class="row">
+                        <div class="large-12 columns" id="userTitle">
+                            <div id="user_userName">{{user.name}}</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-3 columns">
+                            <div class=" user_wineStat">
+                                <div class="stats-box">
+                                    <h4>{{totalWineCount}}</h4>
+                                    <span>Wines</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="large-3 columns">
+                            <div class=" user_wineStat">
+                                <div class="stats-box">
+                                    <h4>{{totalRedCount}}</h4>
+                                    <span>Red Wines</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="large-3 columns">
+                            <div class=" user_wineStat">
+                                <div class="stats-box">
+                                    <h4>{{totalWhiteCount}}</h4>
+                                    <span>White Wines</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="large-3 columns">
+                            <div class=" user_wineStat">
+                                <div class="stats-box">
+                                    <h4>{{totalLocCount}}</h4>
+                                    <span>Locations</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if favoriteWines %}
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div id="user_favoriteWines">Favorite Wines</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for wine in favoriteWines %}
+                        <div class="large-4 columns">
+                            <div class="user_wineImage">
+                                {% if wine is defined and wine['user_imagePath'] %}
+                                <img src="{{ url_for('static', filename=('images/wine/' + wine.user_imagePath) ) }}" />
+                                {% elif wine is defined and wine['wine_imagePath'] %}
+                                <img src="{{ url_for('static', filename=('images/wine/' + wine.wine_imagePath) ) }}" />
+                                {% else %}
+                                <img src="{{ url_for('static', filename='images/wine/default_wine.jpg' ) }}" />
+                                {% endif %}
+                            </div>
+                            <h6 class="favoriteWine-wineName">{{wine['wine_wineName']}}</h6>
+                            <p class="favoriteWine-wineVintage"> {{wine['wine_vintage']}}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if history %}
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div id="wine_varietal">Recent Activity</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-12 columns recent-activity">
+                            {% for hist in history %}
+                            <div class="recent-activity-block">
+                                <div class="recent-activity-event">{{hist.eventTag}}</div>
+                                <div class="recent-activity-time">{{hist.timestamp}}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div id="wine_region"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div id="wine_vintage"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <a class="close-reveal-modal">&#215;</a>
+
+        </div>
+
+
+
+            <!-- Modals -->
+            <div id="editAccountModal" class="reveal-modal medium">
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div class="row">
+                            <div class="large-12 large-centered columns">
+                                <div class="row">
+
+                                    <div class="large-12 large-centered columns">
+
+                                        <form id="editForm" action="User/edit" method="POST" enctype="multipart/form-data">
+
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <h3>Edit Account Information</h3>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row collapse">
+                                                <div class="large-4 columns">
+                                                    <span class="prefix required-field"><b>Current Password</b></span>
+                                                </div>
+                                                <div class="large-8 columns">
+                                                    <input name="current_password" type="password" placeholder="Please enter your current password."></input>
+                                                </div>
+                                            </div>
+
+                                            <div class="row collapse">
+                                                <div class="large-4 columns">
+                                                    <span class="prefix">Change Password</span>
+                                                </div>
+                                                <div class="large-8 columns">
+                                                    <input name="edit_password" type="password" placeholder="Passwords should be between 6-255 characters."></input>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div id="editMismatchMessage" class="error-message">Passwords must match.</div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row collapse">
+                                                <div class="large-4 columns">
+                                                    <span class="prefix">Re-Type Password</span>
+                                                </div>
+                                                <div class="large-8 columns">
+                                                    <input name="edit_repassword" type="password" placeholder="Must match password used above."></input>
+                                                </div>
+                                            </div>
+
+                                            <div class="row collapse">
+                                                <div class="large-4 columns">
+                                                    <span class="prefix">Display Name</span>
+                                                </div>
+                                                <div class="large-8 columns">
+                                                    <input name="edit_name" type="text" placeholder="Ex: John Donut"></input>
+                                                </div>
+                                            </div>
+
+                                            <div class="row collapse">
+                                                <div class="large-4 columns">
+                                                    <span class="prefix">Location</span>
+                                                </div>
+                                                <div class="large-8 columns">
+                                                    <input name="edit_location" type="text" placeholder="Ex: Wineberg, Wineria"></input>
+                                                </div>
+                                            </div>
+
+                                            <div class="row collapse">
+                                                <div class="large-4 columns">
+                                                    <span class="prefix">Birthday</span>
+                                                </div>
+                                                <div class="large-8 columns">
+                                                    <input name="edit_birthday" type="text" placeholder="Ex: 1980-05-31"></input>
+                                                </div>
+                                            </div>
+
+                                            <div class="row collapse">
+                                                <div class="large-4 columns">
+                                                    <span class="prefix">Profile Image</span>
+                                                </div>
+                                                <div class="large-8 columns">
+                                                    <input name="edit_user_image" type="file" placeholder="Ex: me.jpg" accept="image/*" capture></input>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div id="editAccountButton" class="button full_width">Edit Account</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div id="bold-required" class="error-message"><b>*Password is required.</b></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div id="editErrorMessage" class="error-message">Incorrect Password.</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div id="badNewPasswordMessage" class="error-message">Password must be letters/numbers only and between 6 - 255 characters.</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div id="badNewNameMessage" class="error-message">Name must be letters/numbers/spaces and between 2 - 255 characters.</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div id="badNewLocationMessage" class="error-message">Location must be letters/numbers/spaces and between 2 - 255 characters.</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div id="badNewBirthdayMessage" class="error-message">Birthday needs to be of the format YYYY-MM-DD and reasonable.</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="large-3 large-centered columns">
+                                                    <div class="progress_wheel">
+                                                        <img src="{{ url_for('static', filename='images/progress_1.gif') }}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="close-reveal-modal">&#215;</a>
+            </div>
+
+            <div id="deleteAccountModal" class="reveal-modal medium-large">
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div class="row">
+                            <div class="large-12 large-centered columns">
+                                <div class="row">
+                                    <div class="large-12 large-centered columns">
+                                        <h4 class="deleteVerification">Are you sure you want to delete your account?</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-4 large-centered columns">
+                                        <div id="deleteAccountYes" class="button full_width">Yes, I'm sure</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="deleteErrorMessage" class="error-message">Account Deletion was not Successful.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="close-reveal-modal">&#215;</a>
+            </div>
+
+            <!-- End Modals -->
+
+
+            <!-- Javascript Imports --
+            <script src="{{ url_for('static', filename='javascripts/vendor/jquery.js')}}"></script>
+            <script src="{{ url_for('static', filename='javascripts/foundation.min.js')}}"></script>
+            <!-- End Javascript Imports -->
+
+            <script>
+            $(document).foundation();
+            </script>
+
+            <!-- Login Test Custom JS -->
+            <script type="text/javascript">
+            $(function()
+            {
+                $('#editAccountButton').bind('click', function()
+                {
+                    var encounteredError = false;
+
+                    var currPass = $('input[name="current_password"]').val();
+                    var pass1 = $('input[name="edit_password"]').val();
+                    var pass2 = $('input[name="edit_repassword"]').val();
+                    var name = $('input[name="edit_name"]').val();
+                    var location = $('input[name="edit_location"]').val();
+                    var birfday = $('input[name="edit_birthday"]').val();
+
+                        //Make sure required values are not empty
+                        if(currPass == '' || currPass.length < 6 || currPass.length > 255) {
+                            $('#bold-required').css("display", 'block');
+                            encounteredError = true;
+                        } else {
+                            $('#bold-required').css("display", 'none');
+                        }
+
+                        //MAKE SURE PASSWORDS MATCH
+                        if( (pass1 != '' || pass2 != '') && pass1 != pass2) {
+                            $('#editMismatchMessage').css("display", 'block');
+                            encounteredError = true;
+                        } else {
+                            $('#editMismatchMessage').css("display", 'none');
+                        }
+
+                        //Make sure new password is valid
+                        if( pass1 != '' && (pass1.length < 6 || pass1.length > 255 || (/[^0-9A-Za-z]/i).test(pass1)) ) {
+                            $('#badNewPasswordMessage').css("display", 'block');
+                            encounteredError = true;
+                        } else {
+                            $('#badNewPasswordMessage').css("display", 'none');
+                        }
+
+                        //Make sure name is proper length
+                        if( name != '' && (name.length < 2 || name.length > 255 || (/[^0-9A-Za-z\s]/).test(name)) ) {
+                            $('#badNewNameMessage').css("display", 'block');
+                            encounteredError = true;
+                        } else {
+                            $('#badNewNameMessage').css("display", 'none');
+                        }
+
+                        //Make sure name is proper length
+                        if( location != '' && (location.length < 2 || location.length > 255 || (/[^0-9A-Za-z\s]/).test(location)) ) {
+                            $('#badNewLocationMessage').css("display", 'block');
+                            encounteredError = true;
+                        } else {
+                            $('#badNewLocationMessage').css("display", 'none');
+                        }
+
+                        //Make sure name is proper length
+                        if( birfday != '' && (birfday.length < 10 || birfday.length > 10 || !(/^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])/).test(birfday)) ) {
+                            $('#badNewBirthdayMessage').css("display", 'block');
+                            encounteredError = true;
+                        } else {
+                            $('#badNewBirthdayMessage').css("display", 'none');
+                        }
+
+                        //var string = $.trim(customArea.val());
+
+                        //If we had an error there is no point in continuing
+                        if(encounteredError)
+                            return false;
+
+                        //Post Account Into to Server for Account Creation
+                        $.post('/User/verifedit',
+                        {
+                            email    :  '{{ user.emailAddress }}',
+                            password :  $('input[name="current_password"]').val()
+                        }, function(data)
+                        {
+                            if(data.status == 'INVALID') {
+                                $('#editErrorMessage').css("display", 'block');
+                            }else if(data.status == 'VALID'){
+                                $('#editErrorMessage').css("display", 'none');
+                                $('.progress_wheel').css("display", 'block');
+                                $('form#editForm').submit()
+                                //window.location.href = data.newurl;
+                            }
+                        }, 'json');
+
+                        return false;
+
+                    });
+
+                    $('#deleteAccountYes').bind('click', function()
+                    {
+                        $.post('/User/delete',
+                        {
+                            email    :  '{{ user.emailAddress }}'
+                        }, function(data)
+                        {
+                            if(data.status == 'VALID') {
+                                $('#deleteErrorMessage').css("display", 'none');
+                                window.location.href = data.newurl;
+                            }else{
+                                $('#deleteErrorMessage').css("display", 'block');
+                            }
+                        }, 'json');
+                    });
+                });
+            </script>
+        <!-- Initialize JS Plugins -->
+
+        <script src="{{ url_for('static', filename='javascripts/app.js') }}"></script>
+        <script>
+            //Fix modal crap
+            $('div').each(function() {
+                if(!!$(this).attr('data-reveal-id')) {
+                    $(this).bind('click', function(){
+                        var revealID = $(this).attr('data-reveal-id');
+                        modalwatch(function () {
+                        $('.reveal-modal:not(#' + revealID + ')').css('visibility', 'hidden');//:not(#' + $(this).attr('data-reveal-id') + ')'
+                        $('.reveal-modal:not(#' + revealID + ')').css('display', 'none');//:not(#' + $(this).attr('data-reveal-id') + ')'
+                        //alert('.reveal-modal:not(#' + revealID + ')');
+                        //$('.reveal-modal:not(#' + revealID + ')').css('top', '-1000px');
+                        }, 1000);
+                    });
+                }
+            });
+
+
+            $(window).load(function(){
+                //$("#featured").orbit();
+            });
+        </script>
+        
+    </body>
+</html>
+

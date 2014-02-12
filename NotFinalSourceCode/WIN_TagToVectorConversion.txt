@@ -1,0 +1,47 @@
+Steps for Converting a String of Tags (via Add/Edit Wine Interface) to a Vector of Taste/Aroma Floats
+
+~Properties:
+	~Each Vector has 16 floats:
+		~4 Taste Attributes
+		~12 Aroma Attributes
+	~A NxK Tag Conversion Matrix is used for Initial Value Populations
+		~Where N ~= 400 and K ~= 20
+	~A Tag Vector is a single row in the Tag Convesion Matrix
+
+~Steps:
+	1. Load Tag Conversion Matrix into System Memory (this is a pre-step performed once)
+	2. For a given Wine and its given Tags:
+		1. Process the string of Tags into a List of Tags (Strings)
+		2. Foreach Tag in the Tag List, get the corresponding Tag Vector
+		3. Store all Tag Vectors retrieved in this manner in a List
+	3. For all Tag Vectors in the Tag Vector List:
+		1. Place the Vector into one of two groups Defining and Non-Defining
+			~Tag Vectors that are Defining have a non-nul value (an x) in the "Defining" column header
+		2. For each Defining Tag Vector that has an Effect, place that Effect in a List of Effects
+	4. Create an Average Vector for the List of Defining Tag Vectors:
+		1. For each Aroma Attribute:
+			1. Iterate over the List of Tag Vecvtors:
+				1. If the value for the given Attribute and given Tag Vector are NOT _NaN_
+				2. Add the value to a sum, and increment a counter
+				3. Else, modify no values and continue to the next Tag Vector
+			2. Set, in the Result Vector, the value for the given Attribute with sum/counter
+	5. Create a Decayed-Sum Vector for the List of Non-Defining Tag Vectors:
+		1. For each Aroma Attribute:
+			1. Iterate over the List of Tag Vectors:
+				1. If the value for the given Attribute and given Tag Vector are NOT _NaN_
+                                2. Add the value to a sum, and increment a counter
+                                3. Else, modify no values and continue to the next Tag Vector
+                        2. Set, in the Result Vector, the value for the given Attribute with:
+				~IF counter is not Zero, count^(DECAY_LAMBDA) * sum, ELSE, _NaN_
+	6. Create a Merged Vector for the Defining Average Vector and the Non-Defining Decayed Sum Vector:
+		1.For each Aroma Attribute:
+			1. If both vectors (DAV and NDDSV) have non-_NaN_ values, use average of the two values
+			2. If only one value in non-_NaN_ use the value as it is
+			3. If both are _NaN_ use Zero
+	7. Filter the Merged Vector using the List of Filters:
+		1. For each Filer, perform the given operation on the Merged Vector:
+			~For details of each Filter, see the Java Implementation.
+	8. Normalize the Filtered Merged Vector
+		1. Retrieve the Reference Vector
+		2. Divide each attribute in the Filteres Merged Vector by the corresponding value in the Reference Vector
+		3. For all 4 Taste Attributes, boost there values by 120% (value * 1.2)

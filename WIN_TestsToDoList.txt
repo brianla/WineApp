@@ -1,0 +1,52 @@
+Testing Account:
+
+	Email: wintester@gmail.com
+	PW: cs110s
+
+
+Things to know about Test Plans:
+
+	Only wines used are from Washington
+	For each test case, assume they haven't done a previous test case yet
+	Labels represented within single quotation marks (' ')
+	Inputs represented within double quotations marks (" ")
+	May want to click List mode to see wines better
+
+
+Things to fix:
+
+	Adding no named location works (not for edit location)
+	Editing a location name to a name that already exists works.
+	Remove location id
+	Remove ??? from descriptions
+	Add more default images for locations?
+	'Recommend More' - stuck on loading if shelf is deleted
+
+Other stuff:
+
+	Make another new account and populate the same entries, then do the test cases
+	Rename channels to shelves in documentations
+	Add Logout, Edit Account, Register an Account, Edit Shelf (Channel) as Use Cases?
+	Make sure our documentations are consistent
+
+Need to fix Test Cases: 
+	Recommender ones
+	Info Fields
+	Rate and Review
+
+	Dependency Test Cases
+
+
+recommend:	specify which seeds are in which shelf
+		redo recommender test cases (expected results)
+
+
+Requirements:
+	Modify an account
+	logout to system
+
+
+If there are no locations in inventory when adding a wine from recommender to inventory.
+Error message to user about invalid form content (like invalid Rating) when 
+      adding/editing a wine.
+Marked as wishlist, but when edit wine, it is not marked as wishlist.

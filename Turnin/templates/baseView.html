@@ -1,0 +1,80 @@
+{% set navigation_bar = [
+    ('/', 'index', 'Index'),
+    ('/Inventory', 'inventory', 'Inventory'),
+    ('/Recommend', 'recommend', 'Recommendation'),
+] -%}
+{% set active_page = active_page|default('index') -%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <!-- Set the viewport width to device width for mobile -->
+        <meta name="viewport" content="width=device-width" />
+        
+        <link rel="icon" href="{{ url_for('static', filename='images/favicons/favicon.ico') }}" type="image/x-icon" />
+        
+        <meta name="keywords" content="WineCellarrraoraornaroaor    " />
+        <meta name="description" content="" />
+        <meta name="author" content="ZURB, inc. ZURB network also includes zurb.com" />
+        <meta name="copyright" content="ZURB, inc. Copyright (c) 2012" />
+        {% block head %}
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+        
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/normalize.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/foundation.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/custom.css') }}">
+        
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC' rel='stylesheet' type='text/css'>
+        
+        {% block css %}{% endblock %}
+        
+        <script src="{{ url_for('static', filename='javascripts/modernizr.foundation.js') }}"></script>
+        
+        <title>{% block title %}{% endblock %} WineCellar</title>
+        {% endblock %}
+    </head>
+    <body>
+        
+        <header>
+            <div class="nav-bar">
+                <div class="nav-inside">
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">             
+                    <div class="logo" onclick="location.href='http://50.97.251.226:9234/';" style="cursor: pointer;">
+                        <h1>WineCellar</h1>
+                        <p>Your Personal Wine Sommelier</p>
+                    </div>
+                    <nav class="main">
+                        <ul>
+                            <li><a href="/User">Profile</a></li>
+                            <li><a href="/Inventory">Inventory</a></li>
+                            <li><a href="/Recommend">Recommender</a></li>
+                            {% if user and user is defined %}
+                            <li><a href="/User/logout">Logout</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <img src="{{ url_for('static', filename='images/1short.jpg') }}" class="bgimg"/>
+        </header>
+        {% block content %}{% endblock %}
+        <!-- Included JS Files (Compressed) 
+            <script src="{{ url_for('static', filename='javascripts/jquery.js') }}"></script>
+            <script src="{{ url_for('static', filename='javascripts/foundation.min.js') }}"></script>-->
+            
+        <!-- Initialize JS Plugins -->
+        <script src="{{ url_for('static', filename='javascripts/app.js') }}"></script>
+        <script>
+            $(window).load(function(){
+                //$("#featured").orbit();
+            });
+        </script>
+        
+    </body>
+</html>
+

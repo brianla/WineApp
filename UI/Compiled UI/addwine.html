@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width" />
+      <title>Wine Cellar - Personal Inventory</title>
+
+      <link rel="stylesheet" href="stylesheets/normalize.css" />
+      <link rel="stylesheet" href="stylesheets/foundation.css" />
+      <link rel="stylesheet" href="stylesheets/app.css" />
+
+      <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+      <script src="javascripts/vendor/custom.modernizr.js"></script>
+</head>
+<body>
+
+	<nav class="top-bar">
+  <ul class="title-area">
+    <!-- Title Area -->
+    <li class="name">
+      <h1><a href="#">WineCellar</a></h1>
+    </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Left Nav Section -->
+    <ul class="right">
+
+      <li class="divider"></li>
+      <li><a href="index.html">Home</a></li>
+      <li class="divider"></li>
+      <li  class="active"><a href="inventory.html">Inventory</a></li>
+      <li class="divider"></li>
+      <li><a href="recommender.html">Recommendations</a></li>
+      <li class="divider"></li>
+      <li class="has-dropdown"><a href="#">John Donut</a>
+        <ul class="dropdown">
+          <li><a href="#">My Profile</a></li>
+          <li><a href="#">Change Password</a></li>
+          <li><a href="#">View Payment Status</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Log out </a></li>
+      </ul>
+      </li>
+
+    </ul>
+
+  </section>
+</nav>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <a href="#" data-reveal-id="addWineModal" class="radius button">Add Wine</a>
+      </div>
+    </div>
+
+
+
+	<div id="addWineModal" class="reveal-modal">
+	
+    <div class="row">
+           <form class="custom">
+      <div class="large-10 columns">
+
+      <fieldset>
+        <legend>Add Wine</legend>
+
+        <div class="row">
+          <div class="large-6 columns">
+            <label for="autocomplete1">Wine Name</label>
+            <input name="addWineName" type="text" id="autocomplete1" />
+
+          </div>
+          <div class="large-6 columns">
+            <label for="customDropdown1">Inventory Location</label>
+            <select name = "addLocation" id="customDropdown1" class="custom dropdown medium">
+              <option>Kitchen</option>
+              <option>Basement</option>
+              <option>Bathroom</option>
+            </select>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-6 columns">
+            <label for="autocomplete2">Winery</label>
+            <input name="addWinery" type="text" id="autocomplete2">
+          </div>
+          <div class="large-6 columns">
+            <label>Region</label>
+            <input name="addRegion" type="text">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-6 columns">
+            <label>Varietal</label>
+            <input name="addVarietal" type="text">
+          </div>
+          <div class="large-6 columns">
+            <div class="row collapse"><label>Wine Image (From Existing Images)</label>
+              <a href="#"class="button prefix secondary">Select Image</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-2 columns">
+            <label for="autocomplete3">Vintage</label>
+            <input name="addVintage"type="text" id="autocomplete3">
+          </div>
+          <div class="large-2 columns">
+            <label>Quanitity</label>
+            <input name="addQuantity" type="text">
+          </div>
+          <div class="large-2 columns">
+            <label>Rating</label>
+            <input name="addRating" type="text" placeholder="1-5">
+          </div>
+          <div class="large-6 columns">
+            <div class="row collapse">
+              <label>Wine Image (From Computer)</label>
+              <div class="large-6 columns">
+                <input name="edit_user_image" type="file"></input>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Qualities (Tags)</label>
+            <input name="addQualities" type="text">
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <label>Description</label>
+            <textarea name="addDescription" type="text"></textarea>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <input id="addWine" type="submit" value="Add Wine" />
+          </div>
+        </div>
+      </fieldset>
+  </div>
+
+  <div class="large-2 columns"><div id="wineimages">
+    <a class="th radius">
+      <img src="images/samplewine.jpg">
+    </a></div>
+
+        <label for="checkbox1">
+      <input name="addWishlist" type="checkbox" id="checkbox1" style="display: none;">
+      <span class="custom checkbox"></span> Add to Wishlist?
+    </label>
+  </div>
+
+  </form>
+</div>
+
+    <a class="close-reveal-modal">&#215;</a>
+  </div>  
+
+  <script>
+  document.write('<script src=' +
+  ('__proto__' in {} ? 'javascripts/vendor/zepto' : 'javascripts/vendor/jquery') +
+  '.js><\/script>')
+  </script>
+
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  
+  <script>
+    $(document).foundation();
+
+    $(function() {
+      var tags1 = [ "merlot", "sauvignon blanc", "cabernet sauvignon", "riesling", "chardonnay", "shiraz", "sangiovese" ];
+      var tags2 = [ "winery1", "sonoma", "temecula", "winery2", "winery3" ];
+      var tags3 = [ "1995", "1996", "1700", "1776", "1901" ];
+      $("#autocomplete1").autocomplete({
+        source: tags1
+      });
+      $("#autocomplete2").autocomplete({
+        source: tags2
+      });
+      $("#autocomplete3").autocomplete({
+        source: tags3
+      });
+
+    });
+  </script>
+
+
+
+  <script type="text/javascript">
+  $(function()
+  {
+      $('#addWine').bind('click', function()
+      {
+          var qualityStr = $('input[name="addQualities"]').val()
+          var qualityArr = qualityStr.split(",");
+
+          $.post('/Inventory/addWine',
+          {
+              wineName : $('input[name="addWineName"]').val(),
+              wineLocation : $('select[name="addLocation"]').val(),
+              winery : $('input[name="addWinery"]').val(),
+              region: $('addRegion').val(),
+              varietal: $('addVarietal').val(),
+              vintage : $('input[name="addVintage"]').val(),
+              wineImage : $('input[name="addWineImage"]').val(),
+              quantity : $('input[name="addQuantity"]').val(),
+              rating : $('input[name="addRating"]').val(),
+              quality : JSON.stringify(qualityArr),
+              description : $('textarea[name="addDescription"]').val(),
+              wishlist : $('input[name="addWishlist"]').val()
+          }, function(data)
+          {
+              if(data.status == 'INVALID') {
+ //                 $('#loginErrorMessage').css("display", 'inline');
+              }else if(data.status == 'VALID'){
+ //                 $('#loginErrorMessage').css("display", 'none');
+ //                 $('form#loginForm').submit()
+              }
+          }, 'json');
+          return false;
+
+      });
+  });
+  </script>
+
+
+
+</body>
+</html>

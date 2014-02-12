@@ -1,0 +1,416 @@
+{% extends "base.html" %}
+{% set active_page = "inventory" %}
+{% block title %}Inventory{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/profile.css') }}">
+
+{% endblock %}
+{% block content %}
+<div class="everything_below_header">
+<div class="row">
+
+<div class="large-9 large-centered columns">
+    <div class="row">
+     <h1 style="text-align: center" class="profilename">{{user.name}}</h1>
+
+    <div class="large-6 columns">
+        <div  class="large-3 large-centered columns">
+         {% if user.imagePath %}
+        </div>
+    <img  src="{{ url_for('static', filename=('images/user/' + user.imagePath) ) }}" />
+         {% endif %}
+    </div>
+    <div class="large-6 columns">
+    <div class="row">
+            <div class="large-6 columns">
+                <div class="boxcount winecount">
+                    <h4>{{totalWineCount}}</h4>
+                    <p>Wines</p>
+                </div>
+            </div>
+            <div class="large-6 columns">
+                <div class="boxcount redcount">
+                    <h4>{{totalRedCount}}</h4>
+                    <p>Red Wines</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        <div class="large-6 columns">
+            <div class="boxcount whitecount">
+                <h4>{{totalWhiteCount}}</h4>
+                <p>White Wines</p>
+            </div>
+        </div>
+        <div class="large-6 columns">
+            <div class="boxcount poppedcount">
+                <h4>{{totalLocCount}}</h4>
+                <p>Locations</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <h2 class="favoritewinesh2">Favorite Wines</h2>
+        {% for wine in favoriteWines %}
+        <div class="large-4 columns center">
+            {% if wine is defined and wine['user_imagePath'] %}
+            <img src="{{ url_for('static', filename=('images/wine/' + wine.user_imagePath) ) }}" class="favoritewines" width="200px"/>
+            {% elif wine is defined and wine['wine_imagePath'] %}
+            <img src="{{ url_for('static', filename=('images/wine/' + wine.wine_imagePath) ) }}" class="favoritewines" width="200px"/>
+            {% else %}
+            <img src="{{ url_for('static', filename='images/wine/default_wine.jpg' ) }}" class="favoritewines" width="200px"/>
+            {% endif %}
+            <h6>{{wine['wine_wineName']}}</h6>
+            <p class="favoritewinestext"> {{wine['wine_vintage']}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="large-6 columns recentactivity">
+            <h3>Recent Activity</h3>
+            {% for hist in history %}
+            <div class="recentactivityblock">
+                {{hist.eventTag}}
+                <div class="recentactivitytime">{{hist.timestamp}}</div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="large-6 columns">
+            <h3>Favorite Aromas</h3>
+            {% for aroma in favoriteAromas %}
+             <div class="recentactivityblock">
+                {{aroma}}
+                <div class="recentactivitytime">&nbsp</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-6 columns">
+            <a href="#" class="button full_width" data-reveal-id="deleteAccountModal">Delete Account</a>
+        </div>
+        <div class="large-6 columns">
+            <a href="#" class="button full_width" data-reveal-id="editAccountModal">Edit Account</a>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+</div>
+
+<footer>
+    <div class="row">
+      <p>(C) Copyright 2013. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="javascripts/foundation.min.js"></script></body>
+</html>
+
+
+<!-- Modals -->
+{% if user is defined %}
+<div id="editAccountModal" class="reveal-modal medium">
+
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="row">
+                <div class="large-12 large-centered columns">
+                    <div class="row">
+
+                        <div class="large-12 large-centered columns">
+
+                            <form id="editForm" action="User/edit" method="POST" enctype="multipart/form-data">
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <h3>Edit Account Information</h3>
+                                    </div>
+                                </div>
+
+
+                                <div class="row collapse">
+                                    <div class="large-4 columns">
+                                        <span class="prefix required-field"><b>Current Password</b></span>
+                                    </div>
+                                    <div class="large-8 columns">
+                                        <input name="current_password" type="password" placeholder="Please enter your current password."></input>
+                                    </div>
+                                </div>
+
+                                <div class="row collapse">
+                                    <div class="large-4 columns">
+                                        <span class="prefix">Change Password</span>
+                                    </div>
+                                    <div class="large-8 columns">
+                                        <input name="edit_password" type="password" placeholder="Passwords should be between 6-255 characters."></input>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="editMismatchMessage" class="error-message">Passwords must match.</div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row collapse">
+                                    <div class="large-4 columns">
+                                        <span class="prefix">Re-Type Password</span>
+                                    </div>
+                                    <div class="large-8 columns">
+                                        <input name="edit_repassword" type="password" placeholder="Must match password used above."></input>
+                                    </div>
+                                </div>
+
+                                <div class="row collapse">
+                                    <div class="large-4 columns">
+                                        <span class="prefix">Display Name</span>
+                                    </div>
+                                    <div class="large-8 columns">
+                                        <input name="edit_name" type="text" placeholder="Ex: John Donut"></input>
+                                    </div>
+                                </div>
+
+                                <div class="row collapse">
+                                    <div class="large-4 columns">
+                                        <span class="prefix">Location</span>
+                                    </div>
+                                    <div class="large-8 columns">
+                                        <input name="edit_location" type="text" placeholder="Ex: Wineberg, Wineria"></input>
+                                    </div>
+                                </div>
+
+                                <div class="row collapse">
+                                    <div class="large-4 columns">
+                                        <span class="prefix">Birthday</span>
+                                    </div>
+                                    <div class="large-8 columns">
+                                        <input name="edit_birthday" type="text" placeholder="Ex: 1980-05-31"></input>
+                                    </div>
+                                </div>
+
+                                <div class="row collapse">
+                                    <div class="large-4 columns">
+                                        <span class="prefix">Profile Image</span>
+                                    </div>
+                                    <div class="large-8 columns">
+                                        <input name="edit_user_image" type="file" placeholder="Ex: me.jpg" accept="image/*" capture></input>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="editAccountButton" class="button full_width">Edit Account</div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="bold-required" class="error-message"><b>*Password is required.</b></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="editErrorMessage" class="error-message">Incorrect Password.</div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="badNewPasswordMessage" class="error-message">Password must be letters/numbers only and between 6 - 255 characters.</div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="badNewNameMessage" class="error-message">Name must be letters/numbers/spaces and between 2 - 255 characters.</div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="badNewLocationMessage" class="error-message">Location must be letters/numbers/spaces and between 2 - 255 characters.</div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="badNewBirthdayMessage" class="error-message">Birthday needs to be of the format YYYY-MM-DD and reasonable.</div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-3 large-centered columns">
+                                        <div class="progress_wheel">
+                                            <img src="{{ url_for('static', filename='images/progress_1.gif') }}" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="deleteAccountModal" class="reveal-modal medium-large">
+
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="row">
+                <div class="large-12 large-centered columns">
+                    <div class="row">
+                        <div class="large-12 large-centered columns">
+                            <h4 class="deleteVerification">Are you sure you want to delete your account?</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-4 large-centered columns">
+                            <div id="deleteAccountYes" class="button full_width">Yes, I'm sure</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div id="deleteErrorMessage" class="error-message">Account Deletion was not Successful.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+{% endif %}
+<!-- End Modals -->
+
+
+<!-- Javascript Imports -->
+<script src="{{ url_for('static', filename='javascripts/vendor/jquery.js')}}"></script>
+<script src="{{ url_for('static', filename='javascripts/foundation.min.js')}}"></script>
+<!-- End Javascript Imports -->
+
+<script>
+$(document).foundation();
+</script>
+
+<!-- Login Test Custom JS -->
+<script type="text/javascript">
+$(function()
+{
+    $('#editAccountButton').bind('click', function()
+    {
+        var encounteredError = false;
+
+        var currPass = $('input[name="current_password"]').val();
+        var pass1 = $('input[name="edit_password"]').val();
+        var pass2 = $('input[name="edit_repassword"]').val();
+        var name = $('input[name="edit_name"]').val();
+        var location = $('input[name="edit_location"]').val();
+        var birfday = $('input[name="edit_birthday"]').val();
+
+            //Make sure required values are not empty
+            if(currPass == '' || currPass.length < 6 || currPass.length > 255) {
+                $('#bold-required').css("display", 'block');
+                encounteredError = true;
+            } else {
+                $('#bold-required').css("display", 'none');
+            }
+
+            //MAKE SURE PASSWORDS MATCH
+            if( (pass1 != '' || pass2 != '') && pass1 != pass2) {
+                $('#editMismatchMessage').css("display", 'block');
+                encounteredError = true;
+            } else {
+                $('#editMismatchMessage').css("display", 'none');
+            }
+
+            //Make sure new password is valid
+            if( pass1 != '' && (pass1.length < 6 || pass1.length > 255 || (/[^0-9A-Za-z]/i).test(pass1)) ) {
+                $('#badNewPasswordMessage').css("display", 'block');
+                encounteredError = true;
+            } else {
+                $('#badNewPasswordMessage').css("display", 'none');
+            }
+
+            //Make sure name is proper length
+            if( name != '' && (name.length < 2 || name.length > 255 || (/[^0-9A-Za-z\s]/).test(name)) ) {
+                $('#badNewNameMessage').css("display", 'block');
+                encounteredError = true;
+            } else {
+                $('#badNewNameMessage').css("display", 'none');
+            }
+
+            //Make sure name is proper length
+            if( location != '' && (location.length < 2 || location.length > 255 || (/[^0-9A-Za-z\s]/).test(location)) ) {
+                $('#badNewLocationMessage').css("display", 'block');
+                encounteredError = true;
+            } else {
+                $('#badNewLocationMessage').css("display", 'none');
+            }
+
+            //Make sure name is proper length
+            if( birfday != '' && (birfday.length < 10 || birfday.length > 10 || !(/^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])/).test(birfday)) ) {
+                $('#badNewBirthdayMessage').css("display", 'block');
+                encounteredError = true;
+            } else {
+                $('#badNewBirthdayMessage').css("display", 'none');
+            }
+
+            //var string = $.trim(customArea.val());
+
+            //If we had an error there is no point in continuing
+            if(encounteredError)
+                return false;
+
+            //Post Account Into to Server for Account Creation
+            $.post('/User/verifedit',
+            {
+                email    :  '{{ user.emailAddress }}',
+                password :  $('input[name="current_password"]').val()
+            }, function(data)
+            {
+                if(data.status == 'INVALID') {
+                    $('#editErrorMessage').css("display", 'block');
+                }else if(data.status == 'VALID'){
+                    $('#editErrorMessage').css("display", 'none');
+                    $('.progress_wheel').css("display", 'block');
+                    $('form#editForm').submit()
+                    //window.location.href = data.newurl;
+                }
+            }, 'json');
+
+            return false;
+
+        });
+
+$('#deleteAccountYes').bind('click', function()
+{
+    $.post('/User/delete',
+    {
+        email    :  '{{ user.emailAddress }}'
+    }, function(data)
+    {
+        if(data.status == 'VALID') {
+            $('#deleteErrorMessage').css("display", 'none');
+            window.location.href = data.newurl;
+        }else{
+            $('#deleteErrorMessage').css("display", 'block');
+        }
+    }, 'json');
+});
+});
+</script>
+
+{% endblock %}

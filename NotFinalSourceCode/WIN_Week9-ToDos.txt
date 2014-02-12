@@ -1,0 +1,26 @@
+Week 9 ToDo's:
+
+	~Site Design
+	~Splash/Login Page:
+		~
+	~Profile Page:
+		~Wine Inventory Statistics
+			~Red/White Wines
+			~Favorite Flavors/Tags
+			~Favorite Wines
+			~Total Wines in Inventory
+			~Number of Wines in each Location
+			~Wine(s) with greatest Quantity
+	~Inventory:
+		~Need access to ResultProxies of (LocationInventory JOIN Wines) for a given User
+		~Need a list of Locations for a given User
+		~Need a list of Varietals, Wineries, Tags for a given User
+
+		~Single Wine information AJAX calls and html/css:
+			~Display Wine Information in a Modal
+			~Display a Bar Graph for each of the Aroma/Taste values
+			~
+		~Filtering/Sorting:
+			~
+	~Recommender:
+		~

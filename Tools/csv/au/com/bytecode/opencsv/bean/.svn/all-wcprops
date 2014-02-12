@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/bean
+END
+HeaderColumnNameMappingStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/bean/HeaderColumnNameMappingStrategy.java
+END
+ColumnPositionMappingStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/bean/ColumnPositionMappingStrategy.java
+END
+CsvToBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/bean/CsvToBean.java
+END
+HeaderColumnNameTranslateMappingStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/bean/HeaderColumnNameTranslateMappingStrategy.java
+END
+MappingStrategy.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/bean/MappingStrategy.java
+END

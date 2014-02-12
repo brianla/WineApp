@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>WineCellar</title>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" href="stylesheets/normalize.css" />
+<link rel="stylesheet" href="stylesheets/foundation.css" />
+
+
+<style>
+    img {
+        max-width:99999px !important;
+    }
+    body {
+    background: #fff;
+    color:#999;
+    }
+    .nav-bar {
+    background: transparent;
+background: rgba(0,0,0,0.4);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+padding: 3px 0;
+position: absolute;
+top: 20px;
+width: 100%;
+z-index: 1000;
+zoom: 1;
+}
+.nav-inside {
+border-bottom: 1px solid rgba(255,255,255,0.1);
+border-top: 1px solid rgba(255,255,255,0.1);
+height: 40px;
+width: 100%;
+line-height:50px;
+}
+nav.main {
+display: block;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+
+position: absolute;
+right: 0;
+text-transform: uppercase;
+top: 20px;
+z-index: 2000;
+}
+nav.main ul {
+float: right;
+margin: 0;
+}
+nav.main ul li {
+background: none;
+float: left;
+margin: 0 0 0 25px;
+padding: 0;
+position: relative;
+font-size:14px;
+}
+nav.main ul li a {
+color: #fff;
+display: block;
+padding: 13px 0;
+text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+nav.main ul li a:hover, nav.main ul li.active a{
+    color:#e75873;
+}
+header ul li {
+    display:inline;
+    color:white;
+    text-transform:uppercase;
+    font-size:10px;
+    
+}   
+    .logo {
+    background: #bb2f43;
+    border: 1px solid #bb2f43;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.15);
+    padding: 20px 0;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    width: 240px;
+    z-index: 2000;
+       
+    }
+    .logo h1 {
+color: #fff;
+font-family: 'Playfair Display SC', serif;
+font-size: 28px;
+margin: 0;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+}
+.logo p {
+color: #470310;
+font-size: 10px;
+margin: 0 0 10px 0;
+text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+text-transform: uppercase;
+}
+#blockcontainer {
+position:absolute;
+right:60px;
+margin-top:200px;
+}
+#block1 {
+background: #bb2f43;
+border: 1px solid #bb2f43;
+box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 15px rgba(0,0,0,0.15);
+color: #fff;
+float: right;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+font-size: 30px;
+padding: 10px 30px;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+text-transform: uppercase;
+z-index:999999;
+}
+#block2 {
+background: #fff;
+border: 1px solid #fff;
+box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.15);
+clear: both;
+color: #222;
+float: right;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+font-size: 20px;
+padding: 10px 30px;
+text-shadow: 0 1px 0 #fff;
+text-transform: uppercase;
+z-index:999999; 
+}
+#block2 a {
+    color:#222;
+}
+#block3 {
+background: #222;
+border: 1px solid #222;
+box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.2);
+clear: both;
+color: #fff;
+float: right;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+font-size: 20px;
+padding: 10px 30px;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+text-transform: uppercase;
+}
+#block3 a {
+    color:#fff;
+}
+p {
+    color:#999;
+}
+h3 {
+font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+font-weight:400;
+    }
+.pushdown { margin-top:50px; }
+footer { 
+background: #222;
+box-shadow: inset 0 10px 10px rgba(0,0,0,0.4);
+border-top: 1px solid rgba(255,255,255,0.1);
+padding-top:20px;
+padding-bottom:0px;
+}
+hr {
+border:0;
+background: url(images/ribbon.png) no-repeat center center;
+height: 20px;
+}
+.right {
+    text-align:right;
+    }
+div.large-3.columns.highlight h3 {
+color: #a01421;
+font-size: 128%;
+text-align:center;
+}
+
+div.large-3.columns.highlight {
+    margin-top:70px;
+    margin-bottom:100px;
+        text-align:center;
+
+}
+div.large-3.columns.highlight p {
+    color: #999;
+        text-align:center;
+
+}
+.center {
+    text-align:center !important;
+}
+.featuredesc {
+    margin-bottom:20px;
+}
+.bgimg {
+    width:100%;
+}
+</style>
+
+</head>
+<body>
+    <header>
+        
+        <div class="nav-bar">
+            <div class="nav-inside">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">             
+                <div class="logo">
+                    <h1>WineCellar</h1>
+                    <p>Your Personal Wine Sommelier</p>
+                </div>
+                <nav class="main">
+				<ul>
+					<li class="active"><a href="index.html">Home</a></li>
+					<li><a href="about.html">About Us</a></li>
+					<li><a href="menus.html">Inventory</a></li>
+					<li><a href="reviews.html">Recommender</a></li>
+					<li><a href="blog.html">Login</a></li>
+					<li><a href="contact.html">John Donut</a></li>
+				</ul>
+			</nav>
+            </div>
+        </div>
+            <div id="blockcontainer">
+        <div id="block1">some description here</div>
+        <div id="block2"><a href="/register">Register an Account</a></div>
+        <div id="block3"><a href="/login">Login<a></div>
+
+    </div>
+    <img src="images/slider/1.jpg" class="bgimg"/>
+
+    </header>
+    <br />
+    <div class="row">
+        <div class="large-3 columns highlight center">
+        <p><img src="images/icon-wine.png" /></p>
+            <h3>Description here</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel elit augue, accumsan.</p>
+        </div>
+        <div class="large-3 columns highlight">
+        <p><img src="images/icon-food.png" /></p>
+            <h3>Description here</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel elit augue, accumsan.</p>
+        </div>
+        <div class="large-3 columns highlight">
+        <p><img src="images/icon-wine.png" /></p>
+            <h3>Description here</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel elit augue, accumsan.</p>
+        </div>
+        <div class="large-3 columns highlight">
+        <p><img src="images/icon-food.png" /></p>
+            <h3>Description here</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel elit augue, accumsan.</p>
+        </div>
+    </div>
+        <hr>    
+              <br /><br /><br />      <br /><br /><br />
+    <div class="row">
+      <div class="small-8 small-centered columns">
+        <div class="large-9 columns pushdown">
+                <h3 class="featuredesc">Locations and Inventory</h3>
+
+        <p>When viewing the inventory page for the first time, there will be two sections with large plus signs in them.  The section on the left allows you to manage the location(s) of where you store your wine.  The section on the right keeps track of wines in your inventory and allows you to quickly add wines you have acquired. </p>
+        </div>
+        <div class="large-3 columns">
+            <img src="images/wine0.jpeg" width="200px"/>
+        </div>
+     </div>
+    </div>
+      <br /><br /> <br /><br /><br />
+      <br /><br /><br />
+
+
+     <div class="row">
+      <div class="small-8 small-centered columns">
+        <div class="large-3 columns">
+
+            <img src="images/wine0.jpeg" width="200px"/>
+        </div>
+        <div class="large-9 columns pushdown right">
+            <h3 class="featuredesc">Shelves and Recommendations</h3>
+
+            <p>Get recommendations for wines that you enjoyed by adding shelves and associating it with wines you have enjoyed before.  A shelf is a collection of related wines.  These shelves will contain wines similar to the wines you named for you to consider tasting.</p>
+        </div>
+    </div>  
+    </div> 
+
+          <br /><br /> <br /><br /><br />
+      <br /><br /><br />
+
+
+    <div class="row">
+      <div class="small-8 small-centered columns">
+        <div class="large-9 columns pushdown">
+                <h3 class="featuredesc">Searching</h3>
+
+        <p>Wines that you wish to add to your inventory or use as part of a shelf can be added by typing the wine's name, winery, and/or vintage.  Other information on the wine will be found automatically.  You may also search your inventory for a particular wine you added using the inventory page's search bar.  </p>
+        </div>
+        <div class="large-3 columns">
+            <img src="images/wine0.jpeg" width="200px"/>
+        </div>
+     </div>
+    </div>
+
+             <br /><br /> <br /><br /><br />
+      <br /><br /><br />
+     <div class="row">
+      <div class="small-8 small-centered columns">
+        <div class="large-3 columns">
+
+            <img src="images/wine0.jpeg" width="200px"/>
+        </div>
+        <div class="large-9 columns pushdown right">
+            <h3 class="featuredesc">Statistics and Attributes</h3>
+
+            <p>View the user profile for quick statistics such as the total amount of wines owned and one’s red wine to white wine ratio.  Aroma and taste qualities of wines can be seen when choosing to view more info on the wine.</p>
+        </div>
+    </div>  
+    </div> 
+
+
+
+</br> </br> </br> </br>     
+  <footer><div class="row"><p>(C) Copyright 2013. All Rights Reserved.</p></div>
+  </footer>
+  
+    <script>
+    
+  document.write('<script src=javascripts/vendor/'
+    + ('__proto__' in {} ? 'zepto' : 'jquery')
+    + '.js><\/script>');
+</script>
+
+
+<script src="javascripts/foundation.min.js"></script>
+
+
+</body>
+</html>

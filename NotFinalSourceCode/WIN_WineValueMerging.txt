@@ -1,0 +1,11 @@
+~Wine Objects:
+	~Modify the Wine (global) object to have K new non-required attributes, which are those from the Location Inventory
+
+~Operations:
+	~When building an Inventory for a given UseR:
+		1. Grab all LocationInventory and Wine objects for that User
+		2. For each Wine object, overwrite any attribute in common with the LocationInventory object that shares the same wineID
+		3. Pass the new, modified Wine list to the Template Engine
+
+~Reasoning:
+	~The Wine objects lack User-specific data, and the User LocationInventory objects are missing Wine-specific data.

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<!--[if IE 8]>                           <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+  <!--<![endif]-->
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Recommender</title>
+    <link rel="stylesheet" href="stylesheets/normalize.css" />
+    <link rel="stylesheet" href="stylesheets/foundation.css" />
+    <!--<link rel="stylesheet" href="stylesheets/index.css" />
+    <!-- <link rel="stylesheet" href="css/index_adjustments.css" /> -->
+    <style>
+        body {
+            background-image: radial-gradient(transparent, rgba(0,0,0,.7)), url(images/webtreats_wood-pattern5-512.jpg);
+            font-family: 'Libre Baskerville', sans-serif;
+        }
+        @container {
+            background-image: radial-gradient(transparent, rgba(0,0,0,.7)), url(images/leather.jpg);
+            padding-left:35px;
+            padding-right:35px;
+            padding-top:20px;
+            padding-bottom:20px;
+            -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+            -webkit-box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+-moz-box-shadow:    0px 0px 30px rgba(0, 0, 0, 0.3);
+box-shadow:         0px 0px 30px rgba(0, 0, 0, 0.3);    
+
+        }
+        .firstrow {
+            background: #FFF4E3;
+            background-image: url(images/papertexture.png);
+            color:rgba(0,0,0,0.8);
+            -webkit-box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow:    0px 10px 10px rgba(0, 0, 0, 0.5);
+            box-shadow:         0px 10px 10px rgba(0, 0, 0, 0.5);
+            -webkit-border-radius: 5px;
+            -webkit-border-top-left-radius: 7px;
+            -webkit-border-top-right-radius: 7px;
+            -moz-border-radius: 5px;
+            -moz-border-radius-topleft: 7px;
+            -moz-border-radius-topright: 7px;
+            border-radius: 5px;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+
+            z-index:50;
+            padding:0;
+            margin:0;
+            width:100% !important;
+            height:400px !important;
+            
+        }
+        .profile {
+            text-align:center;
+        }
+        #profilepic {
+        }
+        .ratebox {
+            margin-top:30px;
+            font-size:1em;
+        }
+        h3 {
+            margin:0 !important;
+            padding:10px;
+            width:110%;
+        }
+        .profileheader {
+            background: #c0392b;
+            padding-left:25px !important;
+        }
+        .winerate {
+            width:20px;
+        }
+        h2 {
+            background-image: url(images/navbg.gif);
+            background-repeat:repeat-x;
+            color:#FCFAE1;
+            margin: 0;
+            width:100%;
+            font-family: 'Libre Baskerville', serif;
+            font-weight:400;
+            font-size:1.5em;
+            padding-top:10px;
+            padding-bottom:10px;
+            padding-left:20px;
+            color: #5e231a;
+            text-shadow: 0px 1px 1px #bc7267;
+            -webkit-box-shadow: 0px 2px 4px rgba(50, 50, 50, 0.5);
+            -moz-box-shadow:    0px 2px 4px rgba(50, 50, 50, 0.5);
+            box-shadow:         0px 2px 4px rgba(50, 50, 50, 0.5);
+            -webkit-border-top-left-radius: 5px;
+            -webkit-border-top-right-radius: 5px;
+            -moz-border-radius-topleft: 5px;
+            -moz-border-radius-topright: 5px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;   
+            z-index:999999999;
+        }  
+        h3 {
+            color:#9f885e;
+            margin: 0;
+            width:100%;
+            font-family: 'Libre Baskerville', sans-serif;
+            font-weight:400;
+            font-size:1.4em;
+            padding-top:10px;
+        }
+        h2 a {
+            color:rgba(255,255,255,0.6);
+        }
+        h1 {
+            color:#ecf0f1;
+            font-family: 'Libre Baskerville', sans-serif;
+        }
+        h4 {
+            padding-top:10px;
+            font-family: 'Libre Baskerville', sans-serif;
+            font-weight:600;
+            font-size:1.0em;
+            color:rgba(0,0,0,0.8);
+            width:100%;
+        }
+        .secondrow {
+            background: #FFF4E3;
+            background-image: url(images/papertexture.png);
+            color:rgba(0,0,0,0.8);
+            -webkit-box-shadow: 1px 1px 28px rgba(10, 10, 10, 1);
+            -moz-box-shadow:    1px 1px 28px rgba(10, 10, 10, 1);
+            box-shadow:         1px 1px 28px rgba(10, 10, 10, 1); 
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border-bottom: 2px solid #bfab85;
+         }
+        .favorites {
+            color:rgba(0,0,0,0.8);
+        }
+        .favorites ol {
+            margin-left:50px;
+            font-size:1em;
+            font-weight:300;
+        }
+        #chart {
+            margin-top:15px;
+            margin-left:50px;
+        }
+        .thirdrow {
+            background: #FFF4E3;
+            background-image: url(images/papertexture.png);
+            color:rgba(0,0,0,0.8);
+            -webkit-box-shadow: 1px 1px 28px rgba(10, 10, 10, 1);
+            -moz-box-shadow:    1px 1px 28px rgba(10, 10, 10, 1);
+            box-shadow:         1px 1px 28px rgba(10, 10, 10, 1); 
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border-bottom: 2px solid #bfab85;
+        }
+        .winebox {
+            margin-top:20px;
+            margin-bottom:20px;
+            line-height:17px;
+        }
+        .winebox img {
+            padding:5px;
+        }
+        .winetitle {
+            margin-left:1em;
+            margin-top:35px;
+            font-size:1em;
+            font-weight:400;
+            color:rgba(0,0,0,0.8);
+            display:inline-block;
+        }
+        .winedesc {
+            margin-left:1.5em;
+            font-size:0.8em;
+            color:rgba(0,0,0,0.8);
+            display:inline-block;
+        }
+        .button {
+            margin-left:1.5em;
+            padding:15px;
+            font-family: 'Libre Baskerville', sans-serif;
+            border:none;
+            background:#f39c12;
+            color:white;        
+        }
+        .panel {
+            background:#9f885b;
+            border:none;
+            padding:0;     
+        }
+</style>
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=IM+Fell+French+Canon' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css' />
+    <script src="javacripts/vendor/custom.modernizr.js"></script>
+    <script src="javascripts/chart.js"></script>
+  </head>
+  <body>
+    <br />
+    <br />
+
+
+    <div class="row">
+      <div class="large-12 large-centered columns">
+                          <img src="images/logo.png" width="250px" style="left" />
+
+      <br />
+      <br />
+      <br />
+      <div class="container">
+      <div class="row">
+        <div class="large-4 columns">
+            <div class="firstrow">
+                <h2>Profile</h2>
+                <div class="large-12 columns profile" style="width:100%">
+                  <h3>Welcome, John Donut</h3>
+                  <img src="images/profile.jpg" width="200" alt="profile pic" id="profilepic" class="panel" />
+                </div>
+            </div>
+        </div>
+        <div class="large-8 columns">
+            <div class="firstrow">
+                  <h2>Recently Enjoyed</h2>
+                    <div class="large-5 columns winebox">
+                      <img src="http://placekitten.com/150/150" class="left" />
+                      <div class="winetitle">Cat Wine</div>
+                      <div class="winedesc">Cat Winery
+                      <br />1900
+                      <br /></div>
+                    </div>
+                    <div class="large-7 columns ratebox">Rate:
+                    <br />
+                    <img src="images/ratewine.png" class="winerate" /> 
+                    <img src="images/ratewine.png" class="winerate" /> 
+                    <img src="images/ratewine.png" class="winerate" /> 
+                    <img src="images/ratewine_transparent.png" class="winerate" /> 
+                    <img src="images/ratewine_transparent.png" class="winerate" />
+                    <br />Review:
+                    <form>
+                    <textarea name="review" cols="2"></textarea> 
+                    <input type="submit" class="small button right" /></form></div>
+                  </div>
+            </div>
+        </div>
+     
+     <br />
+      <br />
+      <div class="row secondrow">
+        <h2>Inventory Quick Stats 
+        <a href="/inventory">&raquo;</a></h2>
+        <div class="large-3 columns">
+        <canvas id="chart" height="120" width="120"></canvas> 
+        <script>
+            var pieData = [
+                    {
+                        value : 150,
+                        color : "#F7464A",
+                        label : 'Red',
+                        labelColor : '#ecf0f1',
+                        labelFontSize : '1em',
+                        labelAlign: 'center'
+                    },
+                    {
+                        value : 100,
+                        color : "#FDB45C",
+                        label : 'White',
+                        labelColor : '#FFFFFF',
+                        labelFontSize : '1em',
+                        labelAlign: 'center'
+                    }
+                ];
+
+        var myChart = new Chart(document.getElementById("chart").getContext("2d"));
+        var myPie = myChart.Pie(pieData, {
+            animationSteps: 100,
+            animationEasing: 'easeOutBounce'
+        });
+    
+</script></div>
+        <div class="large-4 columns favorites">
+          <h4>Favorite Wines</h4>
+          <ol>
+            <li>Chardonnay</li>
+            <li>Cabernet Sauvigon</li>
+            <li>Merlot</li>
+          </ol>
+        </div>
+        <div class="large-5 columns favorites">
+          <h4>Favorite Flavors</h4>
+          <ol>
+            <li>Fruity</li>
+            <li>Diesel</li>
+            <li>Earthy</li>
+          </ol>
+        </div>
+      </div>
+      <br />
+      <br />
+      <div class="row thirdrow">
+        <h2>Recommended for your pleasure 
+        <a href="/inventory">&raquo;</a></h2>
+        <div class="large-4 columns winebox">
+          <img src="http://placekitten.com/150/150" class="left panel" />
+          <div class="winetitle">Cat Wine</div>
+          <div class="winedesc">Cat Winery
+          <br />1900
+          <br /></div>
+          <a class="small button" href="/wine">MORE</a>
+        </div>
+        <div class="large-4 columns winebox">
+          <img src="http://placekitten.com/150/150" class="left panel" />
+          <div class="winetitle">Cat Wine</div>
+          <div class="winedesc">Cat Winery
+          <br />1900
+          <br /></div>
+          <a class="small button" href="/wine">MORE</a>
+        </div>
+        <div class="large-4 columns winebox">
+          <img src="http://placekitten.com/150/150" class="left panel" />
+          <div class="winetitle">Cat Wine</div>
+          <div class="winedesc">Cat Winery
+          <br />1900
+          <br /></div>
+          <a class="small button" href="/wine">MORE</a>
+        </div>
+      </div>
+      </div>
+      <!--
+        <div class="large-9 large-centered columns">
+            <form>
+            <fieldset>
+              <legend>Profile</legend>
+              <div class="row">
+                <div class="large-12 columns">
+                <label>First and Last name</label> 
+                <input type="text" placeholder="Dr. John Donut" /></div>
+              </div>
+              <div class="row">
+                <div class="large-4 columns">
+                <label>Email</label> 
+                <input type="text" placeholder="jdonut@ucsd.edu" /></div>
+                <div class="large-4 columns">
+                <label>Birthday</label> 
+                <input type="text" placeholder="05/10/1990" /></div>
+                <div class="large-4 columns">
+                  <div class="row collapse">
+                    <label>Picture</label>
+                    <div class="large-9 columns">
+                      <input type="text" placeholder="google" />
+                    </div>
+                    <div class="large-3 columns">
+                      <span class="postfix">browse</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-12 columns">
+                <label>About me</label> 
+                <textarea placeholder="artsy"></textarea></div>
+              </div>
+              <div class="row">
+                <div class="large-12 columns">
+                  <input type="submit" value="Update Profile" />
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    -->
+      <script src="js/foundation.min.js"></script> 
+      <!--
+                
+                <script src="js/foundation/foundation.js"></script>
+                
+                <script src="js/foundation/foundation.alerts.js"></script>
+                
+                <script src="js/foundation/foundation.clearing.js"></script>
+                
+                <script src="js/foundation/foundation.cookie.js"></script>
+                
+                <script src="js/foundation/foundation.dropdown.js"></script>
+                
+                <script src="js/foundation/foundation.forms.js"></script>
+                
+                <script src="js/foundation/foundation.joyride.js"></script>
+                
+                <script src="js/foundation/foundation.magellan.js"></script>
+                
+                <script src="js/foundation/foundation.orbit.js"></script>
+                
+                <script src="js/foundation/foundation.placeholder.js"></script>
+                
+                <script src="js/foundation/foundation.reveal.js"></script>
+                
+                <script src="js/foundation/foundation.section.js"></script>
+                
+                <script src="js/foundation/foundation.tooltips.js"></script>
+                
+                <script src="js/foundation/foundation.topbar.js"></script>
+                
+                -->
+       
+      <script>
+                $(document).foundation();
+                
+</script></div>
+    </div>
+  </body>
+</html>

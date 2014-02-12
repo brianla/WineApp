@@ -1,0 +1,536 @@
+
+
+{% extends "base.html" %}
+{% set active_page = "recommender" %}
+{% block title %}Recommender{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/custom.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/app.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/shelf.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Sail' rel='stylesheet' type='text/css'>
+
+{% endblock %}
+{% block content %}
+<div class="everything_below_header">
+    <div class="row collapse">
+
+    	 <div class="large-12 columns ">
+
+
+            <!-- Channel Selection Buttons -->
+            <div class="large-3 columns">
+                <div class="shelfcontainer">
+                    <div data-reveal-id="shelfModal" class="shelf-top-label">Tasting Shelves</div>
+                    <div data-reveal-id="shelfModal" class="shelf shelf-add">Add Shelf</div>
+                    <div data-reveal-id="edit_shelfModal" class="shelf shelf-edit">Edit Shelf</div>
+                    {% for shelf in fullShelves %}
+                        <div shelf-id="{{shelf.recommenderID}}" class="shelf channel-button">
+                            {{shelf.channelName}}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Recommended Wines -->
+            <div class="large-9 columns">
+                <!-- Dat Progress -->
+                <div class="row" id="progress_wheel_container">
+                    <div class="large-3 large-centered columns">
+                        <div class="progress_wheel" style="display:block;">
+                            <img src="{{ url_for('static', filename='images/progress_1.gif') }}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="recommend-more">Recommend More</div>
+                <div id="recommendation-container">
+
+                    {% for key, value in fullRecommended.iteritems() %}
+                        {% if value %}
+                            {% for wine in value %}
+                                <div class="recommendation-obj recommended-{{key}}">
+                                		<div class="recommendation-obj-image">
+                                            {% if wine is defined and wine.imagePath %}
+                                                <img src="{{ url_for('static', filename=('images/wine/' + wine.imagePath ) ) }}" />
+                                            {% else %}
+                                                <img src="{{ url_for('static', filename='images/wine/default_wine.jpg' ) }}" />
+                                            {% endif %}
+                                		</div>
+                                        <div class="winename">{{wine.wineName}}</div>
+                                        <div class="winedesc">
+                                            {{wine.winery}} <br />
+                                            {{wine.vintage}}
+                                        </div>
+                        				<div data-reveal-id="wineModal" class="moreinfo"
+                                                  wine-wineID="{{wine.wineID}}"
+                                                  wine-wineName="{{wine.wineName}}"
+                                                  wine-winery="{{wine.winery}}"
+                                                  wine-vintage="{{wine.vintage}}"
+                                                  wine-varietal="{{wine.varietal}}"
+                                                  wine-wineType="{{wine.wineType}}"
+                                                  wine-region="{{wine.region}}"
+                                                  wine-tags="{{wine.tags}}"
+                                                  wine-description="{{wine.description}}"
+                                                  wine-averageStarRating="{{wine.averageStarRating}}"
+                                                  wine-imagePath="{{wine.imagePath}}"
+                                                  wine-bitter="{{wine.bitter}}"
+                                                  wine-sweet="{{wine.sweet}}"
+                                                  wine-sour="{{wine.sour}}"
+                                                  wine-salty="{{wine.salty}}"
+                                                  wine-chemical="{{wine.chemical}}"
+                                                  wine-pungent="{{wine.pungent}}"
+                                                  wine-oxidized="{{wine.oxidized}}"
+                                                  wine-microbiological="{{wine.microbiological}}"
+                                                  wine-floral="{{wine.floral}}"
+                                                  wine-spicy="{{wine.spicy}}"
+                                                  wine-fruity="{{wine.fruity}}"
+                                                  wine-vegetative="{{wine.vegetative}}"
+                                                  wine-nutty="{{wine.nutty}}"
+                                                  wine-caramelized="{{wine.caramelized}}"
+                                                  wine-woody="{{wine.woody}}"
+                                                  wine-earthy="{{wine.earthy}}">More Info
+                                        </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div><!-- Master columns 12 -->
+
+    </div>
+</div>
+
+<!-- Modals -->
+<!-- Wine Info Modal -->
+    <!--Wine Info Modal -->
+    <!--
+    <div id="wineModal" class="reveal-modal" wineID="">
+        <div class="row">
+            <div class="large-4 columns">
+                <h2 id="wine_wineName">POOP</h2>
+                <h4 id="wine_winery">POOPEY</h4>
+                <img id="userImage" src="{{ url_for('static', filename='images/wine/default_wine.jpg' ) }}" />
+            </div>
+
+            <div class="large-8 columns">
+                <div class="row">
+                    <div class="section-container accordion" data-section="accordion">
+                        <section class="section active">
+                            <p class="title" data-section-title>
+                                <div>Information</div>
+                            </p>
+                            <div class="content" data-section-content>
+                                <p id="user_description"></p>
+
+                                <h3>Tags:</h3>
+                                <ul id="user_tags"class="tags">
+                                    <li><div class="tag">A Tag</div></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section>
+                            <p class="title" data-section-title>
+                                <div>More Info.</div>
+                            </p>
+                            <div class="content" data-section-content>
+                                <ul id="">
+                                    <li><strong>Varietal:</strong><div id="wine_varietal"></div></li>
+                                    <li><strong>Region:</strong><div id="wine_region"></div></li>
+                                    <li><strong>Your Rating:</strong><div id="user_personalStarRating"></div></li>
+                                    <li><strong>Average Rating:</strong><div id="wine_averageStarRating"></div></li>
+                                    <li><strong>Quantity:</strong><div id="user_quantity"></div></li>
+                                    <li><strong>Wishlist:</strong><div id="user_isWishlist"></div></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                  <div data-reveal-id="inventoryModal" class="radius button">Add this to my inventory</div>
+                </div>
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+-->
+
+    <div id="wineModal" class="reveal-modal" wineID="">
+        
+        <div class="row">
+            <div class="large-4 columns">
+                <div class="row">
+                    <img id="user_imagePath" src="images/samplewine.jpg" />
+                </div>
+                <div class="row">
+                    <!--<div id="editWineModalButton" class="button full_width" data-reveal-id="editWineModal">Edit Wine</div>-->
+                    <div data-reveal-id="inventoryModal" class="radius button full_width">Add this to my inventory</div>
+                </div>
+            </div>
+            <div class="large-8 columns">
+                <div class="row">
+                    <div class="large-12 columns" id="wineTitle">
+                        <div id="wine_wineName">Wine Name</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_winery">Winery</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_varietal"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_region"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_vintage"></div>
+                    </div>
+                </div>
+<!--
+                <div class="row">
+                    <div class="large-12 columns" style="">
+                        <strong>Average Rating:&nbsp;</strong><div id="wine_averageStarRating"></div>
+                    </div> 
+                </div>     
+
+                <div class="row">          
+                    <div class="large-12 columns" style="">
+                        <strong>Your Rating:&nbsp;</strong><div id="user_personalStarRating"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h4 id="wineTags">Tags:&nbsp;</h4>
+                        <ul id="user_tags"class="tags">
+                            <li><div class="tag">A Tag</div></li>
+                        </ul>
+                    </div>
+                </div>
+            -->
+                <div class="row">
+                    <div class="lineSpacing">
+                        <div class="large-12 columns">
+                            <p id="user_description">Description</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+<!-- ADD TO INVENTORY MODAL -->
+<div id="inventoryModal" class="reveal-modal small" wineID="">
+   <div class="row">
+        <div class="large-12 columns">
+            <div class="row">
+                <div class="large-12 large-centered columns">
+                    <div class="row">
+                        <div class="large-12 large-centered columns">
+                            <h4 class="deleteVerification">Which location would you like to add this wine to?</h4>
+                        </div>
+                    </div>
+                  <form id="inventoryForm" class="custom">
+                     <div class="large-12 columns">
+                      <label for="locationDropDown">Inventory Location</label>
+                      <select name="wineLocation" id="locationDropDown" class="custom dropdown medium">
+                          {% if fullLocations|count > 0 %}
+                              {% for fl in fullLocations %}
+                              <option>{{ fl.locationID }}{{ ' ' }}{{ fl.locationName }}</option>
+                              {% endfor %}
+                          {% endif %}
+                      </select>
+                    </div>
+                  </form>
+                  <br />
+                  <br />
+                    <div class="row">
+                        <div class="large-12 large-centered columns">
+                            <div id="addToInventoryButton" class="button full_width">Add wine</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div id="notSuccessful" class="error-message">Wine addition was not Successful.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+
+
+
+<!-- ADDSHELF MODAL -->
+<div id="shelfModal" class="reveal-modal">
+  <div class="row">
+    <div class="large-9 columns">
+      <h2>Create New Shelf</h2>
+    </div>
+    <div class="large-3 columns">
+      <div id="createShelf" class="addshelf button">Create Shelf</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div id="badSeedMessage" class="error-message">A Shelf needs to have at least one Wine Bottle on it.</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div id="badShelfNameMessage" class="error-message">Shelf Names should consist of only letters, numbers, and spaces and must be between 2 and 255 characters.</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <form id="AddSeedForm" class="custom">
+
+        <div class="row">
+          <div class="large-6 columns">
+
+            
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Shelf Name</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <input id="shelfName" type="text" placeholder="Shelf Name" />
+              </div>
+            </div>
+
+      </fieldset>
+
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Search for Wines You Like</h5>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-4 columns">
+                <input id="autocomplete1" class="autocompleteTextField" type="text" placeholder="Wine Name" />
+              </div>
+
+              <div class="large-4 columns">
+                <input id="autocomplete2" class="autocompleteTextField" type="text" placeholder="Winery" />
+              </div>
+
+              <div class="large-4 columns">
+                <input id="autocomplete3" class="autocompleteTextField" type="text" placeholder="Vintage" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                <div id="candyWineList">
+                </div>
+              </div>
+            </div>
+      </fieldset>
+
+          </div>
+
+
+
+          <div class="large-6 columns">
+
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>We'll recommend wines similar to these</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <div id="seedList">
+                </div>
+              </div>
+            </div>
+
+      </fieldset>
+
+          </div>
+
+
+        </div>
+
+    </form>
+
+    
+
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<!-- EDIT SHELF MODAL -->
+<div id="edit_shelfModal" class="reveal-modal">
+  <div class="row">
+    <div class="large-6 columns">
+      <h3>Edit a Shelf</h3>
+    </div>
+    <div class="large-3 columns">
+      <div data-reveal-id="delete_shelfModal" class="radius button">Delete Shelf</div>
+    </div>
+    <div class="large-3 columns">
+      <div id="editShelf" class="button">Save Shelf</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div id="edit_badSeedMessage" class="error-message">A Shelf needs to have at least one Wine Bottle on it.</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <form id="editSeedForm" class="custom">
+
+        <div class="row">
+          <div class="large-6 columns">
+
+            
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Pick a shelf to edit</h5>
+              </div>
+            </div>
+            <div class="large-6 columns">
+                        <label for="shelfDropDown">Shelves</label>
+                        <select name="edit_recommenderID" id="edit_shelfDropDown" class="custom dropdown medium">
+                            {% if fullShelves|count > 0 %}
+                                {% for fs in fullShelves %}
+                    <option>{{ fs.recommenderID }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+
+      </fieldset>
+
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Search for Wines You Like</h5>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-4 columns">
+                <input id="edit_autocomplete1" class="edit_autocompleteTextField" type="text" placeholder="Wine Name" />
+              </div>
+
+              <div class="large-4 columns">
+                <input id="edit_autocomplete2" class="edit_autocompleteTextField" type="text" placeholder="Winery" />
+              </div>
+
+              <div class="large-4 columns">
+                <input id="edit_autocomplete3" class="edit_autocompleteTextField" type="text" placeholder="Vintage" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                <div id="edit_candyWineList">
+                </div>
+              </div>
+            </div>
+      </fieldset>
+
+          </div>
+
+
+
+          <div class="large-6 columns">
+
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Your Seed list</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <div id="edit_seedList">
+                </div>
+              </div>
+            </div>
+
+      </fieldset>
+
+          </div>
+
+
+        </div>
+
+    </form>
+
+    
+
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<!-- Delete shelf modal -->
+<div id="delete_shelfModal" class="reveal-modal medium-large">
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row">
+        <div class="large-12 large-centered columns">
+          <div class="row">
+            <div class="large-12 large-centered columns">
+              <h4 class="deleteVerification">Are you sure you want to delete this shelf?</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-4 large-centered columns">
+              <div id="deleteShelfYes" class="button full_width">Yes, I'm sure</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns">
+              <div id="deleteErrorMessage" class="error-message">Shelf Deletion was not Successful.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+<!-- End Modals -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='javascripts/foundation/foundation.js') }}"></script>
+<script src="{{ url_for('static', filename='javascripts/jquery.foundation.reveal.js') }}"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<!-- Javascript Imports -->
+<script src="{{ url_for('static', filename='javascripts/vendor/jquery.js')}}"></script>
+<script src="{{ url_for('static', filename='javascripts/foundation.min.js')}}"></script>
+<script src="{{ url_for('static', filename='javascripts/isotopesjs/jquery.isotope.js')}}"></script>
+<script src="{{ url_for('static', filename='javascripts/EventHandler.js')}}"></script>
+
+
+{% endblock %}

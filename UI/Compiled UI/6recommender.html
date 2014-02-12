@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>WineCellar</title>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="stylesheets/normalize.css" />
+<link rel="stylesheet" href="stylesheets/foundation.css" />
+<style>
+    body {
+    background: #fff;
+    color:#999;
+    }
+    .nav-bar {
+    background: transparent;
+background: rgba(0,0,0,0.4);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+padding: 3px 0;
+position: absolute;
+top: 20px;
+width: 100%;
+z-index: 1000;
+zoom: 1;
+}
+.nav-inside {
+border-bottom: 1px solid rgba(255,255,255,0.1);
+border-top: 1px solid rgba(255,255,255,0.1);
+height: 40px;
+width: 100%;
+line-height:50px;
+}
+nav.main {
+display: block;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+
+position: absolute;
+right: 0;
+text-transform: uppercase;
+top: 20px;
+z-index: 2000;
+}
+nav.main ul {
+float: right;
+margin: 0;
+}
+nav.main ul li {
+background: none;
+float: left;
+margin: 0 0 0 25px;
+padding: 0;
+position: relative;
+font-size:14px;
+}
+nav.main ul li a {
+color: #fff;
+display: block;
+padding: 13px 0;
+text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+nav.main ul li a:hover, nav.main ul li.active a{
+    color:#e75873;
+}
+header ul li {
+    display:inline;
+    color:white;
+    text-transform:uppercase;
+    font-size:10px;
+    
+}   
+    .logo {
+    background: #bb2f43;
+    border: 1px solid #bb2f43;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.15);
+    padding: 20px 0;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    width: 240px;
+    z-index: 2000;
+       
+    }
+    .logo h1 {
+color: #fff;
+font-family: 'Playfair Display SC', serif;
+font-size: 28px;
+margin: 0;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+}
+.logo p {
+color: #470310;
+font-size: 10px;
+margin: 0 0 10px 0;
+text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+text-transform: uppercase;
+}
+#blockcontainer {
+position:absolute;
+right:60px;
+margin-top:200px;
+}
+#block1 {
+background: #bb2f43;
+border: 1px solid #bb2f43;
+box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 15px rgba(0,0,0,0.15);
+color: #fff;
+float: right;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+font-size: 30px;
+padding: 10px 30px;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+text-transform: uppercase;
+z-index:999999;
+}
+#block2 {
+background: #fff;
+border: 1px solid #fff;
+box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.15);
+clear: both;
+color: #222;
+float: right;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+font-size: 20px;
+padding: 10px 30px;
+text-shadow: 0 1px 0 #fff;
+text-transform: uppercase;
+z-index:999999; 
+}
+#block2 a {
+    color:#222;
+}
+#block3 {
+background: #222;
+border: 1px solid #222;
+box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.2);
+clear: both;
+color: #fff;
+float: right;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+font-size: 20px;
+padding: 10px 30px;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+text-transform: uppercase;
+}
+#block3 a {
+    color:#fff;
+}
+p {
+    color:#999;
+}
+h3 {
+font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+font-weight:400;
+    }
+.pushdown { margin-top:50px; }
+footer { 
+background: #222;
+box-shadow: inset 0 10px 10px rgba(0,0,0,0.4);
+border-top: 1px solid rgba(255,255,255,0.1);
+padding-top:20px;
+padding-bottom:0px;
+}
+hr {
+border:0;
+background: url(images/ribbon.png) no-repeat center center;
+height: 20px;
+}
+
+    .shelfcontainer {
+        position:relative;
+        left:20px;
+        top:20px;
+    }
+    .shelf {
+        width:100%;
+        margin:0;
+background-image: linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -o-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -moz-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -webkit-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -ms-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #B83729),
+	color-stop(1, #C03A2B)
+);
+
+        font-size:0.9em !important;
+        line-height:2em;
+        height:5em;
+        border:none;   
+        color:white;
+        text-align:center;
+        padding-top:20px;
+        display:inline-block;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .shelf:hover {
+        background:#9a2c21;
+        color:white;
+    }
+    .button:hover, button:focus, .button:hover, .button:focus {
+    }
+    .winebox {
+        padding-top:20px;
+        padding-bottom:20px;
+        background:#d9d9d9;
+        border-left:1px solid rgba(0,0,0,0.05);
+        border-top:1px solid rgba(255,255,255,0.5);
+        line-height:2em;
+        
+
+    }
+    .first-box {
+}
+    .last-box {
+z-index:999;
+}
+    .panel {
+        padding:10px;
+        border:none;
+    }
+    .recarrow {
+        margin-top:100px;
+        background:#d9d9d9;
+        border-top:1px solid rgba(255,255,255,0.5);
+        padding-bottom:5px;
+
+}
+    .winename {
+        color: rgba(0,0,0,0.8);
+        font-size:1.5em;
+        font-weight:600;
+    }
+    .winedesc {
+        margin-left:15px;
+        font-size:1em;
+        font-weight:300;
+    }
+    .moreinfo {
+        
+        width:100%;
+        margin-top:15px;
+        background:#3498db;
+        font-size:0.9em !important;
+        line-height:2em;
+        padding-top:0.5em;
+        height:3em;
+        border:none;   
+        color:white;
+        text-align:center;
+        display:inline-block;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .moreinfo:hover {
+        color:white;
+        background:#2980b9;
+    }
+</style>
+
+</head>
+<body>
+    <header>
+        
+        <div class="nav-bar">
+            <div class="nav-inside">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-12 columns">             
+                <div class="logo">
+                    <h1>WineCellar</h1>
+                    <p>Your Personal Wine Sommelier</p>
+                </div>
+                <nav class="main">
+				<ul>
+					<li class="active"><a href="index.html">Home</a></li>
+					<li><a href="about.html">About Us</a></li>
+					<li><a href="menus.html">Inventory</a></li>
+					<li><a href="reviews.html">Recommender</a></li>
+					<li><a href="blog.html">Login</a></li>
+					<li><a href="contact.html">John Donut</a></li>
+				</ul>
+			</nav>
+            </div>
+        </div>
+    <img src="images/slider/1short.jpg" class="bgimg"/>
+
+    </header>
+    <br />
+    <div class="row">
+
+	<div class="small-12 columns collapse">
+        <div class="small-2 columns">
+            <div class="shelfcontainer">
+                <a href="channel" class="shelf">Red Wine</a>
+                <a href="channel" class="shelf">White Wine</a>
+                <a href="channel" class="shelf">Muscato</a>
+                <a href="channel" class="shelf">+</a>
+            </div>
+            </div>
+			<div class="small-3 columns winebox first-box">
+				<div class="panel">
+					<img src="images\Mer2.png">
+				</div>
+                <div class="winename">Catepillar</div>
+                <div class="winedesc">
+                    Winery Name <br />
+                    Vintage Date
+                </div>
+				<a href="#" class="moreinfo">More Info</a>
+
+			</div>
+
+			<div class="large-3 columns winebox">
+				<div class="panel">
+					<img src="images\Zin2.png">
+				</div>
+                <div class="winename">Catepillar</div>
+                <div class="winedesc">
+                    Winery Name <br />
+                    Vintage Date
+                </div>
+				<a href="#" class="moreinfo">More Info</a>
+
+			</div>
+
+			<div class="large-3 columns winebox last-box">
+				<div class="panel">
+					<img src="images\Por2.png">
+				</div>
+                <div class="winename">Catepillar</div>
+                <div class="winedesc">
+                    Winery Name <br />
+                    Vintage Date
+                </div>
+				<a href="#" class="moreinfo">More Info</a>
+        
+			</div>  
+
+			<div class="large-1 columns recarrow">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <img src="images/angle.png" width="50px" />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>
+            
+
+
+	</div>
+
+</div>
+                 <br />
+                <br />
+                <br />
+                <br />
+                <br />
+  <footer><div class="row"><p>(C) Copyright 2013. All Rights Reserved.</p></div>
+  </footer>
+  
+    <script>
+    
+  document.write('<script src=javascripts/vendor/'
+    + ('__proto__' in {} ? 'zepto' : 'jquery')
+    + '.js><\/script>');
+</script>
+
+<script src="javascripts/foundation.min.js"></script>
+
+</body>
+</html>

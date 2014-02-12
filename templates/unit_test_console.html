@@ -1,0 +1,33 @@
+<html lang="en">
+	<head>
+	    <meta charset="utf-8" />
+	    <!-- Set the viewport width to device width for mobile -->
+	    <meta name="viewport" content="width=device-width" />
+
+	    <link rel="icon" href="{{ url_for('static', filename='images/favicons/favicon.ico')}}" type="image/x-icon" />
+	    {% block head %}
+	    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/normalize.css') }}">
+	    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/foundation.min.css') }}">
+	    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/custom.css') }}">
+
+	    <title>{% block title %}{% endblock %} WineCellar</title>
+	    {% endblock %}
+	</head>
+	<body>
+		<div class="row" style="top:64">
+			<div class="large-12 columns">
+				<div class="row"><h1>Error Console</h1></div>
+			{% for line in log %}
+				<div class="row">
+					<div class="large-1 columns"><div class="panel">{{ loop.index }}</div></div>
+					<div class="large-11 columns">
+						<div class="panel">
+							{{ line }}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+	</body>
+</html>

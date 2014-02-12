@@ -1,0 +1,180 @@
+<html>
+<head>
+    <title>Antibiotic Effectiveness</title>
+    <script type="text/javascript" src="javascripts/protovis.js"></script>
+    <script type="text/javascript" src="javascripts/vendor/jquery.js"></script>
+
+</head>
+<body>
+    <div><h3>My CicleBar Graph</h3></div>
+    <div style="text-align:center; border:4px solid #DDD;">
+        <div id="circleBarGraph">
+
+            <script type="text/javascript+protovis">
+
+                /* MODIFY THIS */
+                var data = [[';;wine.wine_bitter;;'],
+                [';;wine.wine_sweet;;'],
+                [';;wine.wine_sour;;'],
+                [';;wine.wine_salty;;'],
+                [';;wine.wine_chemical;;'],
+                [';;wine.wine_pungent;;'],
+                [';;wine.wine_oxidized;;'],
+                [';;wine.wine_microbiological;;'],
+                [';;wine.wine_floral;;'],
+                [';;wine.wine_spicy;;'],
+                [';;wine.wine_fruity;;'],
+                [';;wine.wine_vegetative;;'],
+                [';;wine.wine_nutty;;'],
+                [';;wine.wine_caramelized;;'],
+                [';;wine.wine_woody;;'],
+                [';;wine.wine_earthy;;']];
+
+                var data1 = [ {name: "Bitter", value: ';;wine.wine_bitter;;', attr: "taste"},
+                {name: "Sweet", value: ';;wine.wine_sweet;;', attr: "taste"},
+                {name: "Sour", value: ';;wine.wine_sour;;', attr: "taste"},
+                {name: "Salty", value: ';;wine.wine_salty;;', attr: "taste"},
+                {name: "Chemical", value: ';;wine.wine_chemical;;', attr: "aroma"},
+                {name: "Pungent", value: ';;wine.wine_pungent;;', attr: "aroma"},
+                {name: "Oxidized", value: ';;wine.wine_oxidized;;', attr: "aroma"},
+                {name: "Microbiological", value: ';;wine.wine_microbiological;;', attr: "aroma"},
+                {name: "Floral", value: ';;wine.wine_floral;;', attr: "aroma"},
+                {name: "Spicy", value: ';;wine.wine_spicy;;', attr: "aroma"},
+                {name: "Fruity", value: ';;wine.wine_fruity;;', attr: "aroma"},
+                {name: "Vegetative", value: ';;wine.wine_vegetative;;', attr: "aroma"},
+                {name: "Nutty", value: ';;wine.wine_nutty;;', attr: "aroma"},
+                {name: "Caramelized", value: ';;wine.wine_caramelized;;', attr: "aroma"},
+                {name: "Woody", value: ';;wine.wine_woody;;', attr: "aroma"},
+                {name: "Earthy", value: ';;wine.wine_earthy;;', attr: "aroma"}
+                ];
+
+                var attrColor = { Bitter: "#2CA02C",
+                Sweet: "#1F77B4",
+                Sour: "#CC0000",
+                Salty: "#6A98D5",
+                Chemical:  "#FFCC00",
+                Pungent: "#99FF00",
+                Oxidized: "#FF9900",
+                Microbiological: "#560156",
+                Floral: "#9467BD",
+                Spicy: "#000000",
+                Fruity: "#D62728",
+                Vegetative: "#FF6600",
+                Nutty: "#C49C94",
+                Caramelized: "#8E7618",
+                Woody:  "#7F7F7F",
+                Earthy: "#8C564B"
+                }
+
+                var gramColor = {
+                  aroma: "rgba(255, 255, 130, .8)",
+                  taste: "rgba(230, 130, 110, .8)"
+                };
+
+
+                /* 
+                 * Basic dimensions.
+                 * Width/Height - positioning 
+                 */
+                 var width = 400,
+                 height = 700,
+                 innerRadius = 50,
+                 outerRadius = 200;
+
+                 /* Burtin's radius encoding is, as far as I can tell, sqrt(log(mic)). */
+                 var min = 0,
+                 max = 10,
+                 a = (outerRadius - innerRadius) / (max - min),
+                 b = innerRadius - a * max,
+                 radius = function(mic) a * mic + innerRadius;
+
+                /*
+                 * The pie is split into equal sections for each bacteria, with a blank
+                 * section at the top for the grid labels. Each wedge is further
+                 * subdivided to make room for the three antibiotics, equispaced.
+                */
+                var bigAngle = 2.0 * Math.PI / (data.length + 1),
+                smallAngle = bigAngle / 7;
+
+                /* The root panel. */
+                var vis = new pv.Panel()
+                .width(width)
+                .height(height)
+
+                /* Background wedges to indicate gram staining color. */
+                var bg = vis.add(pv.Wedge)
+                .data(data1) 
+                .left(width / 2)
+                .top(height / 2 - 145)
+                .innerRadius(innerRadius)
+                .outerRadius(outerRadius - 75)
+                .angle(bigAngle)
+                .startAngle(function(d) this.index * bigAngle + bigAngle / 2 - Math.PI / 2)
+                .fillStyle(function(d) gramColor[d.attr]);     // Color of background
+
+                /* Antibiotics. */
+                bg.add(pv.Wedge)
+                .angle(smallAngle * 5)
+                .startAngle(function(d) bg.startAngle() + smallAngle)
+                .outerRadius(function(d) radius(d.value))
+                .fillStyle(function(d) attrColor[d.name]);  //Color of bars
+
+
+                /* Circular grid lines. */
+                bg.add(pv.Dot)
+                .data(pv.range(0, 11))                     // Number of labels
+                .fillStyle(null)
+                .strokeStyle("#eee")
+                .lineWidth(0.7)
+                .size(function(i) Math.pow(radius(i), 2))
+                .anchor("top").add(pv.Label)
+                .visible(function(i) i < 11)
+                .textBaseline("middle")
+                .text(function(i) i);
+
+
+                /* Radial grid lines. Grid lines between bars. */
+                bg.add(pv.Wedge)
+                .data(pv.range(data.length + 1))
+                .innerRadius(innerRadius - 5)
+                .outerRadius(outerRadius - 50)
+                .fillStyle(null)
+                .strokeStyle("black")
+                .lineWidth(0.5)
+                .angle(0);
+
+
+                /* Antibiotic legend. */
+                vis.add(pv.Bar)
+                .data(pv.keys(gramColor))
+                .left(width / 4 + 65)
+                .top(function() height / 4 + 10 + this.index * 25)
+                .fillStyle(function(d) gramColor[d])
+                .width(36)
+                .height(12)
+                .anchor("right").add(pv.Label)
+                .textMargin(6)
+                .textAlign("left");
+
+
+                /* Legend for background colors. */
+                vis.add(pv.Dot)
+                .data(data1)
+                .left(width / 4 + 75)
+                .top(function() + 420 + this.index * 18)
+                .fillStyle(function(d) attrColor[d.name])
+                .strokeStyle(null)
+                .size(30)
+                .anchor("right").add(pv.Label)
+                .textMargin(6)
+                .textAlign("left")
+                .text(function(d) "" + d.name);
+
+                vis.render();
+            </script>
+        </div>
+    </div>
+
+
+
+</body>

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv
+END
+XMLChar.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/rexwest/!svn/ver/8/trunk/RexWest/src/csv/XMLChar.java
+END
+CSVColumn.java
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/rexwest/!svn/ver/8/trunk/RexWest/src/csv/CSVColumn.java
+END
+Transform.java
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/rexwest/!svn/ver/8/trunk/RexWest/src/csv/Transform.java
+END
+CSVHeaderRow.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/rexwest/!svn/ver/8/trunk/RexWest/src/csv/CSVHeaderRow.java
+END
+CSV.java
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/CSV.java
+END
+CSVRow.java
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/rexwest/!svn/ver/8/trunk/RexWest/src/csv/CSVRow.java
+END

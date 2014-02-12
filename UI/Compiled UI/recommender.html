@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Recommender</title>
+
+  <link rel="stylesheet" href="stylesheets/normalize.css" />
+
+  <link rel="stylesheet" href="stylesheets/foundation.css" />
+
+ <!-- <link rel="stylesheet" href="css/index_adjustments.css" /> -->
+
+
+
+	<!-- Google Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=IM+Fell+French+Canon' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+
+  <style>
+    body {
+        background:#162127;
+        background-image:url('images/texturebg.png');
+        background-repeat:repeat;
+        font-family: 'Open Sans', san-serif;
+        }
+    .shelfcontainer {
+        position:relative;
+        left:20px;
+        top:20px;
+    }
+    .shelf {
+        width:100%;
+        margin:0;
+background-image: linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -o-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -moz-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -webkit-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -ms-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #B83729),
+	color-stop(1, #C03A2B)
+);
+
+        font-size:0.9em !important;
+        line-height:2em;
+        height:5em;
+        border:none;   
+        color:white;
+        text-align:center;
+        padding-top:20px;
+        display:inline-block;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .shelf:hover {
+        background:#9a2c21;
+        color:white;
+    }
+    .button:hover, button:focus, .button:hover, .button:focus {
+    }
+    .winebox {
+        padding-top:20px;
+        padding-bottom:20px;
+        background:#d9d9d9;
+        border-left:1px solid rgba(0,0,0,0.05);
+        border-top:1px solid rgba(255,255,255,0.5);
+        line-height:2em;
+        
+
+    }
+    .first-box {
+    -webkit-box-shadow: -3px 0px 7px rgba(50, 50, 50, 0.47);
+-moz-box-shadow:    -3px 0px 7px rgba(50, 50, 50, 0.47);
+box-shadow:         -3px 0px 7px rgba(50, 50, 50, 0.47);
+}
+    .last-box {
+        -webkit-box-shadow: 5px 0px 14px rgba(50, 50, 50, 0.75);
+-moz-box-shadow:    5px 0px 14px rgba(50, 50, 50, 0.75);
+box-shadow:         5px 0px 14px rgba(50, 50, 50, 0.75);
+z-index:999;
+}
+    .panel {
+        padding:10px;
+        border:none;
+    }
+    .recarrow {
+        margin-top:100px;
+        background:#d9d9d9;
+        border-top:1px solid rgba(255,255,255,0.5);
+        padding-bottom:5px;
+
+}
+    .winename {
+        color: rgba(0,0,0,0.8);
+        font-size:1.5em;
+        font-weight:600;
+    }
+    .winedesc {
+        margin-left:15px;
+        font-size:1em;
+        font-weight:300;
+    }
+    .moreinfo {
+        
+        width:100%;
+        margin-top:15px;
+        background:#3498db;
+        font-size:0.9em !important;
+        line-height:2em;
+        padding-top:0.5em;
+        height:3em;
+        border:none;   
+        color:white;
+        text-align:center;
+        display:inline-block;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .moreinfo:hover {
+        color:white;
+        background:#2980b9;
+    }
+  </style>
+    <script src="js/vendor/custom.modernizr.js"></script>
+
+</head>
+<body>
+    <BR><BR><BR><BR><BR>
+<div class="row">
+
+	<div class="small-12 columns collapse">
+        <div class="small-2 columns">
+            <div class="shelfcontainer">
+              {% for shelf in fullShelves %}
+                <a href="channel" id="editShelfButton" class="shelf">{{shelf.channelName}}</a>
+              {%endfor %}
+              <a href="channel" id="addShelfButton" class="shelf">+</a>
+            </div>
+            </div>
+			<div class="small-3 columns winebox first-box">
+				<div class="panel">
+					<img src="images\Mer2.png">
+				</div>
+                <div class="winename">Catepillar</div>
+                <div class="winedesc">
+                    Winery Name <br />
+                    Vintage Date
+                </div>
+				<a href="#" class="moreinfo">More Info</a>
+
+			</div>
+
+			<div class="large-3 columns winebox">
+				<div class="panel">
+					<img src="images\Zin2.png">
+				</div>
+                <div class="winename">Catepillar</div>
+                <div class="winedesc">
+                    Winery Name <br />
+                    Vintage Date
+                </div>
+				<a href="#" class="moreinfo">More Info</a>
+
+			</div>
+
+			<div class="large-3 columns winebox lastbox">
+				<div class="panel">
+					<img src="images\Por2.png">
+				</div>
+                <div class="winename">Catepillar</div>
+                <div class="winedesc">
+                    Winery Name <br />
+                    Vintage Date
+                </div>
+				<a href="#" class="moreinfo">More Info</a>
+   
+			</div>
+
+			<div class="large-1 columns recarrow">
+                <img src="images/angle.png" width="50px" />
+            </div>
+
+
+	</div>
+
+</div>
+
+
+  <script>
+  document.write('<script src=' +
+  ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+  '.js><\/script>')
+  </script>
+
+  <script src="js/foundation.min.js"></script>
+  <!--
+
+  <script src="js/foundation/foundation.js"></script>
+
+  <script src="js/foundation/foundation.alerts.js"></script>
+
+  <script src="js/foundation/foundation.clearing.js"></script>
+
+  <script src="js/foundation/foundation.cookie.js"></script>
+
+  <script src="js/foundation/foundation.dropdown.js"></script>
+
+  <script src="js/foundation/foundation.forms.js"></script>
+
+  <script src="js/foundation/foundation.joyride.js"></script>
+
+  <script src="js/foundation/foundation.magellan.js"></script>
+
+  <script src="js/foundation/foundation.orbit.js"></script>
+
+  <script src="js/foundation/foundation.placeholder.js"></script>
+
+  <script src="js/foundation/foundation.reveal.js"></script>
+
+  <script src="js/foundation/foundation.section.js"></script>
+
+  <script src="js/foundation/foundation.tooltips.js"></script>
+
+  <script src="js/foundation/foundation.topbar.js"></script>
+
+  -->
+
+  <script>
+    $(document).foundation();
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+body{
+background: black;
+position: absolute;
+top: 0%;
+bottom: 0%;
+left: 0%;
+right: 0%;
+background-image: url("http://s5.goodfon.com/image/317539-1366x768.jpg");
+background-size: contain;
+background-repeat:no-repeat;
+
+}
+
+.top-bar{
+background: #330F0F;
+height: 60px;
+opacity: 0.85;
+border-bottom-left-radius: 15px;
+
+}
+
+h1
+{
+font-family: Georgia, serif;
+}
+
+h3
+{
+font-family: 'IM Fell French Canon', serif;
+color: #746767;
+font-size: 40px;
+padding-left: 5%;
+}
+
+.small-button{
+height: 50px;
+opacity: .9;
+font-family: Georgia, serif;
+font-size: 30px;
+}
+
+.someText{
+font-family: Georgia, serif;
+font-size: 30px;
+}
+
+.divider{
+height: 70px;
+}
+
+.has-form
+{
+border-color: #000000;
+position: relative;
+width: 100%;
+
+}
+.panel
+{
+background: #000000;
+position: relative;
+left: 70%;
+right: 5%;
+width: 25%;
+border-radius: 20px;
+border-color: #330F0F;
+border-width: 3px;
+}
+
+
+
+.sl_examples{
+    float:left;
+    font-family: 'Bevan', arial, serif;
+    font-size:20px;
+    line-height:20px;
+    color:#f0f0f0;
+    margin-right:5px;
+
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.sl_examples a{
+    display:block;
+    position:relative;
+    float:left;
+    clear:both;
+    color:#fff;
+}
+.sl_examples a > span{
+    height:20px;
+    float:left;
+    position:relative;
+    overflow:hidden;
+
+}
+.sl_examples a span span{
+    position:absolute;
+    display:block;
+    left:0px;
+    top:0px;
+    text-align:center;
+
+}
+.sl_examples a span span.sl-w1{
+    color:#fff;
+    text-shadow:0px 0px 1px #fff;
+    z-index:2;
+}
+.sl_examples a span span.sl-w2{
+    color:#330033;
+    text-shadow:-1px 1px 2px #9f0633;
+    z-index:3;
+}
+#example1{
+	font-family: 'Libre Baskerville', serif;
+
+}
+#example2{
+	font-family: 'Libre Baskerville', serif;
+	color: black;
+}
+#example3{
+	font-family: 'Libre Baskerville', serif;
+}

@@ -1,0 +1,377 @@
+{% extends "base.html" %}
+{% set active_page = "inventory" %}
+{% block title %}Inventory{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<!-- 100% width container -->
+    <div class="">
+        <div class="row master_container">
+
+            <div class="large-12">
+
+
+                <div class="row">
+                    <div class="large-5 large-centered columns">
+                        <div class="panel">
+
+                            <form id="loginForm" action="User/login" method="POST">
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <h3>Login to Wine Cellar</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="row collapse">
+                                        <div class="large-4 columns">
+                                            <span class="prefix required-field">E-Mail Address</span>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input name="login_email" type="text" placeholder="winelover@winecell.ar"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="row collapse">
+                                        <div class="large-4 columns">
+                                            <span class="prefix required-field">Password</span>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input name="login_password" type="password" placeholder="**********"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <span id="loginErrorMessage" class="error-message">Login Failed</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div id="loginButton" class="button full_width">Login</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <a href="#" class="button full_width" data-reveal-id="createAccountModal">Create Account</a>
+                                        </div>
+                                    </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="createAccountModal" class="reveal-modal medium">
+
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="row">
+                    <div class="large-12 large-centered columns">
+                        <div class="row">
+
+                            <div class="large-12 large-centered columns">
+
+                                <form id="createForm" action="User/create" method="POST" enctype="multipart/form-data">
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <h3>Create New Account</h3>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div id="createErrorMessage" class="error-message">This E-Mail Address is already in use.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row collapse">
+                                        <div class="large-4 columns">
+                                            <span class="prefix required-field"><b>E-Mail Address</b></span>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input name="create_email" type="text" placeholder="Ex: winelover@winecell.ar"></input>
+                                        </div>
+                                    </div>
+
+                                  
+
+                                    <div class="row collapse">
+                                        <div class="large-4 columns">
+                                            <span class="prefix required-field"><b>Password</b></span>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input name="create_password" type="text" placeholder="Passwords should be between 5-16 characters."></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div id="createMismatchMessage" class="error-message">Passwords must match.</div>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="row collapse">
+                                        <div class="large-4 columns">
+                                            <span class="prefix required-field"><b>Re-Type Password</b></span>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input name="create_repassword" type="text" placeholder="Must match password used above."></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="row collapse">
+                                        <div class="large-4 columns">
+                                            <span class="prefix">Display Name</span>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input name="create_name" type="text" placeholder="Ex: John Donut"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="row collapse">
+                                        <div class="large-4 columns">
+                                            <span class="prefix">Location</span>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input name="create_location" type="text" placeholder="Ex: Wineberg, Wineria"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="row collapse">
+                                        <div class="large-4 columns">
+                                            <span class="prefix">Birf Day</span>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input name="create_birthday" type="text" placeholder="Ex: 1980-05-31"></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="row collapse">
+                                        <div class="large-4 columns">
+                                            <span class="prefix">Profile Image</span>
+                                        </div>
+                                        <div class="large-8 columns">
+                                            <input name="create_user_image" type="file" placeholder="Ex: me.jpg" accept="image/*" capture></input>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div id="bold-required" class="error-message">*Bold fields are required</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div id="createAccountButton" class="button full_width">Create Account</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div id="badPasswordMessage" class="error-message">Password must be letters/numbers only and between 6 - 255 characters.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div id="badNameMessage" class="error-message">Name must be letters/numbers/spaces and between 2 - 255 characters.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div id="badLocationMessage" class="error-message">Location must be letters/numbers/spaces and between 2 - 255 characters.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <div id="badBirthdayMessage" class="error-message">Birthday needs to be of the format YYYY-MM-DD and reasonable.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-3 large-centered columns">
+                                            <div class="progress_wheel">
+                                                <img src="{{ url_for('static', filename='images/progress_1.gif') }}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+    <!-- End Modals -->
+
+        <!-- Javascript Imports -->
+        <script src="{{ url_for('static', filename='javascripts/vendor/jquery.js')}}"></script>
+        <script src="{{ url_for('static', filename='javascripts/foundation.min.js')}}"></script>
+        <!-- End Javascript Imports -->
+
+        <script>
+            $(document).foundation();
+        </script>
+
+        <!-- Login Test Custom JS -->
+        <script type="text/javascript">
+        $(function()
+        {
+
+            $('#loginButton').bind('click', function()
+            {
+                var encounteredError = false;
+
+                var email = $('input[name="login_email"]').val();
+                var pass = $('input[name="login_password"]').val();
+
+                //Make sure required values are not empty
+                if(email == '' || email.length < 6 || email.length > 255) {
+                    $('#loginErrorMessage').css("display", 'block');
+                    encounteredError = true;
+                } else {
+                    $('#loginErrorMessage').css("display", 'none');
+                }
+
+                //Make sure required values are not empty
+                if(pass == '' || pass.length < 6 || pass.length > 255) {
+                    $('#loginErrorMessage').css("display", 'block');
+                    encounteredError = true;
+                } else {
+                    $('#loginErrorMessage').css("display", 'none');
+                }
+
+                //If we had an error there is no point in continuing
+                if(encounteredError)
+                    return false;
+
+                $.post('/User/veriflogin',
+                {
+                    email   :  email,
+                    password  :  pass
+                }, function(data)
+                {
+                    if(data.status == 'INVALID') {
+                        $('#loginErrorMessage').css("display", 'block');
+                    }else if(data.status == 'VALID'){
+                        $('#loginErrorMessage').css("display", 'none');
+                        $('form#loginForm').submit()
+                        //window.location.href = data.newurl;
+                    }
+                }, 'json');
+                return false;
+
+            });
+        });
+
+        $(function()
+        {
+            $('#createAccountButton').bind('click', function()
+            {
+                var email = $('input[name="create_email"]').val();
+                var pass1 = $('input[name="create_password"]').val();
+                var pass2 = $('input[name="create_repassword"]').val();
+                var name = $('input[name="create_name"]').val();
+                var location = $('input[name="create_location"]').val();
+                var birfday = $('input[name="create_birthday"]').val();
+
+                var encounteredError = false;
+
+                //Make sure required values are not empty
+                if(email == '' || pass1 == '' || pass2 == '') {
+                    $('#bold-required').css("display", 'block');
+                    return false;
+                } else {
+                    $('#bold-required').css("display", 'none');
+                }
+
+                //MAKE SURE PASSWORDS MATCH
+                if(pass1 != pass2) {
+                    $('#createMismatchMessage').css("display", 'block');
+                    return false;
+                } else {
+                    $('#createMismatchMessage').css("display", 'none');
+                }
+
+                //Make sure new password is valid
+                if( (pass1.length < 6 || pass1.length > 255 || (/[^0-9A-Za-z]/i).test(pass1)) ) {
+                    $('#badPasswordMessage').css("display", 'block');
+                    encounteredError = true;
+                } else {
+                    $('#badPasswordMessage').css("display", 'none');
+                }
+
+                //Make sure name is proper length
+                if( name != '' && (name.length < 2 || name.length > 255 || (/[^0-9A-Za-z\s]/).test(name)) ) {
+                    $('#badNameMessage').css("display", 'block');
+                    encounteredError = true;
+                } else {
+                    $('#badNameMessage').css("display", 'none');
+                }
+
+                //Make sure name is proper length
+                if( location != '' && (location.length < 2 || location.length > 255 || (/[^0-9A-Za-z\s]/).test(location)) ) {
+                    $('#badLocationMessage').css("display", 'block');
+                    encounteredError = true;
+                } else {
+                    $('#badLocationMessage').css("display", 'none');
+                }
+
+                //Make sure name is proper length
+                if( birfday != '' && (birfday.length < 10 || birfday.length > 10 || !(/^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])/).test(birfday)) ) {
+                    $('#badBirthdayMessage').css("display", 'block');
+                    encounteredError = true;
+                } else {
+                    $('#badBirthdayMessage').css("display", 'none');
+                }
+
+                //If we had an error there is no point in continuing
+                if(encounteredError)
+                    return false;
+
+                //Post Account Into to Server for Account Creation
+                $.post('/User/verifcreate',
+                {
+                    email   :  $('input[name="create_email"]').val()
+                }, function(data)
+                {
+                    if(data.status == 'INVALID') {
+                        $('#createErrorMessage').css("display", 'block');
+                    }else if(data.status == 'VALID'){
+                        $('#createErrorMessage').css("display", 'none');
+                        $('.progress_wheel').css("display", 'block');
+                        $('form#createForm').submit()
+                        //window.location.href = data.newurl;
+                    }
+                }, 'json');
+
+                return false;
+
+            });
+        });
+
+
+        </script>
+
+{% endblock %}

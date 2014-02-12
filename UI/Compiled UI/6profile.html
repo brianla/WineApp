@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<!--[if IE 8]>                           <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+  <!--<![endif]-->
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>WineCellar</title>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="stylesheets/normalize.css" />
+    <link rel="stylesheet" href="stylesheets/foundation.css" />
+    <style>
+    body {
+    background: #fff;
+    color:#999;
+    }
+    .nav-bar {
+    background: transparent;
+background: rgba(0,0,0,0.4);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+padding: 3px 0;
+position: absolute;
+top: 20px;
+width: 100%;
+z-index: 1000;
+zoom: 1;
+}
+.nav-inside {
+border-bottom: 1px solid rgba(255,255,255,0.1);
+border-top: 1px solid rgba(255,255,255,0.1);
+height: 40px;
+width: 100%;
+line-height:50px;
+}
+nav.main {
+display: block;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+
+position: absolute;
+right: 0;
+text-transform: uppercase;
+top: 20px;
+z-index: 2000;
+}
+nav.main ul {
+float: right;
+margin: 0;
+}
+nav.main ul li {
+background: none;
+float: left;
+margin: 0 0 0 25px;
+padding: 0;
+position: relative;
+font-size:14px;
+}
+nav.main ul li a {
+color: #fff;
+display: block;
+padding: 13px 0;
+text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+nav.main ul li a:hover, nav.main ul li.active a{
+    color:#e75873;
+}
+header ul li {
+    display:inline;
+    color:white;
+    text-transform:uppercase;
+    font-size:10px;
+    
+}   
+    .logo {
+    background: #bb2f43;
+    border: 1px solid #bb2f43;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.15);
+    padding: 20px 0;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    width: 240px;
+    z-index: 2000;
+       
+    }
+    .logo h1 {
+color: #fff;
+font-family: 'Playfair Display SC', serif;
+font-size: 28px;
+margin: 0;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+}
+.logo p {
+color: #470310;
+font-size: 10px;
+margin: 0 0 10px 0;
+text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+text-transform: uppercase;
+}
+#blockcontainer {
+position:absolute;
+right:60px;
+margin-top:200px;
+}
+#block1 {
+background: #bb2f43;
+border: 1px solid #bb2f43;
+box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 15px rgba(0,0,0,0.15);
+color: #fff;
+float: right;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+font-size: 30px;
+padding: 10px 30px;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+text-transform: uppercase;
+z-index:999999;
+}
+#block2 {
+background: #fff;
+border: 1px solid #fff;
+box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.15);
+clear: both;
+color: #222;
+float: right;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+font-size: 20px;
+padding: 10px 30px;
+text-shadow: 0 1px 0 #fff;
+text-transform: uppercase;
+z-index:999999; 
+}
+#block2 a {
+    color:#222;
+}
+#block3 {
+background: #222;
+border: 1px solid #222;
+box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.2);
+clear: both;
+color: #fff;
+float: right;
+font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+font-size: 20px;
+padding: 10px 30px;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+text-transform: uppercase;
+}
+#block3 a {
+    color:#fff;
+}
+p {
+    color:#999;
+}
+h3 {
+font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+font-weight:400;
+    }
+.pushdown { margin-top:50px; }
+footer { 
+background: #222;
+box-shadow: inset 0 10px 10px rgba(0,0,0,0.4);
+border-top: 1px solid rgba(255,255,255,0.1);
+padding-top:20px;
+padding-bottom:0px;
+}
+hr {
+border:0;
+background: url(images/ribbon.png) no-repeat center center;
+height: 20px;
+}
+
+    .shelfcontainer {
+        position:relative;
+        left:20px;
+        top:20px;
+    }
+    .shelf {
+        width:100%;
+        margin:0;
+background-image: linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -o-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -moz-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -webkit-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+background-image: -ms-linear-gradient(bottom, #B83729 0%, #C03A2B 100%);
+
+background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, #B83729),
+        color-stop(1, #C03A2B)
+);
+
+        font-size:0.9em !important;
+        line-height:2em;
+        height:5em;
+        border:none;   
+        color:white;
+        text-align:center;
+        padding-top:20px;
+        display:inline-block;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .shelf:hover {
+        background:#9a2c21;
+        color:white;
+    }
+    .button:hover, button:focus, .button:hover, .button:focus {
+    }
+    .winebox {
+        padding-top:20px;
+        padding-bottom:20px;
+        background:#d9d9d9;
+        border-left:1px solid rgba(0,0,0,0.05);
+        border-top:1px solid rgba(255,255,255,0.5);
+        line-height:2em;
+        
+
+    }
+    .first-box {
+}
+    .last-box {
+z-index:999;
+}
+    .panel {
+        padding:10px;
+        border:none;
+    }
+    .recarrow {
+        margin-top:100px;
+        background:#d9d9d9;
+        border-top:1px solid rgba(255,255,255,0.5);
+        padding-bottom:5px;
+
+}
+    .winename {
+        color: rgba(0,0,0,0.8);
+        font-size:1.5em;
+        font-weight:600;
+    }
+    .winedesc {
+        margin-left:15px;
+        font-size:1em;
+        font-weight:300;
+    }
+    .moreinfo {
+        
+        width:100%;
+        margin-top:15px;
+        background:#3498db;
+        font-size:0.9em !important;
+        line-height:2em;
+        padding-top:0.5em;
+        height:3em;
+        border:none;   
+        color:white;
+        text-align:center;
+        display:inline-block;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    .moreinfo:hover {
+        color:white;
+        background:#2980b9;
+    }
+</style>
+<style>
+    .favoritewinesh2 {
+        margin-top:30px;
+        margin-bottom:30px;
+        padding-left:20px;
+        font-size:1.7em;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+        font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+        font-weight:400;
+        background: #353535;
+        width:100%;
+        color:white;
+    }
+    .profilename {
+        font-size:1.2em;
+        color:white;
+        background-color:#4cb9fe;
+        padding:5px;
+        width:100%;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+        font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+        font-weight:400;
+    }
+    .profilepic {
+        padding-top:10px;
+        margin:20px;
+        margin-top:0px;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+    .boxcountcontainer {
+        border: 1px solid rgba(0,0,0,0.1);
+        margin-bottom:10px;
+        width:100%;
+        height:100%;
+        padding:10px;
+        display:inline-block;
+    }
+        .profilelocations {
+    }
+    .locationswine {
+        display:inline-block;
+    }
+    .pfrecblock {
+        text-align:center;
+        color:black;
+        margin-top:30px;
+        margin-bottom:30px;
+    }
+    .pfrecblock img {
+        background-color:gray;
+        padding:2px;
+        -webkit-border-radius: 10%;
+        -moz-border-radius: 10%;
+        border-radius: 10%;
+    }
+    .pfrecblock p {
+        color:#474747;
+        display:none;
+    }
+    .boxcount {
+        font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+        display:inline-block;
+        width:100%;
+        height:100px;
+        text-align:center;
+        background: green;
+        padding-top:10px;
+        margin-bottom:0;
+        color:white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+    .boxcount p {
+        position:relative;
+        top:-10px;
+        color:white; 
+     }
+    .boxcount h4 {
+        display:block;
+        font-size:1.5em;
+        font-weight:700;
+        color:white;
+        margin-top:10px;
+    }
+    .winecount {
+        background:#aad34f;
+    }
+    .redcount {
+        background: #f43f2b;
+    }
+    .whitecount {
+        background: #d4cf79;
+    }
+    .poppedcount {
+        background: #fd8a3b;
+    }
+    .favoritewines {
+        display:inline-block;
+        text-align:center;
+        padding:10px;
+        background:rgba(185,46,66, 1);
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+    h6 {
+        color:#b92e42;
+        font-size:1em;
+        font-weight:700;
+        padding:0;
+        margin-top:10px;
+        margin-bottom:0;
+        line-height:0.5;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+    .center {
+        text-align:center;
+    }
+    .favoritewinestext {
+        font-size:0.7em;
+    }
+    h3 {
+        font-color:white;
+        font-size:1em;
+        color:white;    
+        width:100%;
+        background:#353535;
+        padding-left:20px;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+        border: 1px solid #2e2e2e;
+        margin:0;
+        margin-top:20px;
+    }
+    .recentactivityblock {
+        margin:0;
+        padding:20px;
+        background:#f0e6e6;
+        color:#e12540;
+        font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+        border-bottom:1px dotted rgba(0,0,0,0.1);
+
+    }
+    .recentactivityblock:hover {
+        background:#ddd3d3;
+    }
+    .recentactivitytime {
+        margin:5px;
+        color:#969696;
+        font-size:0.8em;
+        
+    }
+</style>
+  </head>
+  <body>
+  <header>
+    <div class="nav-bar">
+      <div class="nav-inside"></div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="logo">
+          <h1>WineCellar</h1>
+          <p>Your Personal Wine Sommelier</p>
+        </div>
+        <nav class="main">
+          <ul>
+            <li class="active">
+              <a href="index.html">Home</a>
+            </li>
+            <li>
+              <a href="about.html">About Us</a>
+            </li>
+            <li>
+              <a href="menus.html">Inventory</a>
+            </li>
+            <li>
+              <a href="reviews.html">Recommender</a>
+            </li>
+            <li>
+              <a href="blog.html">Login</a>
+            </li>
+            <li>
+              <a href="contact.html">John Donut</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <img src="images/slider/1short.jpg" class="bgimg" />
+  </header>
+  <br />
+  <div class="row"> 
+    <div class="large-3 columns profilepic">
+      <h1 class="profilename">Yo, John Donut</h1>
+      <img src="images/profile.jpg" /> <!--
+      <div class="row">
+        <div class="large-6 columns profilelocations collapse">
+        <img src="images/cat1.jpg" width="120px" /> 
+        <img src="images/wine_images/Grenache.jpg" width="27px" /> 
+        <img src="images/wine_images/Alvarinho.jpg" width="27px" /> 
+        <img src="images/wine_images/Barbera.jpg" width="27px" /></div>
+        <div class="large-6 columns profilelocations">
+        <img src="images/cat1.jpg" width="120px" /> 
+        <img src="images/wine_images/Alvarinho.jpg" width="27px" /> 
+        <img src="images/wine_images/Barbera.jpg" width="27px" /> 
+        <img src="images/wine_images/Grenache.jpg" width="27px" /></div>
+      </div> -->
+      <div class="row">
+        <h3>Recommendations</h3>
+        <div class="large-6 columns pfrecblock">
+              <img src="images/wine_images/Grenache.jpg" />
+               <p>Grenache</p>  
+        </div>
+        <div class="large-6 columns pfrecblock">
+          <img src="images/wine_images/Colombard.jpg"/>
+               <p>Colombard</p>
+        </div>
+      </div>
+  </div>
+    <div class="large-8 columns">
+      <div class="row">
+        <div class="boxcountcontainer">
+        <div class="large-3 columns">
+          <div class="boxcount winecount">
+            <h4>5</h4>
+            <p>Wines</p>
+          </div>
+        </div>
+        <div class="large-3 columns">
+          <div class="boxcount redcount">
+            <h4>10</h4>
+            <p>Red Wines</p>
+          </div>
+        </div>
+        <div class="large-3 columns">
+          <div class="boxcount whitecount">
+            <h4>50</h4>
+            <p>White Wines</p>
+          </div>
+        </div>
+        <div class="large-3 columns">
+          <div class="boxcount poppedcount">
+            <h4>48</h4>
+            <p>Locations</p>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Favorite Wines</h3>
+        <br />
+        <div class="large-4 columns center">
+          <img src="images/wine_images/Alicante.jpg" class="favoritewines" width="200px" />
+        <h6>Name of Wine</h6>
+        <p class="favoritewinestext"> Vintage</p>
+        </div>
+        <div class="large-4 columns center">
+          <img src="images/wine_images/Blaufrankisch.jpg" class="favoritewines" width="200px" />
+          <h6>Blaufrankish</h2>
+          <p class="favoritewinestext">Super Winery, 1833</p>
+        </div>
+        <div class="large-4 columns center">
+          <img src="images/wine_images/Alicante.jpg" class="favoritewines" width="200px" />
+              <h6>Alicante</h2>
+              <p class="favoritewinestext">Akotl Winery, 1935</p>
+          </div>
+      </div>
+      <div class="row">
+        <div class="large-6 columns recentactivity">
+        <h3>Recent Activity</h3>
+        <div class="recentactivityblock">
+            Added 4 new wines.
+            <div class="recentactivitytime">4 hours ago. 05/03/2013</div>
+        </div>
+        
+        <div class="recentactivityblock">
+            Ate an awesome donut and  some bottles.
+            <div class="recentactivitytime">1 day ago. 05/03/2013</div>
+        </div>
+            <div class="recentactivityblock">
+            Did really cool shit but blacked out and forgot.
+            <div class="recentactivitytime">3 days ago. 05/01/2013</div>
+        </div>
+        </div>
+        <div class="large-6 columns">
+        <h3>Favorite Aromas</h3>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <footer>
+    <div class="row">
+      <p>(C) Copyright 2013. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="javascripts/foundation.min.js"></script></body>
+</html>

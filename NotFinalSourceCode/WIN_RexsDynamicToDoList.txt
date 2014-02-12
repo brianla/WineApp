@@ -1,0 +1,65 @@
+BUGS:
+
+	~Location Dropdown has only numbers, needs names
+
+MUST DO:
+
+	~Increment/Decrement Buttons on View Wine Modal
+	
+
+NICE TO DO:
+
+	~(5)Dynamic Pagination based on Filters Active
+	~(3)Dynamic Filter Reduction based on Valid Non-Zero Intersections
+	~
+
+SHINY STUFF:
+
+	~(1.5)FP: Rotating Random Wine next to Login Box (twitter logng page style), on click shows Wine Modal
+
+DESIGN:
+
+	~Modal Styling and Layouts
+		~View Wine
+		~
+	~Dynamic Messaging
+	~Location Labels
+	~Add location names to drop downs
+
+
+
+
+HIGH PRIORITY:
+
+
+
+practice presentation
+
+Fix recommendation page's modals
+fix autocomplete on recommenation page
+
+Finish setting up demo account 
+Run through demo and presentationk
+
+Add Wine Modal Needs autocomplete design fixes
+
+Fixprofile's ugliness
+
+View Wine Modal needs to have its design completed.
+Create/Edit Shelf Modals look like ass
+Delete Modal on Inv, and Add to Inventroy Modal on Rec
+Add to Inv Modal on Rec page to large
+
+
+Description on Wine Info Modal on RecPage:
+	Missing description, why?
+	If click on ajax injecgted wines, no data, or old datal
+
+Testall funcitonality of JWINE and a NEW USER
+
+Screen Cast + Voice Over
+
+Point ofContact for TEsting
+
+Delete Pagination + Implement Dynamic Tag Filtering
+

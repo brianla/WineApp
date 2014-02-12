@@ -1,0 +1,17 @@
+A Quick Algorithm for Fuzzy Text Comparions:
+
+	~myVarietal
+	~listOfVarietals
+
+	~for fileName in listOfVarietals: 
+		~For dist in range(1,4):
+			~for i in range(0,len(myVarietal) - dist + 1)):
+			~token =  myVarietal[i:i+dist]:
+			~for j in range(0,len(fileName)):
+				match = True
+				for k in range(0,dist):
+					if token[k:k+1] != fileName[k:k+1]
+						match = False
+						break
+				if match
+					sum += 2^(dist-1)

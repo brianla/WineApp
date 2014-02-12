@@ -1,0 +1,1340 @@
+
+
+{% extends "base.html" %}
+{% set active_page = "recommender" %}
+{% block title %}Recommender{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/custom.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/app.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/shelf.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Sail' rel='stylesheet' type='text/css'>
+
+{% endblock %}
+{% block content %}
+<div class="everything_below_header">
+    <div class="row collapse">
+
+    	 <div class="large-12 columns ">
+
+
+            <!-- Channel Selection Buttons -->
+            <div class="large-3 columns">
+                <div class="shelfcontainer">
+                    <div class="shelf-top-label">Tasting Shelves</div>
+                    <div data-reveal-id="shelfModal" class="shelf shelf-add">Add Shelf</div>
+                    <div data-reveal-id="edit_shelfModal" class="shelf shelf-edit">Edit Shelf</div>
+                    {% for shelf in fullShelves %}
+                        <div shelf-id="{{shelf.recommenderID}}" class="shelf channel-button">
+                            {{shelf.channelName}}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Recommended Wines -->
+            <div class="large-9 columns">
+                <!-- Dat Progress -->
+                <div class="row" id="progress_wheel_container">
+                    <div class="large-3 large-centered columns">
+                        <div class="progress_wheel" style="display:block;">
+                            <img src="{{ url_for('static', filename='images/progress_1.gif') }}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="recommend-more">Recommend More</div>
+                <div id="recommendation-container">
+
+                    {% for key, value in fullRecommended.iteritems() %}
+                        {% if value %}
+                            {% for wine in value %}
+                                <div class="recommendation-obj recommended-{{key}}">
+                                		<div class="recommendation-obj-image">
+                                            {% if wine is defined and wine.imagePath %}
+                                                <img src="{{ url_for('static', filename=('images/wine/' + wine.imagePath ) ) }}" />
+                                            {% else %}
+                                                <img src="{{ url_for('static', filename='images/wine/default_wine.jpg' ) }}" />
+                                            {% endif %}
+                                		</div>
+                                        <div class="winename">{{wine.wineName}}</div>
+                                        <div class="winedesc">
+                                            {{wine.winery}} <br />
+                                            {{wine.vintage}}
+                                        </div>
+                        				<div data-reveal-id="wineModal" class="moreinfo"
+                                                  wine-wineID="{{wine.wineID}}"
+                                                  wine-wineName="{{wine.wineName}}"
+                                                  wine-winery="{{wine.winery}}"
+                                                  wine-vintage="{{wine.vintage}}"
+                                                  wine-varietal="{{wine.varietal}}"
+                                                  wine-wineType="{{wine.wineType}}"
+                                                  wine-region="{{wine.region}}"
+                                                  user-tags="{{wine.tags}}"
+                                                  user-description="{{wine.description}}"
+                                                  wine-averageStarRating="{{wine.averageStarRating}}"
+                                                  wine-imagePath="{{wine.imagePath}}"
+                                                  wine-bitter="{{wine.bitter}}"
+                                                  wine-sweet="{{wine.sweet}}"
+                                                  wine-sour="{{wine.sour}}"
+                                                  wine-salty="{{wine.salty}}"
+                                                  wine-chemical="{{wine.chemical}}"
+                                                  wine-pungent="{{wine.pungent}}"
+                                                  wine-oxidized="{{wine.oxidized}}"
+                                                  wine-microbiological="{{wine.microbiological}}"
+                                                  wine-floral="{{wine.floral}}"
+                                                  wine-spicy="{{wine.spicy}}"
+                                                  wine-fruity="{{wine.fruity}}"
+                                                  wine-vegetative="{{wine.vegetative}}"
+                                                  wine-nutty="{{wine.nutty}}"
+                                                  wine-caramelized="{{wine.caramelized}}"
+                                                  wine-woody="{{wine.woody}}"
+                                                  wine-earthy="{{wine.earthy}}">More Info
+                                        </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div><!-- Master columns 12 -->
+
+    </div>
+</div>
+
+<!-- Modals -->
+<!-- Wine Info Modal -->
+    <!--Wine Info Modal -->
+    <!--
+    <div id="wineModal" class="reveal-modal" wineID="">
+        <div class="row">
+            <div class="large-4 columns">
+                <h2 id="wine_wineName">POOP</h2>
+                <h4 id="wine_winery">POOPEY</h4>
+                <img id="userImage" src="{{ url_for('static', filename='images/wine/default_wine.jpg' ) }}" />
+            </div>
+
+            <div class="large-8 columns">
+                <div class="row">
+                    <div class="section-container accordion" data-section="accordion">
+                        <section class="section active">
+                            <p class="title" data-section-title>
+                                <div>Information</div>
+                            </p>
+                            <div class="content" data-section-content>
+                                <p id="user_description"></p>
+
+                                <h3>Tags:</h3>
+                                <ul id="user_tags"class="tags">
+                                    <li><div class="tag">A Tag</div></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section>
+                            <p class="title" data-section-title>
+                                <div>More Info.</div>
+                            </p>
+                            <div class="content" data-section-content>
+                                <ul id="">
+                                    <li><strong>Varietal:</strong><div id="wine_varietal"></div></li>
+                                    <li><strong>Region:</strong><div id="wine_region"></div></li>
+                                    <li><strong>Your Rating:</strong><div id="user_personalStarRating"></div></li>
+                                    <li><strong>Average Rating:</strong><div id="wine_averageStarRating"></div></li>
+                                    <li><strong>Quantity:</strong><div id="user_quantity"></div></li>
+                                    <li><strong>Wishlist:</strong><div id="user_isWishlist"></div></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                  <div data-reveal-id="inventoryModal" class="radius button">Add this to my inventory</div>
+                </div>
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+-->
+
+    <div id="wineModal" class="reveal-modal" wineID="">
+        
+        <div class="row">
+            <div class="large-4 columns">
+                <div class="row">
+                    <img id="user_imagePath" src="images/samplewine.jpg" />
+                </div>
+                <div class="row">
+                    <!--<div id="editWineModalButton" class="button full_width" data-reveal-id="editWineModal">Edit Wine</div>-->
+                    <div data-reveal-id="inventoryModal" class="radius button full_width">Add this to my inventory</div>
+                </div>
+            </div>
+            <div class="large-8 columns">
+                <div class="row">
+                    <div class="large-12 columns" id="wineTitle">
+                        <div id="wine_wineName">Wine Name</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_winery">Winery</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_varietal"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_region"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_vintage"></div>
+                    </div>
+                </div>
+<!--
+                <div class="row">
+                    <div class="large-12 columns" style="">
+                        <strong>Average Rating:&nbsp;</strong><div id="wine_averageStarRating"></div>
+                    </div> 
+                </div>     
+
+                <div class="row">          
+                    <div class="large-12 columns" style="">
+                        <strong>Your Rating:&nbsp;</strong><div id="user_personalStarRating"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h4 id="wineTags">Tags:&nbsp;</h4>
+                        <ul id="user_tags"class="tags">
+                            <li><div class="tag">A Tag</div></li>
+                        </ul>
+                    </div>
+                </div>
+            -->
+                <div class="row">
+                    <div class="lineSpacing">
+                        <div class="large-12 columns">
+                            <p id="user_description">Description</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+<!-- ADD TO INVENTORY MODAL -->
+<div id="inventoryModal" class="reveal-modal small" wineID="">
+   <div class="row">
+        <div class="large-12 columns">
+            <div class="row">
+                <div class="large-12 large-centered columns">
+                    <div class="row">
+                        <div class="large-12 large-centered columns">
+                            <h4 class="deleteVerification">Which location would you like to add this wine to?</h4>
+                        </div>
+                    </div>
+                  <form id="inventoryForm" class="custom">
+                     <div class="large-12 columns">
+                      <label for="locationDropDown">Inventory Location</label>
+                      <select name="wineLocation" id="locationDropDown" class="custom dropdown medium">
+                          {% if fullLocations|count > 0 %}
+                              {% for fl in fullLocations %}
+                              <option>{{ fl.locationID }}{{ ' ' }}{{ fl.locationName }}</option>
+                              {% endfor %}
+                          {% endif %}
+                      </select>
+                    </div>
+                  </form>
+                  <br />
+                  <br />
+                    <div class="row">
+                        <div class="large-12 large-centered columns">
+                            <div id="addToInventoryButton" class="button full_width">Add wine</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div id="notSuccessful" class="error-message">Wine addition was not Successful.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+
+
+
+<!-- ADDSHELF MODAL -->
+<div id="shelfModal" class="reveal-modal">
+  <div class="row">
+    <div class="large-9 columns">
+      <h2>Create New Shelf</h2>
+    </div>
+    <div class="large-3 columns">
+      <div id="createShelf" class="addshelf button">Create Shelf</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div id="badSeedMessage" class="error-message">A Shelf needs to have at least one Wine Bottle on it.</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div id="badShelfNameMessage" class="error-message">Shelf Names should consist of only letters, numbers, and spaces and must be between 2 and 255 characters.</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <form id="AddSeedForm" class="custom">
+
+        <div class="row">
+          <div class="large-6 columns">
+
+            
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Shelf Name</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <input id="shelfName" type="text" placeholder="Shelf Name" />
+              </div>
+            </div>
+
+      </fieldset>
+
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Search for Wines You Like</h5>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-4 columns">
+                <input id="autocomplete1" class="autocompleteTextField" type="text" placeholder="Wine Name" />
+              </div>
+
+              <div class="large-4 columns">
+                <input id="autocomplete2" class="autocompleteTextField" type="text" placeholder="Winery" />
+              </div>
+
+              <div class="large-4 columns">
+                <input id="autocomplete3" class="autocompleteTextField" type="text" placeholder="Vintage" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                <div id="candyWineList">
+                </div>
+              </div>
+            </div>
+      </fieldset>
+
+          </div>
+
+
+
+          <div class="large-6 columns">
+
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>We'll recommend wines similar to these</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <div id="seedList">
+                </div>
+              </div>
+            </div>
+
+      </fieldset>
+
+          </div>
+
+
+        </div>
+
+    </form>
+
+    
+
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<!-- EDIT SHELF MODAL -->
+<div id="edit_shelfModal" class="reveal-modal">
+  <div class="row">
+    <div class="large-6 columns">
+      <h3>Edit a Shelf</h3>
+    </div>
+    <div class="large-3 columns">
+      <div data-reveal-id="delete_shelfModal" class="radius button">Delete Shelf</div>
+    </div>
+    <div class="large-3 columns">
+      <div id="editShelf" class="button">Save Shelf</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div id="edit_badSeedMessage" class="error-message">A Shelf needs to have at least one Wine Bottle on it.</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <form id="editSeedForm" class="custom">
+
+        <div class="row">
+          <div class="large-6 columns">
+
+            
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Pick a shelf to edit</h5>
+              </div>
+            </div>
+            <div class="large-6 columns">
+                        <label for="shelfDropDown">Shelves</label>
+                        <select name="edit_recommenderID" id="edit_shelfDropDown" class="custom dropdown medium">
+                            {% if fullShelves|count > 0 %}
+                                {% for fs in fullShelves %}
+                    <option value="{{ fs.recommenderID }}">{{ fs.channelName }}</option>
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+
+      </fieldset>
+
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Search for Wines You Like</h5>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-4 columns">
+                <input id="edit_autocomplete1" class="edit_autocompleteTextField" type="text" placeholder="Wine Name" />
+              </div>
+
+              <div class="large-4 columns">
+                <input id="edit_autocomplete2" class="edit_autocompleteTextField" type="text" placeholder="Winery" />
+              </div>
+
+              <div class="large-4 columns">
+                <input id="edit_autocomplete3" class="edit_autocompleteTextField" type="text" placeholder="Vintage" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                <div id="edit_candyWineList">
+                </div>
+              </div>
+            </div>
+      </fieldset>
+
+          </div>
+
+
+
+          <div class="large-6 columns">
+
+      <fieldset>
+            <div class="row">
+              <div class="large-12 columns">
+                <h5>Your Seed list</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <div id="edit_seedList">
+                </div>
+              </div>
+            </div>
+
+      </fieldset>
+
+          </div>
+
+
+        </div>
+
+    </form>
+
+    
+
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<!-- Delete shelf modal -->
+<div id="delete_shelfModal" class="reveal-modal medium-large">
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row">
+        <div class="large-12 large-centered columns">
+          <div class="row">
+            <div class="large-12 large-centered columns">
+              <h4 class="deleteVerification">Are you sure you want to delete this shelf?</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-4 large-centered columns">
+              <div id="deleteShelfYes" class="button full_width">Yes, I'm sure</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns">
+              <div id="deleteErrorMessage" class="error-message">Shelf Deletion was not Successful.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+<!-- End Modals -->
+<!--
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='javascripts/foundation/foundation.js') }}"></script>
+<script src="{{ url_for('static', filename='javascripts/jquery.foundation.reveal.js') }}"></script> -->
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+        <!-- Javascript Imports -->
+        <script src="{{ url_for('static', filename='javascripts/vendor/jquery.js')}}"></script>
+        <script src="{{ url_for('static', filename='javascripts/foundation.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='javascripts/isotopesjs/jquery.isotope.js')}}"></script>
+<script>
+
+
+            //Preps the Inventory layout
+            var $recommandations = $('#recommendation-container');
+            $recommandations.isotope({ layoutMode : 'masonry' });
+            $recommandations.isotope({
+                masonry: {
+                    columnWidth: 232
+                }
+            });
+
+            $('.channel-button:first').addClass('shelf-active');
+            $recommandations.isotope({ filter: '.recommended-' + $('.channel-button:first').attr('shelf-id') });
+
+
+
+
+
+
+
+
+            //onClick filter magic
+            $('.channel-button').click(function() {
+
+                //Filter to show just recomms from current self
+                //alert(('.recommended-' + $(this).attr('shelf-id')));
+                //And update the filter :D
+                $('#recommendation-container').isotope({ 
+                    filter: ('.recommended-' + $(this).attr('shelf-id'))
+                });
+
+                $('.channel-button').removeClass('shelf-active');
+                $(this).addClass('shelf-active');
+
+            });
+
+
+
+            $('.recommend-more').bind('click', function()
+            {
+
+                $('#progress_wheel_container').css("display", 'block');
+                //Post the wineIDs
+                $.post('/Recommend/getRecommendations',
+                {
+                    recommenderID :  $('.shelf-active').attr('shelf-id')
+                }, function(data)
+                {
+                    if(data.status == 'VALID') {
+
+
+                        //alert('RECOMMEND GOOD K?');
+
+                        var cand;
+                        for(var i = 0; i < data.candidates.length; i++) {
+
+                            //alert("Loop # " + i);
+                            cand = data.candidates[i];
+
+                            var staticPath = '/static/images/wine/';
+                            var imagePath;
+                            if(cand.imagePath != null && cand.imagePath != '')
+                                imagePath = cand.imagePath;
+                            else
+                                imagePath = 'default_wine.jpg';
+
+                            //alert($('.shelf-active').attr('shelf-id'));
+                            //Construct a massiv div with all of the candidate wine's info and append it to the end of the #candyWineList
+                            /*$('#recommendation-container').prepend('<h1 class=recommended-"' + $('.shelf-active').attr('shelf-id') + '">SHITS BROKE!!1</h1>').isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });*/
+
+                            //alert("Description: " + cand.description);
+
+                            $('#recommendation-container').prepend('<div class="recommendation-obj recommended-' + $('.shelf-active').attr('shelf-id') + '">' + 
+                                                        '<div class="recommendation-obj-image">' + 
+                                                            '<img src="' + staticPath + imagePath + '" />' +
+                                                        '</div>' + 
+                                                        '<div class="winename">' + cand.wineName + '</div>' + 
+                                                        '<div class="winedesc">' + cand.winery + '<br />' + cand.vintage + '</div>' + 
+                                                        '<div data-reveal-id="wineModal" class="moreinfo"' + 
+                                                                    'wine-wineID="' + cand.wineID + '" ' +
+                                                                    'wine-wineName="' + cand.wineName + '" ' +
+                                                                    'wine-winery="' + cand.winery + '" ' +
+                                                                    'wine-vintage="' + cand.vintage + '" ' +
+                                                                    'wine-varietal="' + cand.varietal + '" ' +
+                                                                    'wine-wineType="' + cand.wineType + '" ' +
+                                                                    'wine-region="' + cand.region + '" ' +
+                                                                    'user-tags="' + cand.tags + '" ' +
+                                                                    'user-description="' + cand.description + '" ' +
+                                                                    'wine-averageStarRating="' + cand.averageStarRating + '" ' +
+                                                                    'wine-imagePath="' + cand.imagePath + '" ' +
+                                                                    'bitter="' + cand.bitter + '" ' +
+                                                                    'sweet="' + cand.sweet + '" ' +
+                                                                    'sour="' + cand.sour + '" ' +
+                                                                    'salty="' + cand.salty + '" ' +
+                                                                    'chemical="' + cand.chemical + '" ' +
+                                                                    'pungent="' + cand.pungent + '" ' +
+                                                                    'oxidized="' + cand.oxidized + '" ' +
+                                                                    'microbiological="' + cand.microbiological + '" ' +
+                                                                    'floral="' + cand.floral + '" ' +
+                                                                    'spicy="' + cand.spicy + '" ' +
+                                                                    'fruity="' + cand.fruity + '" ' +
+                                                                    'vegetative="' + cand.vegetative + '" ' +
+                                                                    'nutty="' + cand.nutty + '" ' +
+                                                                    'caramelized="' + cand.caramelized + '" ' +
+                                                                    'woody="' + cand.woody + '" ' +
+                                                                    'earthy="' + cand.earthy + '">More Info</div></div>').isotope( 'reloadItems' ).isotope({ sortBy: 'original-order' });
+                        }
+
+                        bindWineModalClick();
+
+                    }else{
+                        //alert('RECOMMEND FAIRED');
+                      //On fail, do soemthing
+
+                        //$('#deleteErrorMessage').css("display", 'block');
+                    }
+
+                    $('#progress_wheel_container').css("display", 'none');
+                    typewatch2(function () {
+                        //Fix for chrome
+                        $('#recommendation-container').isotope({ filter: '.recommended-' + $('.shelf-active').attr('shelf-id') });
+                    }, 500);
+                }, 'json');
+            });
+
+var modalwatch = (function()
+  {
+      var timer = 0;
+      return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+      }  
+  })();
+
+
+
+  /********************************************************************
+  If you're gonna copy pasta my shit, at least keep the tabbing correct
+  *********************************************************************/
+
+  $(function() {
+
+    //On click event for Create Shelf Button
+    $('#createShelf').bind('click', function()
+        {
+          var children = $('#seedList').children();
+          var childCount = children.length;
+          var shelfName = $('input[id="shelfName"]').val();
+
+          var encounteredError = false;
+
+          //If we have no seeds then we can;t make a channel, throw error
+          if(childCount == 0) {
+            $('#badSeedMessage').css("display", 'block');
+                encounteredError = true;
+          } else {
+                $('#badSeedMessage').css("display", 'none');
+            }
+
+
+            //Make sure name is proper length
+            if( (shelfName.length < 2 || shelfName.length > 255 || (/[^0-9A-Za-z\s]/).test(shelfName)) ) {
+                $('#badShelfNameMessage').css("display", 'block');
+                encounteredError = true;
+            } else {
+                $('#badShelfNameMessage').css("display", 'none');
+            }
+
+            //If we had an error, bail out
+            if(encounteredError)
+              return false;
+
+
+          //Loop through all of the seeds and add their wine IDs to an array
+          var wineIDArr = Array();
+          for(var i = 0; i < childCount; i++)
+          {
+            wineIDArr[i] = children.eq(i).attr('wineID');
+          }
+
+          //Post the wineIDs
+            $.post('/Recommend/createShelf',
+            {
+                email     :  '{{ user.emailAddress }}',
+                shelfName :  shelfName,
+                seeds     :  JSON.stringify(wineIDArr)
+            }, function(data)
+            {
+                if(data.status == 'VALID') {
+                    //$('#deleteErrorMessage').css("display", 'none');
+                    
+                    //Close modal
+                    $('#shelfModal').foundation('reveal','close');
+
+                    //Reload page
+                    location.reload(false);
+                    //ORRRRRRR
+                    //Inject the new content directly?
+
+                }else{
+
+                  //On fail, do soemthing
+
+                    //$('#deleteErrorMessage').css("display", 'block');
+                }
+            }, 'json');
+        });
+
+
+        $('[data-reveal-id="edit_shelfModal"]').bind('click', function()
+        {
+            $('#edit_shelfDropDown').trigger('change');
+            $('#edit_shelfModal').foundation('reveal','close');
+        });
+
+        $('[data-reveal-id="inventoryModal"]').bind('click', function()
+        {
+            $('#inventoryModal').foundation('reveal', 'open');/*
+            modalwatch(function () {
+                        //Fix for chrome
+                $('#inventoryModal').foundation('reveal', 'open');
+            }, 500);*/
+        });
+
+        
+
+
+    /****************************************************
+    EDIT SHELF COPY PASTA
+    ******************************************************/
+
+    $('#editShelf').bind('click', function()
+        {
+          var children = $('#edit_seedList').children();
+          var childCount = children.length;
+          //var shelfName = $('input[id="edit_shelfName"]').val();
+          var recID = $('select[name="edit_recommenderID"]').val();
+
+          var encounteredError = false;
+
+          //If we have no seeds then we can;t make a channel, throw error
+          if(childCount == 0) {
+            $('#edit_badSeedMessage').css("display", 'block');
+                encounteredError = true;
+          } else {
+                $('#edit_badSeedMessage').css("display", 'none');
+            }
+
+            /*
+            //Make sure name is proper length
+            if( (shelfName.length < 2 || shelfName.length > 255 || (/[^0-9A-Za-z\s]/).test(shelfName)) ) {
+                $('#edit_badShelfNameMessage').css("display", 'block');
+                encounteredError = true;
+            } else {
+                $('#edit_badShelfNameMessage').css("display", 'none');
+            }*/
+
+            //If we had an error, bail out
+            if(encounteredError)
+              return false;
+
+
+          //Loop through all of the seeds and add their wine IDs to an array
+          var wineIDArr = Array();
+          for(var i = 0; i < childCount; i++)
+          {
+            wineIDArr[i] = children.eq(i).attr('wineID');
+          }
+
+          //Post the wineIDs
+            $.post('/Recommend/editShelf',
+            {
+                email             :  '{{ user.emailAddress }}',
+                /*shelfName         :  shelfName,*/
+                seeds             :  JSON.stringify(wineIDArr),
+                recommenderID     :  recID
+            }, function(data)
+            {
+                if(data.status == 'VALID') {
+                    //$('#deleteErrorMessage').css("display", 'none');
+                    
+                    //Close modal
+                    $('#edit_shelfModal').foundation('reveal','close');
+
+                    //Reload page
+                    location.reload(false);
+                    //ORRRRRRR
+                    //Inject the new content directly?
+
+                }else{
+
+                  //On fail, do soemthing
+
+                    //$('#deleteErrorMessage').css("display", 'block');
+                }
+            }, 'json');
+        });
+
+  });
+
+
+  //Add wine to inventory AJAX
+  $(function()
+  {
+      $('#addToInventoryButton').bind('click', function()
+      {
+        //alert($('#wineModal').attr('wineID'));
+
+          //Post Wine to Recommender
+          $.post('/Recommend/addFromRecommendToInventory',
+          {
+              wineID          :  $('#wineModal').attr('wineID'),
+              locationID    :  $('#locationDropDown').val().slice(0,$('#locationDropDown').val().indexOf(' '))
+          
+          }, function(data)
+          {
+              if(data.status == 'INVALID') {
+                  $('#createErrorMessage').css("display", 'block');
+              }else if(data.status == 'VALID'){
+                  $('#createErrorMessage').css("display", 'none');
+                  $('.progress_wheel').css("display", 'block');
+                  //$('form#inventoryForm').submit();
+                    location.reload(false);
+
+                  $('#inventoryModal').foundation('reveal','close');
+                  //window.location.href = data.newurl;
+
+              }
+
+          }, 'json');
+
+          return false;
+
+      });
+  });
+
+  //Make Ajax Request for Candidate Wines
+  //This will only fire after a keyboard event has occurred on one of the search boxes AND
+  //a certain delay has passed.  Each new keyboard even refreshes the delay.
+
+  $('.autocompleteTextField').keyup(function () {
+      typewatch(function () {
+
+            $.post('/Recommend/candidateWines',
+            {
+              //Create a dictionary that has the current search terms
+                wineName   :   $('input[id="autocomplete1"]').val(),
+                winery     :   $('input[id="autocomplete2"]').val(),
+                vintage    :   $('input[id="autocomplete3"]').val()
+            }, function(data)
+            {
+
+
+                if(data.status == 'INVALID') {
+                    //alert('IT R BROKE K?');
+                    //Clear the candidate list
+                    $('#candyWineList').empty();
+                }else if(data.status == 'VALID'){
+
+                  //Clear the candidate list
+                    $('#candyWineList').empty();
+
+                    //For each candidate, build a div and add an on click listener
+                    var cand;
+                  for(var i = 0; i < data.candidates.length; i++) {
+                    cand = data.candidates[i];
+
+                    function slicer(str) {
+                      var streak = 0;
+                      for(var i = 0 ; i < str.length; i++)
+                      {
+                        if(str.charAt(i) != ' ') {
+                          streak += 1;
+                        }else{
+                          streak = 0;
+                        }
+
+                        if(streak > 30) {
+                          str = str.slice(0,i) + ' ' + str.slice(i);
+                          streak = 0;
+                          i++;
+                        }
+                      }
+                      return str;
+                    }
+
+                    cand.wineName = slicer(cand.wineName);
+                    cand.winery = slicer(cand.winery);
+
+                    //Construct a massiv div with all of the candidate wine's info and append it to the end of the #candyWineList
+                  $('#candyWineList').append('<div class="row candidate-wine-holder" ' +
+                    'wineID="' + cand.wineID + '" ' +
+                    'wineName="' + cand.wineName + '" ' +
+                    'winery="' + cand.winery + '" ' +
+                    'vintage="' + cand.vintage + '" ' +
+                    'varietal_blend="' + cand.varietal + '" ' +
+                    'wineType="' + cand.wineType + '" ' +
+                    'region="' + cand.region + '" ' +
+                    'tags="' + cand.tags + '" ' +
+                    'description="' + cand.description + '" ' +
+                    'averageStarRating="' + cand.averageStarRating + '" ' +
+                    'imagePath="' + cand.imagePath + '" ' +
+                    'bitter="' + cand.bitter + '" ' +
+                    'sweet="' + cand.sweet + '" ' +
+                    'sour="' + cand.sour + '" ' +
+                    'salty="' + cand.salty + '" ' +
+                    'chemical="' + cand.chemical + '" ' +
+                    'pungent="' + cand.pungent + '" ' +
+                    'oxidized="' + cand.oxidized + '" ' +
+                    'microbiological="' + cand.microbiological + '" ' +
+                    'floral="' + cand.floral + '" ' +
+                    'spicy="' + cand.spicy + '" ' +
+                    'fruity="' + cand.fruity + '" ' +
+                    'vegetative="' + cand.vegetative + '" ' +
+                    'nutty="' + cand.nutty + '" ' +
+                    'caramelized="' + cand.caramelized + '" ' +
+                    'woody="' + cand.woody + '" ' +
+                    'earthy="' + cand.earthy + '" ' +
+                    '><div class="large-12 columns candidate-wine">' + cand.vintage + ' ' + cand.winery + '\'s ' + cand.wineName +'</div></div>');
+          }
+
+              $('.candidate-wine-holder').each(function() {
+                $(this).click(function() {
+
+                  //Remove it from the candidate list
+                  $(this).detach();
+
+                  //Attach it to the seed list
+                  $('#seedList').append(this);
+
+                  //Remove the on click listener
+                  $(this).off('click');
+
+                  //Change its width from large-12 to large-11 to make room for a delete button
+                  if($(this).children().eq(0).hasClass('large-12')) {
+                    $(this).children().eq(0).removeClass('large-12');
+                  }
+                  $(this).children().eq(0).addClass('large-11');
+                
+                      //Create a delete button
+                  var deleteButton = '<div class="large-1 columns delete-button">' + '&#215;' + '</div>';
+                  $(this).append(deleteButton);
+
+                  //Give the delete button a listener that removes the seed on click
+                  $(this).children().eq(1).click(function() {
+                    $(this).parent().remove();
+                  });
+                  
+                });
+              });
+
+
+                }
+
+
+            }, 'json');
+
+        // executed only 500 ms after the last keyup event.
+      }, 500);
+  });
+
+  $('.edit_autocompleteTextField').keyup(function () {
+      typewatch(function () {
+
+            $.post('/Recommend/candidateWines',
+            {
+              //Create a dictionary that has the current search terms
+                wineName   :   $('input[id="edit_autocomplete1"]').val(),
+                winery     :   $('input[id="edit_autocomplete2"]').val(),
+                vintage    :   $('input[id="edit_autocomplete3"]').val()
+            }, function(data)
+            {
+
+
+                if(data.status == 'INVALID') {
+                  //alert('IT R BROKE K?');
+                  //Clear the candidate list
+                  $('#candyWineList').empty();
+                }else if(data.status == 'VALID'){
+
+                  //Clear the candidate list
+                    $('#edit_candyWineList').empty();
+
+                    //For each candidate, build a div and add an on click listener
+                    var cand;
+                  for(var i = 0; i < data.candidates.length; i++) {
+                    cand = data.candidates[i];
+
+                  function slicer(str) {
+                    var streak = 0;
+                    for(var i = 0 ; i < str.length; i++)
+                    {
+                      if(str.charAt(i) != ' ') {
+                        streak += 1;
+                      }else{
+                        streak = 0;
+                      }
+
+                      if(streak > 30) {
+                        str = str.slice(0,i) + ' ' + str.slice(i);
+                        streak = 0;
+                        i++;
+                      }
+                    }
+                    return str;
+                  }
+
+                  cand.wineName = slicer(cand.wineName);
+                  cand.winery = slicer(cand.winery);
+
+                    //Construct a massiv div with all of the candidate wine's info and append it to the end of the #candyWineList
+                  $('#edit_candyWineList').append('<div class="row edit_candidate-wine-holder" ' +
+                    'wineID="' + cand.wineID + '" ' +
+                    'wineName="' + cand.wineName + '" ' +
+                    'winery="' + cand.winery + '" ' +
+                    'vintage="' + cand.vintage + '" ' +
+                    'varietal_blend="' + cand.varietal + '" ' +
+                    'wineType="' + cand.wineType + '" ' +
+                    'region="' + cand.region + '" ' +
+                    'tags="' + cand.tags + '" ' +
+                    'description="' + cand.description + '" ' +
+                    'averageStarRating="' + cand.averageStarRating + '" ' +
+                    'imagePath="' + cand.imagePath + '" ' +
+                    'bitter="' + cand.bitter + '" ' +
+                    'sweet="' + cand.sweet + '" ' +
+                    'sour="' + cand.sour + '" ' +
+                    'salty="' + cand.salty + '" ' +
+                    'chemical="' + cand.chemical + '" ' +
+                    'pungent="' + cand.pungent + '" ' +
+                    'oxidized="' + cand.oxidized + '" ' +
+                    'microbiological="' + cand.microbiological + '" ' +
+                    'floral="' + cand.floral + '" ' +
+                    'spicy="' + cand.spicy + '" ' +
+                    'fruity="' + cand.fruity + '" ' +
+                    'vegetative="' + cand.vegetative + '" ' +
+                    'nutty="' + cand.nutty + '" ' +
+                    'caramelized="' + cand.caramelized + '" ' +
+                    'woody="' + cand.woody + '" ' +
+                    'earthy="' + cand.earthy + '" ' +
+                    '><div class="large-12 columns candidate-wine">' + cand.vintage + ' ' + cand.winery + '\'s ' + cand.wineName +'</div></div>');
+          }
+
+              $('.edit_candidate-wine-holder').each(function() {
+                $(this).click(function() {
+
+                  //Remove it from the candidate list
+                  $(this).detach();
+
+                  //Attach it to the seed list
+                  $('#edit_seedList').append(this);
+
+                  //Remove the on click listener
+                  $(this).off('click');
+
+                  //Change its width from large-12 to large-11 to make room for a delete button
+                  if($(this).children().eq(0).hasClass('large-12')) {
+                    $(this).children().eq(0).removeClass('large-12');
+                  }
+                  $(this).children().eq(0).addClass('large-11');
+                
+                      //Create a delete button
+                  var deleteButton = '<div class="large-1 columns delete-button">' + '&#215;' + '</div>';
+                  $(this).append(deleteButton);
+
+                  //Give the delete button a listener that removes the seed on click
+                  $(this).children().eq(1).click(function() {
+                    $(this).parent().remove();
+                  });
+                  
+                });
+              });
+                }
+            }, 'json');
+
+        // executed only 500 ms after the last keyup event.
+      }, 500);
+  });
+  
+  $('#edit_shelfDropDown').change(function() {
+
+            $.post('/Recommend/getSeeds',
+            {
+              //Create a dictionary that has the current search terms
+                recID   :   $('#edit_shelfDropDown').val(),
+ 
+            }, function(data)
+            {
+
+                //Clear the seed list
+                $('#edit_seedList').empty();
+
+                var seed;
+                for(var i = 0; i < data.seedList.length; i++) {
+                  seed = data.seedList[i];
+
+                  function slicer(str) {
+                    var streak = 0;
+                    for(var i = 0 ; i < str.length; i++)
+                    {
+                      if(str.charAt(i) != ' ') {
+                        streak += 1;
+                      }else{
+                        streak = 0;
+                      }
+
+                      if(streak > 30) {
+                        str = str.slice(0,i) + ' ' + str.slice(i);
+                        streak = 0;
+                        i++;
+                      }
+                    }
+                    return str;
+                  }
+
+                  seed.wineName = slicer(seed.wineName);
+                  seed.winery = slicer(seed.winery);
+
+                //Construct a massiv div with all of the seed wine's info and append it to the end of the #seedList
+                $('#edit_seedList').append('<div class="row edit_candidate-wine-holder" ' +
+                  'wineID="' + seed.wineID + '" ' +
+                  'wineName="' + seed.wineName + '" ' +
+                  'winery="' + seed.winery + '" ' +
+                  'vintage="' + seed.vintage + '" ' +
+                  'varietal_blend="' + seed.varietal + '" ' +
+                  'wineType="' + seed.wineType + '" ' +
+                  'region="' + seed.region + '" ' +
+                  'tags="' + seed.tags + '" ' +
+                  'description="' + seed.description + '" ' +
+                  'averageStarRating="' + seed.averageStarRating + '" ' +
+                  'imagePath="' + seed.imagePath + '" ' +
+                  'bitter="' + seed.bitter + '" ' +
+                  'sweet="' + seed.sweet + '" ' +
+                  'sour="' + seed.sour + '" ' +
+                  'salty="' + seed.salty + '" ' +
+                  'chemical="' + seed.chemical + '" ' +
+                  'pungent="' + seed.pungent + '" ' +
+                  'oxidized="' + seed.oxidized + '" ' +
+                  'microbiological="' + seed.microbiological + '" ' +
+                  'floral="' + seed.floral + '" ' +
+                  'spicy="' + seed.spicy + '" ' +
+                  'fruity="' + seed.fruity + '" ' +
+                  'vegetative="' + seed.vegetative + '" ' +
+                  'nutty="' + seed.nutty + '" ' +
+                  'caramelized="' + seed.caramelized + '" ' +
+                  'woody="' + seed.woody + '" ' +
+                  'earthy="' + seed.earthy + '" ' +
+                  '><div class="large-11 columns candidate-wine">' + seed.vintage + ' ' + seed.winery + '\'s ' + seed.wineName +'</div><div class="large-1 columns delete-button">' + '&#215;' + '</div></div>');
+
+            $('.delete-button').click(function() {
+                $(this).parent().remove();
+              });
+        }
+            }, 'json');
+  });
+
+    // Delete wine
+    $(function()
+    {
+        $('#deleteShelfYes').bind('click', function()
+        {          
+            $.post('/Recommend/delete',
+            {
+                email   :  '{{ user.emailAddress }}',
+                recID   :   $('#edit_shelfDropDown').val(),
+
+            }, function(data)
+            {
+                if(data.status == 'VALID') {
+                    $('#deleteErrorMessage').css("display", 'none');
+                //Reload page
+                location.reload(false);
+                }else{
+                    $('#deleteErrorMessage').css("display", 'block');
+                }
+            }, 'json');
+
+//            $('#deleteShelfModal').trigger('reveal:close');
+        });
+    });
+
+    //data-reveal-id="wineInfoModal"
+  
+
+  function bindWineModalClick() {
+      $('[data-reveal-id="wineModal"]').bind('click', function()
+      {
+
+          var viewWineModal = $('#wineModal');
+          var staticPath = '{{ url_for('static', filename='images/wine/') }}';
+
+          $('#wineModal').attr('wineID', $(this).attr('wine-wineID'));
+
+          //alert($(this).attr('wine-wineName'));
+          $('#wine_wineName').text($(this).attr('wine-wineName'));
+          $('#wine_winery').text($(this).attr('wine-winery'));
+          $('#wine_varietal').text($(this).attr('wine-varietal'));
+          $('#wine_vintage').text($(this).attr('wine-vintage'));
+          $('#wine_averageStarRating').text($(this).attr('wine-averageStarRating'));
+          $('#wine_region').text($(this).attr('wine-region'));
+          $('#user_quantity').text($(this).attr('user-quantity'));
+          $('#user_tags').text($(this).attr('user-tags'));
+
+          //alert("Description: " + $(this).attr('user-description'));
+          $('#user_description').text($(this).attr('user-description'));
+          $('#user_isWishlist').text($(this).attr('user-isWishlist'));
+          $('#user_personalStarRating').text($(this).attr('user-personalStarRating'));
+
+          //Image fall-back code
+          var imagePath = $(this).attr('user-imagePath');
+          if(imagePath == null || imagePath == '' || imagePath == 'None')
+              imagePath = $(this).attr('wine-imagePath');
+          if(imagePath == null || imagePath == '' || imagePath == 'None')
+              imagePath = 'default_wine.jpg';
+          $('#user_imagePath').attr('src', staticPath + imagePath);
+
+          $('#wineModal').foundation('reveal', 'open');
+
+          return false;
+
+      });
+  }
+
+  $(function()
+  {
+      bindWineModalClick();
+  });
+
+  var typewatch = (function()
+  {
+      var timer = 0;
+      return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+      }  
+  })();
+
+   //Show edit buttons on location tiles
+    //Dynamically highlights the filter objects (if it is not activated)
+    /*
+    $(".channel-button").mouseenter(function() {
+        $('.filter-shelf-menu[hover-key="' + $(this).attr('shelf-id') + '"]').css("display", 'block');
+    }).mouseleave(function() {
+        $('.filter-shelf-menu[hover-key="' + $(this).attr('shelf-id') + '"]').css("display", 'none');
+    });
+*/
+
+
+
+
+
+    /************************************************
+    EDIT IF THE MESS
+    *************************************************/
+
+            //AND FINALLY WE SHOW DIS SHIT
+            var rec_con = $('#recommendation-container');
+            $('#progress_wheel_container').css("display", 'none');
+            rec_con.css("display", 'block');
+
+
+            var typewatch2 = (function()
+            {
+                var timer = 0;
+                return function(callback, ms){
+                    clearTimeout (timer);
+                    timer = setTimeout(callback, ms);
+                }  
+            })();
+
+            typewatch2(function () {
+                //Fix for chrome
+                $('#recommendation-container').isotope({ filter: '.recommended-' + $('.channel-button:first').attr('shelf-id') });
+            }, 500);
+
+
+            var modalwatch = (function()
+            {
+                var timer = 0;
+                return function(callback, ms){
+                    clearTimeout (timer);
+                    timer = setTimeout(callback, ms);
+                }  
+            })();
+
+            /*Fix modal crap
+            $('div').each(function() {
+                if(!!$(this).attr('data-reveal-id')) {
+                    $(this).bind('click', function(){
+                        var revealID = $(this).attr('data-reveal-id');
+                        modalwatch(function () {
+                        $('.reveal-modal:not(#' + revealID + ')').css('visibility', 'hidden');//:not(#' + $(this).attr('data-reveal-id') + ')'
+                        $('.reveal-modal:not(#' + revealID + ')').css('display', 'none');//:not(#' + $(this).attr('data-reveal-id') + ')'
+                        //alert('.reveal-modal:not(#' + revealID + ')');
+                        //$('.reveal-modal:not(#' + revealID + ')').css('top', '-1000px');
+                        }, 1000);
+                    });
+                }
+            });*/
+            //Preps the Inventory layout
+
+</script>
+
+
+
+
+
+{% endblock %}

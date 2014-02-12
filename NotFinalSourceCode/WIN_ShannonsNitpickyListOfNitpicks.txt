@@ -1,0 +1,30 @@
+Recommendation Page
+
+Add to inventory from recommendation modal looks bad (dropdown list is super huge)
+Wine info modal isn't yet updated
+Create shelf styling went blehg all over itself
+Delete shelf and edit shelf functionality does not have button(s) and is not yet implemented
+All wine pictures are the same
+Opening add wine info modal then add to inventory modal then closing the add to inventory modal makes it so I can't exit out of the wine info modal
+Page doesn't look very good upon loading
+
+
+Profile
+
+Needs better layout
+needs better styling
+
+
+------------Nitpicky section-----------
+
+
+1. index has footer bar that no other part of the site has
+2. "Your personal wine sommelier" is a bit hard to read
+3. Register an account and log out don't do anything on hover to indicate that they're links
+4. In the create account modal the filler text for locations indicates that you can have a comma, but you can't
+5. Choose file and no file chosed aren't centered with "Profile image"
+6. Delete location modal - change to not include number ,don't capitalize location
+7. Add button on list of inventory page still needs to be changed
+8. Welcome message displays again on page reload after deleting a wine.
+9. Close wine info modal in 3d closes the whole modal
+10. Search bar could stand to be a little bigger

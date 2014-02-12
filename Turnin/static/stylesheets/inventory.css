@@ -1,0 +1,971 @@
+html, body {
+    min-height: 600px;
+    /*background-image: url("/static/images/fabric_of_squares_gray.png");
+    background-image: url("/static/images/fabric_2.png");
+    background-image: url("/static/images/Wood_BG.jpg");*/
+
+}
+
+.everything_below_header {
+
+
+
+    
+    background-image: url(/static/images/Arches_BG_2.png);
+    background-color: #FFF9F8;
+    background-color: rgba(253,250,243,0.8);
+    background-repeat: repeat-x;
+    
+}
+
+.percent100 {
+    height: 100%;
+    min-height:100%;
+    width: 100%;
+    /*margin:0 auto;*/
+}
+
+.groupname {
+    color:#AC212A;
+}
+
+.master_container {
+    /*
+    background-color: rgba(253,250,243,0.8);
+
+    background-image: url("/static/images/fabric_of_squares_gray.png");
+    /*
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    */
+    /*
+    -moz-box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+    */
+    /*background-image: url(/static/images/Arches_BG_2.png);*/
+
+    /*
+    border: 1px solid #666;
+    background-color: #F1EEEE;
+    background-color: #D9D9D9;
+
+    background-repeat: repeat;
+
+    z-index: 2;*/
+}
+
+.left_side {
+    height: 100%;
+    min-height:600px;
+
+}
+
+.right_side {
+    height: 100%;
+    min-height:600px;
+    padding: 0px !important;
+}
+
+
+/*************************************************************
+ Inventory
+ *************************************************************/
+#inventory_container {
+    margin: 0 auto;
+    height:100%;
+    min-height:100%;
+    overflow: visible !important;
+    display:none;
+
+
+}
+
+.inventory-top {
+    /*
+    background-color: #FFF9F8;
+    font-size: 20pt;
+    */
+    /*
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    */
+    /*
+    -moz-box-shadow: 0 0 2px 2px rgba(1,1,1,0.1);
+    -webkit-box-shadow: 0 0 2px 2px rgba(1,1,1,0.1);
+    box-shadow: 0 0 2px 2px rgba(1,1,1,0.1);
+    */
+    /*background-image: url(/static/images/Arches_BG_2.png);*/
+    background-repeat: repeat-x;
+
+
+    margin-bottom: 4px;
+    padding: 8px 8px 8px 8px;
+    color:#333;
+    font-family: 'Sail', cursive;
+    font-size: 36pt;
+
+    /*
+    border: 1px solid #666;
+    background-color: #F1EEEE;
+    background-color: #D9D9D9;
+    */
+
+    display:none;
+}
+
+.inventorySearch {
+    /*width: 504px !important;/* Fyull-width is 632px, with mic button its 600px */
+    background-color: #FFF;
+    padding: 10px 0px 10px 10px;
+
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    border: 3px solid #AAA;/*shadow acts are border when expanded*/
+    -moz-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+}
+
+.inventorySearch-mic {
+    width:100%;
+    text-align: center;
+    display: inline;
+}
+
+.inventory-obj {
+    color: #FFF;
+    margin: 5px;
+    background-color: #FFF;
+     
+    cursor:pointer;
+    overflow: hidden;/* was hidden */
+
+
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    border: 1px solid #AAA;/*shadow acts are border when expanded*/
+    -moz-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+}
+
+.inventory-obj-label {
+    width: 100%;
+    height: 32px;
+    background-color: #EEE;
+    border-top: 1px solid #AAA;
+    color:#444;
+    display: none;
+}
+
+.inventory-obj-label.vintage {
+    font-size: 14pt;
+    color: #888;
+}
+
+.inventory-obj-label.name {
+    font-size: 12pt;
+}
+
+.inventory-obj:hover {
+    border-color: #444;
+}
+
+.inventory-obj-three-d {
+    color: #FFF;
+    margin: 5px;
+     
+    cursor:pointer;
+    overflow: visible;/* was hidden */
+}
+
+.inventory-obj:first-of-type {
+    
+    -moz-box-shadow: 0 0 1px 1px rgba(0,0,0,0.0);
+    -webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,0.0);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.0);
+
+}
+
+.inventory-obj-add:hover {
+
+    background-image: url(/static/images/AddWine_Button_On.jpg);
+
+    border: 1px solid #DDD;
+}
+
+.inventory-obj-add h1 {
+    padding-top:1px;
+    font-size:80px;
+    color:#525252;
+}
+
+.inventory-4:hover {
+    z-index:3;
+    width:149px;/* was 2 * (159 - 2 * margin(5)) + 10, same size as inventory-2*/
+    /*height:149px;*/
+}
+
+.inventory-4{
+    z-index:2;
+    width:149px;/*159 - 2 * margin(5)*/
+    /*height:149px;*/
+}
+
+.inventory-4-forced{
+    z-index:2;
+    width:149px;/*159 - 2 * margin(5)*/
+    height:149px;
+}
+
+.inventory-1:hover {
+    z-index:3;
+    width:626px;/* was 2 * (159 - 2 * margin(5)) + 10, same size as inventory-2*/
+    /*height:149px;*/
+}
+
+.inventory-1{
+    z-index:2;
+    width:626px;/*159 - 2 * margin(5)*/
+    /*height:149px;*/
+}
+
+.inventory-1:first-of-type {
+    height: 40px;
+}
+
+.inventory-obj-image {
+    max-height: 100%;/*was 80% to make room for label, but that looked like ass*/
+    width: 127px;/*
+    position: absolute;
+    top: 0;
+    left: 0;*/
+    border: 1px solid #DDD;
+    overflow: hidden;
+    margin: 10px;
+
+}
+
+.inventory-obj-image:hover {
+}
+
+.inventory-obj-info {
+    position: absolute;
+    top: 0;
+    left: 149px;
+    max-height: 100%;/*was 80% to make room for label, but that looked like ass*/
+    width: 477px;
+    height: 100%;
+    display:none;
+    float:right;
+    margin: 0px 0px 0px 0px;
+    padding: 5px;
+    /*
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;*/
+    border: 1px solid #DDD;
+    background-color: #F1EEEE;
+}
+
+.inventory-obj-stars {
+    width: 24px;
+    height: 24px;
+    background-color: #DDD;
+    z-index: 4;
+    padding: 2px;
+    -webkit-border-radius: 0px 0px 4px 0px;
+    -moz-border-radius: 0px 0px 4px 0px;
+    border-radius: 0px 0px 4px 0px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.inventory-obj-count {
+    width: 15%;
+    height: 15%;
+    background-color:#1EE87C;
+    float:right;
+    z-index:4;
+    padding:2px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    display: none;
+}
+
+.inventory-obj-info-general {
+    color: #333;
+    width: 100%;
+}
+
+.inventory-obj-info-general .left {
+    width:69%;
+    padding-right: 5px;
+}
+
+.inventory-obj-info-general .left .name{
+    width: 100%;
+    text-align: right;
+    font-size: 24pt;
+    color: #433;
+}
+
+.inventory-obj-info-general .left .winery{
+    width: 100%;
+    text-align: right;
+    font-size: 16pt;
+    color: #766;
+}
+
+.inventory-obj-info-general .left .varietal{
+    width: 100%;
+    text-align: right;
+    font-size: 12pt;
+    color: #999;
+}
+
+.inventory-obj-info-general .right {
+    width: 31%;
+    float:right;
+    text-align: left;
+}
+.inventory-obj-info-general .right .vintage{
+    font-size: 72pt;
+    position: relative;
+    top:-8px;
+    color: #663333;
+    /*left: -48px;
+    top: 34px;
+
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+    /*also accepts left, right, top, bottom coordinates; not required, but a good idea for styling *
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    */
+}
+
+
+/*Can we do something about this?*/
+.inventory-obj-add {
+    background-color: #bb2f43;
+    border: 1px solid #DDD;
+    text-align:center;
+    
+    width: 100%;
+    /*max-height: 100%;/*was 80% to make room for label, but that looked like ass*/
+    width: 149px;
+    height: 149px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+
+
+    -moz-box-shadow: 0;
+    -webkit-box-shadow: 0;
+    box-shadow: 0;
+    
+    /*border: 1px solid #888;/*shadow acts are border when expanded*/
+
+    background-image: url(/static/images/AddWine_Button_Off.jpg);
+    /*background-size: 100%;*/
+    background-position:center; 
+
+}
+
+.inventory-obj-add-label {
+    text-align: center;
+
+    font-family: 'Playfair Display SC', serif;
+    font-size: 28px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    background-color:#bb2f43;
+    color:#F1EEEE;
+
+
+    padding:4px;
+
+
+    min-height: 48px;
+}
+
+
+/*************************************************************
+ Inventory Info Control
+ *************************************************************/
+
+#aromaBarGraph {
+    display:none;
+    float:right;
+    text-align: left;
+    width:100%;
+    height: 40px;
+    margin-right: 5px;/*to line up with inventory objs*/
+}
+
+#aromaBarGraph ul {
+    
+}
+
+#aromaBarGraph ul li {
+    display: inline;
+    list-style-type: none;
+    margin: 3px;
+    border: 1px solid transparent;
+}
+
+#aromaBarGraph ul li:hover {
+    display: inline;
+    list-style-type: none;
+    margin: 3px;
+    border: 1px solid #333;
+}
+
+#aromaBarGraph .bar-item {
+    width:15px;
+    height:30px;
+}
+#aromaBarGraph .bar-item.aroma {
+    background-color: #E33;
+}
+#aromaBarGraph .bar-item.taste {
+    background-color: #E36;
+}
+
+
+/* .inventory-obj:not(inventory-obj:first-of-type):hover */
+
+
+/*************************************************************
+ Inventory Display Control
+ *************************************************************/
+#page {
+    height: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    vertical-align: bottom;
+}
+
+#page_display {
+    text-align: left;
+    float:left;
+    margin-left: 5px;/*to line up with inventory objs*/
+    width: 28%;
+}
+
+#page_display ul {
+    
+}
+
+#page_display ul li {
+    display: inline;
+    vertical-align: bottom;
+    list-style-type: none;
+    padding: 2px 4px 2px 4px;
+    font-size: 16pt;
+    color: #333;
+    border: 1px solid transparent;
+
+    /* Moved from hover to here to let the user know these are buttons */
+    background-color: #F2F2F2;
+    border: 1px solid #666;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+
+
+    background: #bb2f43;
+    border: 1px solid #666;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 10px rgba(0,0,0,0.15);
+    color: #F1EEEE;
+
+    font-family: 'Playfair Display SC', serif;
+    font-size: 22px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+#page_display ul li:hover {
+    background-color: #ab1f33;
+    border: 1px solid #444;
+}
+
+/*************************************************************
+ Pagination
+ *************************************************************/
+#page_nav {
+    display: none;
+    float:right;
+    text-align: right;
+    width:65%;
+    /*height: 40px;
+     padding-top: 8px;
+     padding-bottom: 8px;*/
+    margin-right: 32px;/*to line up with inventory objs*/
+}
+
+#page_nav ul {
+    
+}
+
+#page_nav ul li {
+    display: inline;
+    list-style-type: none;
+    padding: 0px 2px 0px 2px;
+    font-size: 12pt;
+    color: #333;
+    border: 1px solid transparent;
+}
+
+#page_nav ul li:hover {
+    background-color: #F2F2F2;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+#page_nav ul li.adj_page {
+    font-size: 14pt;
+    color: #992222;
+}
+
+#page_nav ul li.curr_page {
+    font-size: 16pt;
+    color: #BB1818;
+}
+
+#page_nav ul li.terminal {
+    font-size: 16pt;
+}
+
+#page_nav ul li.intermediate {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+
+/*************************************************************
+ Filtering
+ *************************************************************/
+#filter_container {
+    display:none;
+    background: rgba(70,33,33,0.2);
+    box-shadow: 0 0 8px rgba(0,0,0,0.2), inset 0 0 20px rgba(0,0,0,0.15);
+}
+
+#filter_nav {
+    text-align: right;
+    margin-right: 5px;/*to line up with filter objs*/
+    padding: 6px;
+    height: 40px;
+}
+
+#filter_nav ul li {
+    display: inline;
+    list-style-type: none;
+    border: 1px solid transparent;
+
+    display: none;
+}
+
+#filter_nav ul li img {
+    border: 1px solid transparent;
+}
+
+#filter_nav ul li img:hover {
+    background-color: #F2F2F2;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+.filter-obj {
+    color: #FFF;
+    background-color: #FFF;
+    margin: 5px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+    overflow: hidden;
+
+    border: 1px solid #AAA;/*shadow acts are border when expanded*/
+    -moz-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+}
+
+.filter-obj img{
+    margin: 5px;
+    border: 1px solid #DDD;
+}
+
+.filter-obj-add {
+    color: #FFF;
+    margin: 5px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+    text-align: center;
+    /*background-color:#F1EEEE;*/
+    background-image: url(/static/images/AddWine_Button_Off.jpg);
+    background-position:center; 
+    border: 1px solid #888;
+    padding: 4px;
+    color:#444;
+
+    width:126px;/*136 - 2 * margin(5)*/
+    height:126px;
+}
+.filter-obj-add:hover {
+    background-image: url(/static/images/AddWine_Button_On.jpg);
+}
+
+.filter-label {
+    background-color:#F1EEEE;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
+
+    font-family: 'Playfair Display SC', serif;
+    font-size: 18px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    color:#666;
+
+    background-color: #FFF;
+    border: 1px solid #CCC;
+}
+
+.filter-label-large {
+    background: #bb2f43;
+    border: 1px solid #bb2f43;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.15);
+    color: #F1EEEE;
+
+    font-family: 'Playfair Display SC', serif;
+    font-size: 22px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+.filter-welcome {
+    background-color:#F1EEEE;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 18pt;
+    color:#444;
+    text-align: center;
+
+    color:#666;
+
+    background-color: #FFF;
+    border: 1px solid #DDD;
+}
+
+.filter-tag {
+    padding: 4px;
+    border: 1px solid transparent;
+}
+
+.filter-1 {
+    width:262px;/*272 - 2 * margin(5)*/
+}
+
+.filter-2 {
+    width:126px;/*136 - 2 * margin(5)*/
+    /*height:126px;*/
+}
+
+.filter-2 img {
+    width: 114px;
+}
+
+.filter-2:hover {
+    border: 1px solid #333;
+}
+
+.filter-3 {
+    width:80px;/*90 - 2 * margin(5)*/
+    height:80px;
+    padding: 6px;
+    border: 1px solid transparent;
+}
+
+.filter-4 {
+    width:58px;/*68 - 2 * margin(5)*/
+    /*height:58px;*/
+}
+
+.filter-2-forced {
+    width:126px;/*136 - 2 * margin(5)*/
+    height:126px;
+}
+
+.filter-3-forced {
+    width:80px;/*90 - 2 * margin(5)*/
+    height:80px;
+}
+
+.filter-4-forced {
+    width:58px;/*68 - 2 * margin(5)*/
+    height:58px;
+}
+
+.filter-obj.activated {
+    background-color:#bb2f43 !important;/*Used to override the loljquery bgcolor*/
+}
+
+.filter-location-menu {
+    display:none;
+    right:0;
+    top:0;
+    z-index:4;
+    top:0;
+    left:0;
+    width:100%;
+}
+
+.filter-location-edit {
+    width: 24px;
+    height: 24px;
+    background-color: #999;
+    z-index: 4;
+    padding: 5px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 24px;
+}
+
+.filter-location-delete{
+    width: 24px;
+    height: 24px;
+    background-color:#CC6666;
+    float:right;
+    z-index:4;
+    padding:5px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0px;
+}
+
+/*************************************************************
+ Isotopes
+ *************************************************************/
+.isotope-item {
+    z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+    pointer-events: none;
+    z-index: 1;
+}
+
+.isotope,
+.isotope .isotope-item {
+    -webkit-transition-duration: 1.0s;
+    -moz-transition-duration: 1.0s;
+    -ms-transition-duration: 1.0s;
+    -o-transition-duration: 1.0s;
+    transition-duration: 1.0s;
+}
+
+.isotope {
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    -ms-transition-property: height, width;
+    -o-transition-property: height, width;
+    transition-property: height, width;
+}
+
+.isotope .isotope-item {
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property:    -moz-transform, opacity;
+    -ms-transition-property:     -ms-transform, opacity;
+    -o-transition-property:      -o-transform, opacity;
+    transition-property:         transform, opacity;
+}
+
+/*************************************************************
+ 3D Inventory
+ *************************************************************/
+
+#threeDModal {
+    background-image: url(/static/images/Arches_BG_2.png);
+    background-color: #FFF9F8;
+    background-color: rgba(253,250,243,1.0);
+    background-repeat: repeat-x;
+    
+    margin: 0;
+    font-family: Arial;
+    overflow: hidden;
+    width: 80%;
+    height: 80%;
+    padding: 5px;
+    left: 10% !important;
+    top: 10% !important;
+
+    position:fixed;
+}
+
+#threeDModal a {
+    /*color: #ffffff;*/
+}
+
+.reveal-modal-three-d {
+}
+
+#info {
+    position: absolute;
+    width: 100%;
+    color: #ffffff;
+    padding: 5px;
+    font-family: Monospace;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+}
+
+#menu {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+button {
+    /*color: rgba(127,255,255,0.75);*/
+    color: #101010;
+    background-color: rgba(230,230,230,0.6);
+    outline: 1px solid rgba(24,24,24,0.75);
+    border: 0px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: rgba(210,200,190,0.8);
+}
+button:active {
+    color: #333;
+    background-color: rgba(240,240,240,0.8);
+}
+
+.bg3D {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+/*************************************************************
+ Auto-complete on Add Wine
+ *************************************************************/
+
+#candyWineList {
+    display: block;
+    padding: 16px;
+}
+
+.special_iso_right, .special_iso_left {
+    display: block;
+
+    -webkit-transition-duration: 1.0s;
+    -moz-transition-duration: 1.0s;
+    -ms-transition-duration: 1.0s;
+    -o-transition-duration: 1.0s;
+    transition-duration: 1.0s;
+    -webkit-transition-property: height, width, top, left;
+    -moz-transition-property: height, width, top, left;
+    -ms-transition-property: height, width, top, left;
+    -o-transition-property: height, width, top, left;
+    transition-property: height, width, top, left;
+
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property:    -moz-transform, opacity;
+    -ms-transition-property:     -ms-transform, opacity;
+    -o-transition-property:      -o-transform, opacity;
+    transition-property:         transform, opacity;
+}
+
+.special_iso_right {
+    /*float:right;*/
+    /*position: relative;*/
+    margin: 16px !important;
+}
+
+.special_iso_left {
+    /*float:left;
+    max-width: 360px !important;*/
+    /*position: relative;*/
+    margin: 16px !important;
+    display:none;
+}
+
+#addWineForm {
+    /*float:right;*/
+}
+
+.candidate-wine {
+    width: 100% !important;
+    background:#F1EEEE;
+    color:#333;
+    margin:2px 5px 2px 5px;
+    /*height:30px;*/
+    padding: 5px;
+    line-height:1.5em;
+    border-radius: 4px;
+    border: 1px solid #DDD;
+    cursor: pointer;
+}
+
+.candidate-wine:hover {
+    border: 1px solid #333;
+}
+
+#master-add-wine-container {
+    overflow: hidden;
+}
+
+#massive-container {
+}
+
+/*************************************************************
+ Auxillary
+ *************************************************************/
+
+ .wishlist {
+    float:left;
+ }
+

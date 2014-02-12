@@ -1,0 +1,4 @@
+Things to work on:
+
+	~The 4 horizonally aligned icons should be replaced with real icons
+	~

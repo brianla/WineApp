@@ -1,0 +1,445 @@
+.required-field {
+	color:#EE2222;
+	background-color: #EEAAAA;
+}
+
+.progress_wheel {
+	display: none;
+	text-align: center;
+	margin: 4px;
+	border: 0px;
+}
+
+.full_width{
+	width: 100% !important;
+}
+
+.create_acc_btn {
+}
+
+#createAccountButton {
+	margin-top: 15px;
+}
+
+.error-message {
+	color: #DD1111;
+	display: none;
+	width: 100% !important;
+	padding: 4px 4px 4px 4px !important;
+	margin: 2px 0px 2px 0px !important;
+	background-color: #F4F1F1;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border:1px solid #CCC;
+}
+
+.error-message-visible {
+	color: #661111;
+	width: 100% !important;
+	padding: 4px 4px 4px 4px !important;
+	margin: 2px 0px 2px 0px !important;
+	background-color: #F4F1F1;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border:1px solid #CCC;
+}
+
+.deleteVerification {
+	text-align: center;
+}
+
+.bgimg {
+	width: 100% !important;
+}
+
+/******************************************
+	Add Shelf CSS
+******************************************/
+#candyWineList {
+	height: 300px !important;
+	/*background-color: #EEE;*/
+	/*overflow-y: scroll;
+	overflow-x: visible;*/
+}
+
+.form-field-border {
+	border: 1px #DDD solid;
+	padding: 8px;
+}
+
+
+
+/******************************************
+	Add Shelf CSS
+******************************************/
+
+body {
+	background: #fff;
+	color:#999;
+}
+.nav-bar {
+	background: transparent;
+	background: rgba(0,0,0,0.4);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+	padding: 3px 0;
+	position: absolute;
+	top: 20px;
+	width: 100%;
+	z-index: 5;
+	zoom: 1;
+}
+.nav-inside {
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+	border-top: 1px solid rgba(255,255,255,0.1);
+	height: 40px;
+	width: 100%;
+	line-height:50px;
+}
+nav.main {
+	display: block;
+	font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+
+	position: absolute;
+	right: 0;
+	text-transform: uppercase;
+	top: 20px;
+	z-index: 10;
+}
+nav.main ul {
+	float: right;
+	margin: 0;
+}
+nav.main ul li {
+	background: none;
+	float: left;
+	margin: 0 0 0 25px;
+	padding: 0;
+	position: relative;
+	font-size:14px;
+}
+nav.main ul li a {
+	color: #fff;
+	display: block;
+	padding: 13px 0;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+nav.main ul li a:hover, nav.main ul li.active a{
+	color:#e75873;
+}
+header ul li {
+	display:inline;
+	color:white;
+	text-transform:uppercase;
+	font-size:10px;
+
+}   
+.logo {
+	background: #bb2f43;
+	border: 1px solid #bb2f43;
+	box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.15);
+	padding: 20px 0;
+	left: 0;
+	position: absolute;
+	text-align: center;
+	top: 0px;
+	width: 240px;
+	z-index: 10;
+
+}
+.logo h1 {
+	color: #fff;
+	font-family: 'Playfair Display SC', serif;
+	font-size: 28px;
+	margin: 0;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+}
+.logo p {
+	color: #470310;
+	font-size: 10px;
+	margin: 0 0 10px 0;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+	text-transform: uppercase;
+}
+#blockcontainer {
+	position:absolute;
+	right:60px;
+	margin-top:200px;
+}
+#block1 {
+	background: #bb2f43;
+	border: 1px solid #bb2f43;
+	box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 15px rgba(0,0,0,0.15);
+	color: #fff;
+	float: right;
+	font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+	font-size: 30px;
+	padding: 10px 30px;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+	text-transform: uppercase;
+	z-index:15;
+}
+#block2 {
+	background: #fff;
+	border: 1px solid #fff;
+	box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.15);
+	clear: both;
+	color: #222;
+	float: right;
+	font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+	font-size: 20px;
+	padding: 10px 30px;
+	text-shadow: 0 1px 0 #fff;
+	text-transform: uppercase;
+	z-index:15; 
+}
+#block2 a {
+	color:#222;
+}
+#block3 {
+	background: #222;
+	border: 1px solid #222;
+	box-shadow: 0 0 5px rgba(0,0,0,0.2), inset 0 0 40px rgba(0,0,0,0.2);
+	clear: both;
+	color: #fff;
+	float: right;
+	font-family: "PT Serif", Georgia, "Times New Roman", Times, serif;
+	font-size: 20px;
+	padding: 10px 30px;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+	text-transform: uppercase;
+}
+#block3 a {
+	color:#fff;
+}
+p {
+	color:#999;
+}
+h3 {
+	font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+	font-weight:400;
+}
+.pushdown { margin-top:50px; }
+footer { 
+	background: #222;
+	box-shadow: inset 0 10px 10px rgba(0,0,0,0.4);
+	border-top: 1px solid rgba(255,255,255,0.1);
+	padding-top:20px;
+	padding-bottom:0px;
+}
+hr {
+	border:0;
+	background: url(/static/images/ribbon.png) no-repeat center center;
+	height: 20px;
+}
+
+.button {
+
+    background-color: #bb2f43 !important;
+	border-color: #bb2f43 !important;
+}
+
+/***************************************
+Profile
+****************************************/
+.everything_below_header {
+    
+    background-image: url(/static/images/Arches_BG_2.png);
+    background-color: #FFF9F8;
+    background-color: rgba(253,250,243,0.8);
+    background-repeat: repeat-x;
+    
+}
+
+
+/***************************************
+Recommender, WHY?!!?!?
+****************************************/
+
+
+
+
+/**********************************
+Hacky Fixes 
+***********************************/
+#createImageInput:after {
+	color: #bb2f43 !important;
+}
+
+
+
+/***************************************
+User Stuffs
+****************************************/
+#profileModal {
+
+    background-image: url(/static/images/Arches_BG_2.png);
+    background-color: #FFF9F8;
+    background-color: rgba(253,250,243,1.0);
+    background-repeat: repeat-x;
+}
+
+#user_userName {
+
+    font-size: 48pt;
+    margin-bottom: 12px;
+    color: #ab1f33;
+}
+
+#user_favoriteWines {
+    font-size: 32pt;
+    color: #ab4f43;
+    display: inline;
+    margin-bottom: 12px;
+    margin-top: 12px !important;
+    padding-top:12px;
+}
+#wine_varietal {
+    font-size: 24pt;
+    color: #5b2f53;
+    margin-bottom: 8px;
+}
+
+#wine_region {
+    font-size: 18pt;
+    color: #4b1f43;
+    margin-bottom: 8px;
+}
+
+
+#wine_vintage {
+    font-size: 18pt;
+    color: #4b1f43;
+    display: inline;
+    margin-bottom: 8px;
+}
+
+#editUserAccountButton, #deleteUserAccountButton {
+    padding-top: 1em;
+}
+
+.user-info {
+	padding: 4px;
+	color: #333;
+	font-size: 12pt;
+	margin-bottom: 10px;
+}
+
+#user_image {
+	color: #FFF;
+    background-color: #FFF;
+     
+    overflow: hidden;/* was hidden */
+    padding:10px;
+
+
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    border: 1px solid #AAA;/*shadow acts are border when expanded*/
+    -moz-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
+.user_wineImage, .user_wineStat {
+	color: #FFF;
+    background-color: #FFF;
+     
+    overflow: hidden;/* was hidden */
+    padding:10px;
+
+    margin-top: 12px;
+
+
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    border: 1px solid #AAA;/*shadow acts are border when expanded*/
+    -moz-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+    margin-bottom: 16px;
+}
+
+.user_wineImage img {
+	width: 100% !important;
+    overflow: hidden;
+    border: 1px solid #DDD !important;/*shadow acts are border when expanded*/
+}
+
+.user_wineStat div {
+	width: 100% !important;
+    background-color: rgba(244,241,234,0.5);
+    overflow: hidden;
+    border: 1px solid #DDD !important;/*shadow acts are border when expanded*/
+}
+
+#user_image img {
+	width: 100% !important;
+    overflow: hidden;
+    border: 1px solid #DDD !important;/*shadow acts are border when expanded*/
+}
+
+.favoriteWine-wineName {
+    color:#b92e42;
+    font-size:1em;
+    font-weight:700;
+    padding:0;
+    margin-bottom:0;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+
+.favoriteWine-wineVintage {
+    font-size:0.7em;
+}
+
+.stats-box {
+    display:block;
+    width:100%;
+    text-align:center;
+    background: #FFF;
+    padding: 4px;
+    color:#FFFEFE !important;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    padding-bottom: 16px;
+}
+
+.stats-box span {
+	color: #999;
+}
+
+.recent-activity {
+}
+
+.recent-activity-block {
+	padding: 8px 8px 8px 8px;
+	width: 100% !important;
+    background: rgba(255,255,255,0.4);
+    color:#333;
+    margin:2px 5px 2px 5px;
+    /*height:30px;*/
+    padding: 5px;
+    line-height:1.5em;
+    border-radius: 4px;
+    border: 1px solid #DDD;
+}
+
+.recent-activity-event {
+	width: 40%;
+	display: inline;
+	font-size: 14pt;
+	color:#555;
+}
+
+.recent-activity-time {
+	width: 60%;
+	display: inline;
+	margin-right: 5px;
+	text-align: right;
+}
+

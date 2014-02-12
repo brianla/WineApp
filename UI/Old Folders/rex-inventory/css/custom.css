@@ -1,0 +1,268 @@
+html, body {
+    min-height: 600px;
+}
+
+
+.percent100 {
+    height: 100%;
+    min-height:100%;
+    width: 100%;
+    /*margin:0 auto;*/
+}
+
+.groupname {
+    color:#AC212A;
+}
+
+.left_side {
+    border-right: 1px solid #EEE;
+    height: 100%;
+    min-height:600px;
+}
+
+.right_side {
+    border-left: 1px solid #DDD;
+    height: 100%;
+    min-height:600px;
+}
+
+
+/*************************************************************
+ Inventory
+ *************************************************************/
+#inventory_container {
+    margin: 0 auto;
+    height:100%;
+    min-height:100%;
+    overflow: visible !important;
+}
+
+.inventory-obj {
+    color: #FFF;
+    margin: 5px;
+    background-color: #791527;
+    border: 1px solid transparent;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+.inventory-obj:first-of-type {
+    color:#444;
+    background-color: #F1EEEE;
+    border: 1px solid #DDD !important;
+    text-align:center;
+}
+
+.inventory-4:hover {
+    z-index:3;
+    margin-left: -10px;
+    margin-top: -10px;
+    width:179px;/* was 2 * (159 - 2 * margin(5)) + 10, same size as inventory-2*/
+    height:179px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid transparent;/*was #FFF*/
+    -moz-box-shadow: 0 0 4px 4px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 4px 4px rgba(0,0,0,0.5);
+    box-shadow: 0 0 4px 4px rgba(0,0,0,0.5);
+}
+
+.inventory-4{
+    z-index:2;
+    width:149px;/*159 - 2 * margin(5)*/
+    height:149px;
+}
+
+.inventory-obj-image {
+    width: 100%;
+    height: 80%;
+    /*background-color: #F1EEEE;*/
+    -webkit-border-radius: 4px 4px 0px 0px;
+    -moz-border-radius: 4px 4px 0px 0px;
+    border-radius: 4px 4px 0px 0px;
+    overflow: hidden;
+}
+
+.inventory-obj-label {
+    width: 100%;
+    height: 20%;
+    padding: 6px;
+}
+
+/* .inventory-obj:not(inventory-obj:first-of-type):hover */
+
+/*************************************************************
+ Pagination
+ *************************************************************/
+#page_nav {
+    text-align: right;
+    height: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-right: 5px;/*to line up with inventory objs*/
+}
+
+#page_nav ul {
+    
+}
+
+#page_nav ul li {
+    display: inline;
+    list-style-type: none;
+    padding: 0px 2px 0px 2px;
+    font-size: 12pt;
+    color: #333;
+    border: 1px solid transparent;
+}
+
+#page_nav ul li:hover {
+    background-color: #F2F2F2;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+#page_nav ul li.adj_page {
+    font-size: 14pt;
+    color: #992222;
+}
+
+#page_nav ul li.curr_page {
+    font-size: 16pt;
+    color: #BB1818;
+}
+
+#page_nav ul li.terminal {
+    font-size: 16pt;
+}
+
+#page_nav ul li.intermediate {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+
+/*************************************************************
+ Filtering
+ *************************************************************/
+#filter_nav {
+    text-align: right;
+    margin-right: 5px;/*to line up with filter objs*/
+    padding: 6px;
+    height: 40px;
+}
+
+#filter_nav ul li {
+    display: inline;
+    list-style-type: none;
+    border: 1px solid transparent;
+}
+
+#filter_nav ul li img {
+    border: 1px solid transparent;
+}
+
+#filter_nav ul li img:hover {
+    background-color: #F2F2F2;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+.filter-obj {
+    color: #FFF;
+    margin: 5px;
+    border: 1px solid transparent;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+.filter-label {
+    background-color:#F1EEEE;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 14pt;
+    color:#444;
+}
+
+.filter-tag {
+    padding: 4px;
+}
+
+.filter-1 {
+    width:262px;/*272 - 2 * margin(5)*/
+}
+
+.filter-2 {
+    width:126px;/*136 - 2 * margin(5)*/
+    height:126px;
+}
+
+.filter-3 {
+    width:80px;/*90 - 2 * margin(5)*/
+    height:80px;
+}
+
+.filter-4 {
+    width:58px;/*68 - 2 * margin(5)*/
+    height:58px;
+}
+
+.filter-obj.activated {
+    background-color:#FF4E50 !important;/*Used to override the loljquery bgcolor*/
+}
+
+/*************************************************************
+ Isotopes
+ *************************************************************/
+.isotope-item {
+    z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+    pointer-events: none;
+    z-index: 1;
+}
+
+.isotope,
+.isotope .isotope-item {
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -ms-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+
+.isotope {
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    -ms-transition-property: height, width;
+    -o-transition-property: height, width;
+    transition-property: height, width;
+}
+
+.isotope .isotope-item {
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property:    -moz-transform, opacity;
+    -ms-transition-property:     -ms-transform, opacity;
+    -o-transition-property:      -o-transform, opacity;
+    transition-property:         transform, opacity;
+}
+
+
+/*************************************************************
+ Auxillary
+ *************************************************************/
+

@@ -1,0 +1,13 @@
+Notes on the Tasks that need to be completed for the Autocomplete in the Add Shelf Modal to work.
+
+ToDo:
+	1.DB Methods to search the Main Wine DB
+		~Search Wine, Winery, Vintage of each wine for the given/respective values supplied by an Ajax Request
+	2. RecommendIO methods to send values received on the Route to the DB Access
+	3. Routes to receive the Shelf Autocomplete Request (as POSTed Form Values)
+	4. OnValueChange listener on Wine, Wienry, Vintage TextField on the Add Shelf Modal
+		~After a given delay has passed since last edit, attempt to auto-complete
+		~Send AJAX request to the server
+	5. Accept response from the server
+		~Modify the DOM to show a drop-down that contains the auto-complete candidates
+	6. OnClick of an auto-complete candidate, add that wine to the list of seeds

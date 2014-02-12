@@ -1,0 +1,253 @@
+
+
+
+/* 3D RenderingCSS */
+
+#threeDModal {
+    background-color: #EEE;
+    margin: 0;
+    font-family: Arial;
+    overflow: hidden;
+    width: 80%;
+    height: 80%;
+    padding: 5px;
+    left: 10%;
+    top: 10%;
+}
+
+#threeDModal a {
+    /*color: #ffffff;*/
+}
+
+.reveal-modal {
+    position:fixed;
+}
+
+#info {
+    position: absolute;
+    width: 100%;
+    color: #ffffff;
+    padding: 5px;
+    font-family: Monospace;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+}
+
+#menu {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.element {
+    width: 140px;
+    height: 180px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+    border: 1px solid rgba(48,48,48,0.25);
+    cursor: default;
+}
+
+.element:hover {
+    box-shadow: 0px 0px 20px rgba(48,48,48,0.75);
+    border: 1px solid rgba(64,64,64,0.75);
+}
+
+.element .number {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+    color: rgba(127,255,255,0.75);
+}
+
+.element .symbol {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    font-size: 70px;
+    text-align: center;
+    color: rgba(255,255,255,0.75);
+    font-weight: bold;
+    
+    -webkit-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+    -moz-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+    -o-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+    -ms-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+    filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+}
+
+.element .details {
+    position: absolute;
+    top: 125px;
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    color: rgba(127,255,255,0.75);
+}
+
+button {
+    /*color: rgba(127,255,255,0.75);*/
+    color: #101010;
+    background-color: rgba(230,230,230,0.6);
+    outline: 1px solid rgba(24,24,24,0.75);
+    border: 0px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: rgba(210,200,190,0.8);
+}
+button:active {
+    color: #333;
+    background-color: rgba(240,240,240,0.8);
+}
+
+.bg3D {
+    width: 100%;
+    height: 100%;
+}
+
+/* Custom CSS */
+
+
+#main_container {
+    margin: 0 auto;
+    padding-top: 16px;
+}
+
+#isotopes_container {
+    margin: 0 auto;
+}
+
+#prev_btn {
+    width: 50%;
+    margin: 0 0 0 auto;
+    float: right;
+}
+#next_btn {
+    width: 50%;
+    margin: 0 auto 0 0;
+    float: left;
+}
+
+.button {
+    background-color:#222;
+    border-color:#BBB;
+}
+
+.button:hover {
+    background-color:#555;
+    border-color:#BBB;
+}
+
+/* Isotope CSS */
+
+.isotope_obj {
+    width:118px;
+    height:118px;
+    margin: 4px 4px 4px 4px;
+    font-size: 48pt;
+    color:#333;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.isotope_obj:hover {
+    border-color:#FFB;
+}
+
+.side_spacer {
+}
+
+.isotope-item {
+    z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+    pointer-events: none;
+    z-index: 1;
+}
+
+.isotope,
+.isotope .isotope-item {
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -ms-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+
+.isotope {
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    -ms-transition-property: height, width;
+    -o-transition-property: height, width;
+    transition-property: height, width;
+}
+
+.isotope .isotope-item {
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property:    -moz-transform, opacity;
+    -ms-transition-property:     -ms-transform, opacity;
+    -o-transition-property:      -o-transform, opacity;
+    transition-property:         transform, opacity;
+}
+
+
+/* Auto-generated CSS */
+
+.z00E7B7 {
+	border:solid 4px #00E7B7;
+	background-image:url('../img/rsz_cat1.jpg');
+}
+.z00749F {
+	border:solid 4px #00749F;
+	background-image:url('../img/rsz_cat2.jpg');
+}
+.z00206B {
+	border:solid 4px #00206B;
+	background-image:url('../img/rsz_cat3.jpg');
+}
+.z390F7B {
+	border:solid 4px #390F7B;
+	background-image:url('../img/rsz_cat4.jpg');
+}
+.zE8919A {
+	border:solid 4px #E8919A;
+	background-image:url('../img/rsz_cat5.jpg');
+}
+.zBA937C {
+	border:solid 4px #BA937C;
+	background-image:url('../img/rsz_cat6.jpg');
+}
+.z00E7B7_btn {
+	background-color:#00E7B7;
+	margin:4px 4px 4px 4px;
+}
+.z00749F_btn {
+	background-color:#00749F;
+	margin:4px 4px 4px 4px;
+}
+.z00206B_btn {
+	background-color:#00206B;
+	margin:4px 4px 4px 4px;
+}
+.z390F7B_btn {
+	background-color:#390F7B;
+	margin:4px 4px 4px 4px;
+}
+.zE8919A_btn {
+	background-color:#E8919A;
+	margin:4px 4px 4px 4px;
+}
+.zBA937C_btn {
+	background-color:#BA937C;
+	margin:4px 4px 4px 4px;
+}
+.zDDD_btn {
+	background-color:#DDD;
+	margin:4px 4px 4px 4px;
+}

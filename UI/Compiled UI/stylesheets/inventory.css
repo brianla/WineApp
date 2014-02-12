@@ -1,0 +1,399 @@
+html, body {
+    min-height: 600px;
+    background-image: url("../images/fabric_2.png");
+}
+
+
+.percent100 {
+    height: 100%;
+    min-height:100%;
+    width: 100%;
+    /*margin:0 auto;*/
+}
+
+.groupname {
+    color:#AC212A;
+}
+
+.master_container {
+    background-color: #FFF;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -moz-box-shadow: 0 0 5px 5px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 0 5px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px 5px rgba(0,0,0,0.1);
+}
+
+.left_side {
+    /*border-right: 1px solid #EEE;*/
+    height: 100%;
+    min-height:600px;
+}
+
+.right_side {
+    /*border-left: 1px solid #DDD;*/
+    height: 100%;
+    min-height:600px;
+}
+
+
+/*************************************************************
+ Inventory
+ *************************************************************/
+#inventory_container {
+    margin: 0 auto;
+    height:100%;
+    min-height:100%;
+    overflow: visible !important;
+}
+
+.inventory-obj {
+    color: #FFF;
+    margin: 5px;
+     
+    cursor:pointer;
+    overflow: visible;/* was hidden */
+}
+
+.inventory-obj:first-of-type {
+    
+}
+
+/*Can we do something about this?*/
+.inventory-obj-add {
+    background-color: #F1EEEE;
+    border: 1px solid #DDD;
+    text-align:center;
+    
+    width: 100%;
+    max-height: 100%;/*was 80% to make room for label, but that looked like ass*/
+    width: 149px;
+    height: 149px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    border: 1px solid #AAA;/*shadow acts are border when expanded*/
+    -moz-box-shadow: 0 0 3px 3px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 0 3px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 0 3px 3px rgba(0,0,0,0.1);
+}
+
+.inventory-obj-add h1 {
+    padding-top:1px;
+    font-size:80px;
+    color:#525252;
+}
+
+.inventory-4:hover {
+    z-index:3;
+    width:149px;/* was 2 * (159 - 2 * margin(5)) + 10, same size as inventory-2*/
+    height:149px;
+}
+
+.inventory-4{
+    z-index:2;
+    width:149px;/*159 - 2 * margin(5)*/
+    height:149px;
+}
+
+.inventory-1:hover {
+    z-index:3;
+    width:626px;/* was 2 * (159 - 2 * margin(5)) + 10, same size as inventory-2*/
+    height:149px;
+}
+
+.inventory-1{
+    z-index:2;
+    width:626px;/*159 - 2 * margin(5)*/
+    height:149px;
+}
+
+.inventory-1:first-of-type {
+    height: 40px;
+}
+
+.inventory-obj-image {
+    width: 100%;
+    max-height: 100%;/*was 80% to make room for label, but that looked like ass*/
+    width: 149px;
+    height: 149px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    border: 1px solid #AAA;/*shadow acts are border when expanded*/
+    -moz-box-shadow: 0 0 3px 3px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 0 3px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 0 3px 3px rgba(0,0,0,0.1);
+}
+
+.inventory-obj-image:hover {
+    border-color: #444;
+}
+
+.inventory-obj-info {
+    
+}
+
+.inventory-obj-label {
+    width: 100%;
+    height: 20%;
+    padding: 6px;
+}
+
+.inventory-obj-stars {
+    width: 24px;
+    height: 24px;
+    background-color: #DDD;
+    z-index: 4;
+    padding: 2px;
+    -webkit-border-radius: 0px 0px 4px 0px;
+    -moz-border-radius: 0px 0px 4px 0px;
+    border-radius: 0px 0px 4px 0px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.inventory-obj-count {
+    width: 15%;
+    height: 15%;
+    background-color:#1EE87C;
+    float:right;
+    z-index:4;
+    padding:2px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    display: none;
+}
+
+/* .inventory-obj:not(inventory-obj:first-of-type):hover */
+
+
+/*************************************************************
+ Inventory Display Controll
+ *************************************************************/
+#page {
+    height: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    vertical-align: bottom;
+}
+
+#page_display {
+    text-align: left;
+    float:left;
+    margin-left: 5px;/*to line up with inventory objs*/
+}
+
+#page_display ul {
+    
+}
+
+#page_display ul li {
+    display: inline;
+    vertical-align: bottom;
+    list-style-type: none;
+    padding: 0px 2px 0px 2px;
+    font-size: 12pt;
+    color: #333;
+    border: 1px solid transparent;
+}
+
+#page_display ul li:hover {
+    background-color: #F2F2F2;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+/*************************************************************
+ Pagination
+ *************************************************************/
+#page_nav {
+    float:right;
+    text-align: right;
+    width:80%;
+    /*height: 40px;
+     padding-top: 8px;
+     padding-bottom: 8px;*/
+    margin-right: 5px;/*to line up with inventory objs*/
+}
+
+#page_nav ul {
+    
+}
+
+#page_nav ul li {
+    display: inline;
+    list-style-type: none;
+    padding: 0px 2px 0px 2px;
+    font-size: 12pt;
+    color: #333;
+    border: 1px solid transparent;
+}
+
+#page_nav ul li:hover {
+    background-color: #F2F2F2;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+#page_nav ul li.adj_page {
+    font-size: 14pt;
+    color: #992222;
+}
+
+#page_nav ul li.curr_page {
+    font-size: 16pt;
+    color: #BB1818;
+}
+
+#page_nav ul li.terminal {
+    font-size: 16pt;
+}
+
+#page_nav ul li.intermediate {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+
+/*************************************************************
+ Filtering
+ *************************************************************/
+#filter_container {
+}
+
+#filter_nav {
+    text-align: right;
+    margin-right: 5px;/*to line up with filter objs*/
+    padding: 6px;
+    height: 40px;
+}
+
+#filter_nav ul li {
+    display: inline;
+    list-style-type: none;
+    border: 1px solid transparent;
+}
+
+#filter_nav ul li img {
+    border: 1px solid transparent;
+}
+
+#filter_nav ul li img:hover {
+    background-color: #F2F2F2;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+.filter-obj {
+    color: #FFF;
+    margin: 5px;
+    border: 1px solid transparent;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+.filter-label {
+    background-color:#F1EEEE;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: 14pt;
+    color:#444;
+}
+
+.filter-tag {
+    padding: 4px;
+}
+
+.filter-1 {
+    width:262px;/*272 - 2 * margin(5)*/
+}
+
+.filter-2 {
+    width:126px;/*136 - 2 * margin(5)*/
+    height:126px;
+}
+
+.filter-3 {
+    width:80px;/*90 - 2 * margin(5)*/
+    height:80px;
+}
+
+.filter-4 {
+    width:58px;/*68 - 2 * margin(5)*/
+    height:58px;
+}
+
+.filter-obj.activated {
+    background-color:#FF4E50 !important;/*Used to override the loljquery bgcolor*/
+}
+
+/*************************************************************
+ Isotopes
+ *************************************************************/
+.isotope-item {
+    z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+    pointer-events: none;
+    z-index: 1;
+}
+
+.isotope,
+.isotope .isotope-item {
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -ms-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+
+.isotope {
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    -ms-transition-property: height, width;
+    -o-transition-property: height, width;
+    transition-property: height, width;
+}
+
+.isotope .isotope-item {
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property:    -moz-transform, opacity;
+    -ms-transition-property:     -ms-transform, opacity;
+    -o-transition-property:      -o-transform, opacity;
+    transition-property:         transform, opacity;
+}
+
+
+/*************************************************************
+ Auxillary
+ *************************************************************/
+

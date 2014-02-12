@@ -1,0 +1,767 @@
+{% extends "base.html" %}
+{% set active_page = "inventory" %}
+{% block title %}Inventory{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/app.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='stylesheets/inventory.css') }}">
+    <link href='http://fonts.googleapis.com/css?family=Sail' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascripts/protovis.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='javascripts/vendor/jquery.js') }}"></script>
+    <link href='http://fonts.googleapis.com/css?family=Playfair+Display+SC' rel='stylesheet' type='text/css'>
+{% endblock %}
+{% block content %}
+<!-- 100% width container -->
+    <div class="everything_below_header">
+        <div class="row">
+            <div class="large-12 columns inventory-top">
+                Inventory
+            </div>
+        </div>
+        
+        <div class="row master_container">
+
+            
+
+
+            <!-- Tag/Filter/Sort Menu -->
+            <div class="large-4 columns left_side">
+
+                <div class="large-12 large-centered columns">
+
+                    <!-- Filter Sort Options go here -->
+                    <div class="row collapse">
+                        <div id="filter_nav" class="large-12 columns">
+                            <ul>
+                                <li filter=".filter-2, .filter-3, .filter-4, .filter-tag" sortby="random"><img src="{{ url_for('static', filename='images/filter_nav_hash.png') }}" /></li>
+                                <li filter="*" sortby="index"><img src="{{ url_for('static', filename='images/filter_nav_carrot.png') }}" /></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Filter items (Location, Filter, Tag) go here -->
+                    <div class="row collapse">
+                        <div id="filter_container" class="large-12 columns">
+
+                            <div class="filter-obj filter-1 filter-welcome">Welcome!<br />{{ user.name }}</div>
+                            <div order="-1" class="filter-obj filter-1 filter-label filter-label-large">Inventory Controls</div>
+                            <div order="-1" class="filter-obj filter-1 filter-label">Locations</div>
+                            <div class="filter-obj-add filter-2-forced" id="addLocationFilterObj" data-reveal-id="addLocationModal"></div>
+                            {% if fullLocations|count > 0 %}
+                                {% for fl in fullLocations %}
+                                    <div class="filter-obj filter-2" filterKey="{{fl.locationID}}" title="{{ fl.locationName }}">
+                                        {% if fl.imagePath %}
+                                        <img src="{{ url_for('static', filename='images/location/' + fl.imagePath) }}" />
+                                        {% else %}
+                                        <img src="{{ url_for('static', filename='images/location/default_location.jpg') }}" />
+                                        {% endif %}
+                                        <div class="filter-location-menu" filterKey="{{fl.locationID}}" locationName="{{fl.locationName}}">
+                                            <div class="filter-location-edit">?</div>
+                                            <div class="filter-location-delete" data-reveal-id="deleteLocationModal">X</div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if filters['types']|count > 0 or filters['varietals']|count > 0 or filters['wineries']|count > 0 %}
+                                <div order="-1" class="filter-obj filter-1 filter-label">Filters</div>
+                                <div class="filter-obj filter-3" filterKey="wishlist">Wish List</div>
+                                {% for filter in filters['types'] %}
+                                    <div class="filter-obj filter-3" filterKey="{{filter}}">{{ filter }}</div>
+                                {% endfor %}
+                                {% for filter in filters['varietals'] %}
+                                    <div class="filter-obj filter-3" filterKey="{{filter}}">{{ filter }}</div>
+                                {% endfor %}
+                                {% for filter in filters['wineries'] %}
+                                    <div class="filter-obj filter-3" filterKey="{{filter}}">{{ filter }}</div>
+                                {% endfor %}
+                                {% for vintage in filters['vintages'] %}
+                                    {% if vintage %}
+                                        <div class="filter-obj filter-3" filterKey="{{vintage}}">{{ vintage }}</div>
+                                    {% else %}
+                                        <div class="filter-obj filter-3" filterKey="{{vintage}}">Blend</div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if filters['tags']|count > 0 %}
+                                <div order="-1" class="filter-obj filter-1 filter-label">Tags</div>
+                                {% for tag in filters['tags'] %}
+                                    <div class="filter-obj filter-tag" filterKey="{{tag}}">{{ tag }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Inventory -->
+            <div class="large-8 columns right_side">
+
+                <!-- Inventory Page Control -->
+                <div id="page">
+                    
+                    <!-- Display Mode -->
+                    <div id="page_display">
+                        <ul>
+                            <li id="grid_display">Grid</li>
+                            <li id="list_display">List</li>
+                            <li id="three_d_display">3D</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Page Navigation -->
+                    <div id="page_nav">
+                        <ul>
+                            <li>Off</li>
+                            <li class="">1</li>
+                            <li class="intermediate">... 7 ...</li>
+                            <li class="adj_page">14</li>
+                            <li class="curr_page">15</li>
+                            <li class="adj_page">16</li>
+                            <li class="intermediate">... 23 ...</li>
+                            <li class="">30</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+
+
+                <div class="row collapse">
+                    <div class="large-11 columns">
+                        <input id="inventorySearch" name="inventorySearch" type="text" class="inventorySearch" placeholder="Search...">
+                    </div>
+                    <div class="large-1 columns">
+                        <div id="search-by-voice" class="inventorySearch-mic"><img src="{{ url_for('static', filename='images/mic.gif') }}" /></div>
+                    </div>
+                </div>
+
+                <!-- Dat Progress -->
+                <div class="row" id="progress_wheel_container">
+                    <div class="large-3 large-centered columns">
+                        <div class="progress_wheel" style="display:block;">
+                            <img src="{{ url_for('static', filename='images/progress_1.gif') }}" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Container -->
+                <div id="inventory_container" class="percent100">
+                    <div class="inventory-obj inventory-4 inventory-4-forced" data-reveal-id="addWineModal">
+
+                        <div class="inventory-obj-add"></div>
+                        <div class="inventory-obj-add-label">Add Wine</div>
+                    </div>
+
+                    {% for wine in inventory %}
+                    <div class="inventory-obj inventory-4" data-reveal-id="wineInfoModal" 
+                            wine-wineID="{{wine.wine_wineID}}"
+                            wine-wineName="{{wine.wine_wineName}}"
+                            wine-winery="{{wine.wine_winery}}"
+                            wine-vintage="{{wine.wine_vintage}}"
+                            wine-varietal="{{wine.wine_varietal}}"
+                            wine-wineType="{{wine.wine_wineType}}"
+                            wine-region="{{wine.wine_region}}"
+                            wine-tags="{{wine.wine_tags}}"
+                            wine-description="{{wine.wine_description}}"
+                            wine-averageStarRating="{{wine.wine_averageStarRating}}"
+                            wine-imagePath="{{wine.wine_imagePath}}"
+                            wine-bitter="{{wine.wine_bitter}}"
+                            wine-sweet="{{wine.wine_sweet}}"
+                            wine-sour="{{wine.wine_sour}}"
+                            wine-salty="{{wine.wine_salty}}"
+                            wine-chemical="{{wine.wine_chemical}}"
+                            wine-pungent="{{wine.wine_pungent}}"
+                            wine-oxidized="{{wine.wine_oxidized}}"
+                            wine-microbiological="{{wine.wine_microbiological}}"
+                            wine-floral="{{wine.wine_floral}}"
+                            wine-spicy="{{wine.wine_spicy}}"
+                            wine-fruity="{{wine.wine_fruity}}"
+                            wine-vegetative="{{wine.wine_vegetative}}"
+                            wine-nutty="{{wine.wine_nutty}}"
+                            wine-caramelized="{{wine.wine_caramelized}}"
+                            wine-woody="{{wine.wine_woody}}"
+                            wine-earthy="{{wine.wine_earthy}}"
+
+                            user-li-locationID="{{wine.user_li_locationID}}"
+                            user-quantity="{{wine.user_quantity}}"
+                            {% if wine.user_isWishlist %}
+                            user-isWishlist="wishlist"
+                            {% else %}
+                            user-isWishlist="not_on_wishlist"
+                            {% endif %}
+                            user-tags="{{wine.user_tags}}"
+                            user-description="{{wine.user_description}}"
+                            user-personalStarRating="{{wine.user_personalStarRating}}"
+                            user-imagePath="{{wine.user_imagePath}}"
+                            user-bitter="{{wine.user_bitter}}"
+                            user-sweet="{{wine.user_sweet}}"
+                            user-sour="{{wine.user_sour}}"
+                            user-salty="{{wine.user_salty}}"
+                            user-chemical="{{wine.user_chemical}}"
+                            user-pungent="{{wine.user_pungent}}"
+                            user-oxidized="{{wine.user_oxidized}}"
+                            user-microbiological="{{wine.user_microbiological}}"
+                            user-floral="{{wine.user_floral}}"
+                            user-spicy="{{wine.user_spicy}}"
+                            user-fruity="{{wine.user_fruity}}"
+                            user-vegetative="{{wine.user_vegetative}}"
+                            user-nutty="{{wine.user_nutty}}"
+                            user-caramelized="{{wine.user_caramelized}}"
+                            user-woody="{{wine.user_woody}}"
+                            user-earthy="{{wine.user_earthy}}">
+                        <div class="inventory-obj-image">
+                            {% if wine is defined and wine.user_imagePath %}
+                            <img src="{{ url_for('static', filename=('images/wine/' + wine.user_imagePath) ) }}" />
+                            {% elif wine is defined and wine.wine_imagePath %}
+                            <img src="{{ url_for('static', filename=('images/wine/' + wine.wine_imagePath) ) }}" />
+                            {% else %}
+                            <img src="{{ url_for('static', filename='images/wine/default_wine.jpg' ) }}" />
+                            {% endif %}
+                        </div>
+                        <div class="inventory-obj-label">
+                            {% if wine is defined and wine.wine_wineName %}
+                                <span class="vintage">{{ wine.wine_vintage }}</span>
+                                <span class="name">{{ wine.wine_wineName|truncate(12) }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="inventory-obj-info">
+
+                            <div class="inventory-obj-info-general">
+                                <div class="left">
+                                    <div class="name">{{wine.wine_wineName}}</div> 
+                                    <div class="winery">{{wine.wine_winery}}</div> 
+                                    <div class="varietal">{{wine.wine_varietal}}</div> 
+                                </div>
+                                <div class="right">
+                                    <div class="vintage">
+                                        {% if wine.wine_vintage|string|length == 4 %}
+                                            {% if (wine.wine_vintage % 100) < 10 %}
+                                                {{ '`0' + (wine.wine_vintage % 100)|string }}
+                                            {% else %}
+                                                {{ '`' + (wine.wine_vintage % 100)|string }}
+                                            {% endif %}
+                                        {% else %}
+                                            {{ '`XX' }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="aromaBarGraph">
+                                <ul>
+                                    <!-- magic might happen here? -->
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Wine Modal -->
+    <div id="addWineModal" class="reveal-modal">
+
+        <div id="master-add-wine-container">
+
+            <div class="row">
+
+                <div class="large-4 columns">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <h4>Auto-complete Candidates:</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="candyWineList" class="large-12">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="large-8 columns">
+
+                    <form class="custom" id="addWineForm" action="Inventory/addWine" method="POST" enctype="multipart/form-data">
+
+                            <fieldset>
+                                <legend>Add Wine</legend>
+
+                                    <div class="row">
+                                        <div class="large-6 columns">
+                                            <label for="autocomplete1"><b>Wine Name*</b></label>
+                                            <input name="wineName" type="text" id="autocomplete1" class="autocompleteTextField" >
+
+                                        </div>
+                                        <div class="large-6 columns">
+                                            <label for="locationDropDown">Inventory Location</label>
+                                            <select name="wineLocation" id="locationDropDown" class="custom dropdown medium">
+                                                {% if fullLocations|count > 0 %}
+                                                    {% for fl in fullLocations %}
+                                                    <option>{{ fl.locationID }}{{ ' ' }}{{ fl.locationName }}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-6 columns">
+                                            <label for="autocomplete2">Winery</label>
+                                            <input name="winery" type="text" id="autocomplete2" class="autocompleteTextField">
+                                        </div>
+                                        <div class="large-6 columns">
+                                            <label>Region</label>
+                                            <input name="region" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-6 columns">
+                                            <label><b>Varietal*</b></label>
+                                            <input name="varietal" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="large-2 columns">
+                                            <label for="autocomplete3">Vintage</label>
+                                            <input name="vintage" type="text" id="autocomplete3" class="autocompleteTextField">
+                                        </div>
+                                        <div class="large-2 columns">
+                                            <label>Quanitity</label>
+                                            <input name="quantity" type="text">
+                                        </div>
+                                        <div class="large-2 columns">
+                                            <label>Rating</label>
+                                            <input name="rating" type="text" placeholder="1-5">
+                                        </div>
+                                        <div class="large-6 columns">
+                                            <div class="row collapse">
+                                                <label>Wine Image (From Computer)</label>
+                                                <div class="large-6 columns">
+                                                <input name="wineImage" type="file" placeholder="Ex: me.jpg" accept="image/*" capture>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <label>Qualities (Tags)</label>
+                                        <input name="quality" type="text">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <label>Description</label>
+                                        <textarea name="description" type="text"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="bold-required" class="error-message">*Bold fields are required</div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-3 columns">
+                                        <div class="button" id="addWineButton">Add Wine</div>
+                                    </div>
+                                    <div class="large-9 columns">
+                                        <label>Add to Wishlist?</label>
+                                        <input class="wishlist" name="wishList" type="checkbox" id="checkbox1">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <div id="badMessage" class="error-message">Input Error</div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                    </form>
+                </div>
+
+            </div><!-- End massive overflow -->
+
+        </div><!-- End master container (anti-overflow) -->
+
+
+
+        <a class="close-reveal-modal">&#215;</a>
+    </div>  
+
+    <!--Wine Info Modal -->
+    <div id="wineInfoModal" class="reveal-modal" wineID="">
+        
+        <div class="row">
+            <div class="large-4 columns">
+                <div class="row">
+                    <img id="user_imagePath" src="images/samplewine.jpg" />
+                </div>
+                <div class="row">
+                    <div id="editWineModalButton" class="button full_width" data-reveal-id="editWineModal">Edit Wine</div>
+                </div>
+                <div class="row">
+                    <div id="deleteWineModalButton" class="button full_width" data-reveal-id="deleteWineModal">Delete Wine</div>
+                </div>
+            </div>
+            <div class="large-8 columns">
+                <div class="row">
+                    <div class="large-12 columns" id="wineTitle">
+                        <div id="wine_wineName">Wine Name</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_winery">Winery</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_varietal"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_region"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div id="wine_vintage"></div>
+                    </div>
+                </div>
+<!--
+                <div class="row">
+                    <div class="large-12 columns" style="">
+                        <strong>Average Rating:&nbsp;</strong><div id="wine_averageStarRating"></div>
+                    </div> 
+                </div>     
+
+                <div class="row">          
+                    <div class="large-12 columns" style="">
+                        <strong>Your Rating:&nbsp;</strong><div id="user_personalStarRating"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h4 id="wineTags">Tags:&nbsp;</h4>
+                        <ul id="user_tags"class="tags">
+                            <li><div class="tag">A Tag</div></li>
+                        </ul>
+                    </div>
+                </div>
+            -->
+                <div class="row">
+                    <div class="lineSpacing">
+                        <div class="large-12 columns">
+                            <p id="user_description">Description</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+
+    <!-- Edit Wine Modal -->
+    <div id="editWineModal" class="reveal-modal">
+
+        <div class="row">
+            <form class="custom" id="editWineForm" action="Inventory/editEntry" method="POST" enctype="multipart/form-data">
+                <input name="edit_wineID" type="text" id="" style="display:none;"/>
+                <input name="original_wineLocation" type="text" id="" style="display:none;"/>
+                <div class="large-12 columns">
+
+                    <fieldset>
+                        <legend>Edit Wine</legend>
+
+                            <div class="row">
+                                <div class="large-6 columns">
+                                    <label for="edit_autocomplete1"><b>Wine Name*</b></label>
+                                    <input name="edit_wineName" type="text" id="edit_autocomplete1" />
+
+                                </div>
+                                <div class="large-6 columns">
+                                    <label for="edit_locationDropDown">Inventory Location</label>
+                                    <select name="edit_wineLocation" id="edit_locationDropDown" class="custom dropdown medium">
+                                        <!-- THIS NEEDS TO BE UPDATED ON ADD LOCATION -->
+                                        {% if fullLocations|count > 0 %}
+                                            {% for fl in fullLocations %}
+                                            <option>{{ fl.locationID }}{{ ' ' }}{{ fl.locationName }}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-6 columns">
+                                    <label for="edit_autocomplete2">Winery</label>
+                                    <input name="edit_winery" type="text" id="edit_autocomplete2">
+                                </div>
+                                <div class="large-6 columns">
+                                    <label>Region</label>
+                                    <input name="edit_region" type="text">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-6 columns">
+                                    <label><b>Varietal*</b></label>
+                                    <input name="edit_varietal" type="text">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-2 columns">
+                                    <label for="edit_autocomplete3">Vintage</label>
+                                    <input name="edit_vintage" type="text" id="edit_autocomplete3">
+                                </div>
+                                <div class="large-2 columns">
+                                    <label>Quanitity</label>
+                                    <input name="edit_quantity" type="text">
+                                </div>
+                                <div class="large-2 columns">
+                                    <label>Rating</label>
+                                    <input name="edit_personalStarRating" type="text" placeholder="1-5">
+                                </div>
+                                <div class="large-6 columns">
+                                    <div class="row collapse">
+                                        <label>Wine Image (From Computer)</label>
+                                        <div class="large-6 columns">
+                                        <input name="edit_wineImage" type="file" placeholder="Ex: me.jpg" accept="image/*" capture>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Qualities (Tags)</label>
+                                <input name="edit_quality" type="text">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Description</label>
+                                <textarea name="edit_description" type="text"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <div id="bold-required" class="error-message">*Bold fields are required</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-3 columns">
+                                <div class="button" id="editWineButton">Edit Wine</div>
+                            </div>
+                            <div class="large-9 columns">
+                                <label>Add to Wishlist?</label>
+                                <input class="wishlist" name="edit_wishList" type="checkbox" id="checkbox1">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <div id="badMessage" class="error-message">Input Error</div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+
+            </form>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>  
+
+
+    <!-- Add Wine Modal -->
+    <div id="addLocationModal" class="reveal-modal custom">
+
+        <div class="row">
+            <form class="custom" id="addLocationForm" action="Inventory/addInventory" method="POST" enctype="multipart/form-data">
+                <div class="large-12 columns">
+
+                    <fieldset>
+                        <legend>Add Location</legend>
+
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label>Location Name</label>
+                                <input name="addLocationName" type="text">
+                            </div>
+                            <div class="large-6 columns">
+                                <div class="row collapse">
+                                    <label>Location Image</label>
+                                    <input name="addLocationImage" type="file" placeholder="Ex: me.jpg" accept="image/*" capture>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <div class="row">
+                        <div class="large-3 columns">
+                            <div class="button" id="addLocationButton">Add Location</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>  
+
+
+    <!-- 3D Modal -->
+    <div id="threeDModal" class="reveal-modal reveal-modal-three-d">
+        
+        <div id="three_d_container"></div>
+        <div id="menu">
+            <button id="table">TABLE</button>
+            <button id="sphere">SPHERE</button>
+            <button id="helix">HELIX</button>
+            <button id="grid">GRID</button>
+        </div>
+        
+        <a class="close-reveal-modal" onClick="dispose3D();">&#215;</a>
+    </div>
+
+    <!-- Delete account modal -->
+    <div id="deleteWineModal" class="reveal-modal medium-large">
+
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="row">
+                    <div class="large-12 large-centered columns">
+                        <div class="row">
+                            <div class="large-12 large-centered columns">
+                                <h4 class="deleteVerification">Are you sure you want to delete your wine?</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-4 large-centered columns">
+                                <div id="deleteWineYes" class="button full_width">Yes, I'm sure.</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <div id="deleteErrorMessage" class="error-message">Wine Deletion was not Successful.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <!-- Delete Location Modal -->
+    <div id="deleteLocationModal" class="reveal-modal medium-large">
+
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="row">
+                    <div class="large-12 large-centered columns">
+                        <div class="row">
+                            <div class="large-12 large-centered columns">
+                                <h4 class="deleteVerification">Are you sure you want to delete Location (<span id="deleteLocationNumber"></span>)?</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-4 large-centered columns">
+                                <div id="deleteLocationYes" class="button full_width">Yes, I'm sure</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <div id="deleteErrorMessage" class="error-message">Location Deletion was not Successful.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+
+    <div id="editLocationModal" class="reveal-modal">
+
+        <div class="row">
+            <form class="custom" id="editLocationForm" action="Inventory/editInventory" method="POST" enctype="multipart/form-data">
+                <div class="large-12 columns">
+
+                    <fieldset>
+                        <legend>Edit Location <span id="editLocationName"></span> (<span id="editLocationNumber"></span>)</legend>
+                        <input name="editLocationNumber" type="text" style="display:none;">
+
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label>Location Name</label>
+                                <input name="editLocationName" type="text">
+                            </div>
+                            <div class="large-6 columns">
+                                <div class="row collapse">
+                                    <label>Location Image</label>
+                                    <input name="editLocationImage" type="file" placeholder="Ex: me.jpg" accept="image/*" capture>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <div class="row">
+                        <div class="large-3 columns">
+                            <div class="button" id="editLocationButton">Edit Location</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>  
+
+
+    <!-- Javascript Imports -->
+    <script src="{{ url_for('static', filename='javascripts/vendor/jquery.js')}}"></script>
+    <script src="{{ url_for('static', filename='javascripts/foundation.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='javascripts/isotopesjs/jquery.isotope.js')}}"></script>
+    <script src="{{ url_for('static', filename='javascripts/EventHandler.js')}}"></script>
+
+
+    <!-- 3D Scripts Starts Here -->
+    <script src="{{ url_for('static', filename='javascripts/three/three.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/three/tween.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/three/TrackballControls.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascripts/three/CSS3DRenderer.js') }}"></script>
+    <!-- End Javascript Imports -->
+
+
+    <!-- End Modals -->
+{% endblock %}

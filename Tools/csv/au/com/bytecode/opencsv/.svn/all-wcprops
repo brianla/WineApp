@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/package.html
+END
+CSVReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/CSVReader.java
+END
+CSVWriter.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/CSVWriter.java
+END
+CSVParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/CSVParser.java
+END
+ResultSetHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/ResultSetHelper.java
+END
+ResultSetHelperService.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/rexwest/!svn/ver/12/trunk/RexWest/src/csv/au/com/bytecode/opencsv/ResultSetHelperService.java
+END

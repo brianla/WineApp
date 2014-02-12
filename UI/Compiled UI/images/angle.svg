@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.0//EN' 'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg fill-opacity="1" xmlns:xlink="http://www.w3.org/1999/xlink" color-rendering="auto" color-interpolation="auto" stroke="black" text-rendering="auto" stroke-linecap="square" stroke-miterlimit="10" stroke-opacity="1" shape-rendering="auto" fill="black" stroke-dasharray="none" font-weight="normal" stroke-width="1" xmlns="http://www.w3.org/2000/svg" font-family="&apos;Dialog&apos;" font-style="normal" stroke-linejoin="miter" font-size="12" stroke-dashoffset="0" image-rendering="auto">
+  <!--Unicode Character 'RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK' (U+00BB)-->
+  <defs id="genericDefs" />
+  <g>
+    <g>
+      <path d="M140.2031 311.625 L95.625 375.75 L74.8125 375.75 L111.5156 311.625 L74.8125 247.3594 L95.625 247.3594 L140.2031 311.625 ZM85.2188 311.625 L40.6406 375.75 L19.8281 375.75 L56.3906 311.625 L19.8281 247.3594 L40.6406 247.3594 L85.2188 311.625 Z" stroke="none" />
+    </g>
+  </g>
+</svg>
